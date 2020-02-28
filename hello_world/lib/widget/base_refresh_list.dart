@@ -66,6 +66,9 @@ class RefreshList extends StatefulWidget {
 class RefreshListState extends State<RefreshList> {
   CancelToken tag = CancelToken();
 
+  //是否是加载前的界面
+  bool isBeforeLoaded = true;
+
   //数据源
   List list = List();
 
@@ -273,6 +276,10 @@ class RefreshListState extends State<RefreshList> {
 
   //默认空背景图
   Widget getDefaultEmptyBg() {
+    if (isBeforeLoaded) {
+      isBeforeLoaded = false;
+      return CircularProgressIndicator();
+    }
     return Text('空空如也~');
   }
 

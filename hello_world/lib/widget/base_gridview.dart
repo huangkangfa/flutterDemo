@@ -9,14 +9,16 @@ class ComGridView extends StatelessWidget {
   final columnCount;
 
   ComGridView(this.data, this.buildItemLayout, this.columnCount,
-      {Key key,this.mainAxisSpacing,
+      {Key key,
+      this.mainAxisSpacing,
       this.crossAxisSpacing,
       this.paddingLeft,
       this.paddingTop,
       this.paddingRight,
       this.paddingBottom,
       this.padding,
-      this.emptyBg}): super(key: key);
+      this.emptyBg})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class ComGridView extends StatelessWidget {
       List<Widget> items = [];
       for (double j = 0; j < columnCount; j++) {
         if (i * columnCount + j <= max) {
-          items.add(buildItemLayout(i * columnCount));
+          items.add(buildItemLayout(i * columnCount + j.toInt()));
           if (j < columnCount - 1) {
             items.add(getMainAxisSpacing());
           }

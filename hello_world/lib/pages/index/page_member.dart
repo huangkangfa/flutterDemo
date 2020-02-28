@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/widget/base_refresh_sliver_list.dart';
 
 class MemberPage extends StatefulWidget {
   MemberPage({Key key}) : super(key: key);
@@ -15,7 +16,7 @@ class MemberPageState extends State<MemberPage>
     super.build(context);
     return Scaffold(
       body: Center(
-        child: Text('我是会员'),
+        child: new RefreshSliverList(),
       ),
     );
   }
