@@ -43,7 +43,13 @@ class HomePageState extends State<HomePage>
       builder: (context, userInfo) {
         return Scaffold(
           backgroundColor: Colors.white,
-          body: getListBody(),
+          body: RefreshList(
+              TypeOfListView(header: getListHeader()), Apis.products_home,
+              (item, index) {
+            return getListItem(item, index);
+          }, onRefresh: () {
+            refreshHomeData();
+          }),
         );
       },
     );
@@ -60,26 +66,16 @@ class HomePageState extends State<HomePage>
     );
   }
 
-  Widget getListItem() {
-    return Row(
-      children: <Widget>[
-        new Text('哈哈哈哈'),
-      ],
+  Widget getListItem(item, index) {
+    return Container(
+      height: 80,
+      color: index % 2 == 0 ? Colors.red : Colors.blue,
+      child: Row(
+        children: <Widget>[
+          new Text('哈哈哈哈'),
+        ],
+      ),
     );
-  }
-
-  Widget getListBody() {
-    return RefreshList(
-        TypeOfListView(header: getListHeader()), Apis.products_home,
-        (item, index) {
-      return Container(
-        height: 80,
-        color: index % 2 == 0 ? Colors.red : Colors.blue,
-        child: getListItem(),
-      );
-    }, onRefresh: () {
-      refreshHomeData();
-    });
   }
 
   @override
