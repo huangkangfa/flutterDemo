@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:hello_world/configs/apis.dart';
 import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/dao/dao_home.dart';
 import 'package:hello_world/model/model_banner_list_entity.dart';
@@ -16,6 +17,7 @@ import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_appbar.dart';
 import 'package:hello_world/widget/base_gridview.dart';
+import 'package:hello_world/widget/base_refresh_list.dart';
 import 'package:hello_world/widget/base_toast.dart';
 import 'package:hello_world/widget/widget_edit_search.dart';
 
@@ -74,33 +76,47 @@ class HomePageState extends State<HomePage>
       builder: (context, userInfo) {
         return Scaffold(
           backgroundColor: Colors.white,
-          body: Column(
-            children: <Widget>[
-              getSearchBar(),
-              Container(
-                color: dataBanner.length > 0 ? Colors.white : Colors.grey[300],
-                height: ScreenUtil().setWidth(150),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: ThemeSize.marginSizeMin,
-                      bottom: ThemeSize.marginSizeMid),
-                  child: getADSwiper(),
-                ),
+          body: RefreshList(
+              TypeOfListView(
+                  header: Column(
+                children: <Widget>[
+                  getSearchBar(),
+                  Container(
+                    color:
+                        dataBanner.length > 0 ? Colors.white : Colors.grey[300],
+                    height: ScreenUtil().setWidth(150),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          top: ThemeSize.marginSizeMin,
+                          bottom: ThemeSize.marginSizeMid),
+                      child: getADSwiper(),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: ScreenUtil().setWidth(20)),
+                    child: getIconsBar(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: ScreenUtil().setWidth(20)),
+                    child: ComGridView(
+                        dataActivitys, buildItemLayoutOfActivitys, 2,
+                        padding: ThemeSize.marginSizeMid,
+                        mainAxisSpacing: ThemeSize.marginSizeMin,
+                        crossAxisSpacing: ThemeSize.marginSizeMin),
+                  ),
+                ],
+              )),
+              Apis.products_home, (item, index) {
+            return Container(
+              height: 80,
+              color: index % 2 == 0 ? Colors.red : Colors.blue,
+              child: Row(
+                children: <Widget>[
+                  new Text('哈哈哈哈'),
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.only(top: ScreenUtil().setWidth(20)),
-                child: getIconsBar(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: ScreenUtil().setWidth(20)),
-                child: ComGridView(
-                    dataActivitys, buildItemLayoutOfActivitys, 2,
-                    padding: ThemeSize.marginSizeMid,
-                    mainAxisSpacing: ThemeSize.marginSizeMin,
-                    crossAxisSpacing: ThemeSize.marginSizeMin),
-              ),
-            ],
-          ),
+            );
+          }),
         );
       },
     );
@@ -187,8 +203,7 @@ class HomePageState extends State<HomePage>
             padding: EdgeInsets.only(
                 right: ThemeSize.marginSizeMin,
                 bottom: ThemeSize.marginSizeMin),
-            child: Text('杭州',
-                style: TextStyle(fontSize: ThemeSize.fontSize14)),
+            child: Text('杭州', style: TextStyle(fontSize: ThemeSize.fontSize14)),
           )
         ],
       ),

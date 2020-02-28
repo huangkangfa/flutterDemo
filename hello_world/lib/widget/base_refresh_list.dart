@@ -20,7 +20,11 @@ enum LoadingStatus {
 //展示类型
 abstract class RefreshListType {}
 
-class TypeOfListView extends RefreshListType {}
+class TypeOfListView extends RefreshListType {
+  final Widget header;
+
+  TypeOfListView({this.header});
+}
 
 class TypeOfGridView extends RefreshListType {
   final double columnCount;
@@ -144,17 +148,21 @@ class RefreshListState extends State<RefreshList> {
         ),
       );
     } else {
+      TypeOfListView typeOfListView = widget.type as TypeOfListView;
+      int temp = typeOfListView.header == null ? 0 : 1;
       child = ListView.builder(
           controller: controller,
-          itemCount: list.length + 1,
+          itemCount: list.length + 1 + temp,
           itemBuilder: (BuildContext context, int index) {
             if (list.length == 0) {
               return Center();
             }
-            if (index == list.length) {
+            if (index == list.length + temp) {
               return getLoadingView();
+            } else if (temp > 0 && index == 0) {
+              return typeOfListView.header;
             } else {
-              return widget.buildItemLayout(list[index], index);
+              return widget.buildItemLayout(list[index - temp], index - temp);
             }
           });
     }
