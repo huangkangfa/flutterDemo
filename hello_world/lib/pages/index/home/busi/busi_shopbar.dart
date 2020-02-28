@@ -15,7 +15,7 @@ class ShopBar extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new ShopBarState();
+    return ShopBarState();
   }
 }
 
@@ -62,7 +62,10 @@ class ShopBarState extends State<ShopBar> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.grey[200], width: 1.0),
+                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5))),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -121,7 +124,7 @@ class ShopBarState extends State<ShopBar> {
     ));
 
     return Container(
-      height: ScreenUtil().setWidth(146),
+      height: ScreenUtil().setWidth(150),
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: childs,

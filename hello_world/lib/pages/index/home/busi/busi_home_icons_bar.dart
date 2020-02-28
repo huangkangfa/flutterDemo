@@ -12,7 +12,7 @@ import 'package:hello_world/util/util_screen.dart';
 class HomeIconsBar extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new HomeIconsBarState();
+    return HomeIconsBarState();
   }
 }
 

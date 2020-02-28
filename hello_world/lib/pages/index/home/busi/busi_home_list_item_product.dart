@@ -16,10 +16,9 @@ class ListItemOfProduct extends StatelessWidget {
       borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          border:
-          Border(bottom: BorderSide(width: 1.5, color: Colors.grey[300])),
-        ),
+            color: Colors.white,
+            border: Border.all(color: Colors.grey[200], width: 1.0),
+            borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8))),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

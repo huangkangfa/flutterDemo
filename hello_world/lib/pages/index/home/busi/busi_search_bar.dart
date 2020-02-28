@@ -9,7 +9,7 @@ import 'package:hello_world/widget/widget_edit_search.dart';
 class SearchBar extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new SearchBarState();
+    return SearchBarState();
   }
 }
 

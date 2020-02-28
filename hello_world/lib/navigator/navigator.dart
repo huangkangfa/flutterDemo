@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/pages/index/page_find.dart';
 import 'package:hello_world/pages/index/home/page_home.dart';
 import 'package:hello_world/pages/index/page_member.dart';
-import 'package:hello_world/pages/index/page_mine.dart';
+import 'package:hello_world/pages/index/mine/page_mine.dart';
 import 'package:hello_world/pages/index/page_shopping_mall.dart';
 import 'package:hello_world/widget/drawer_wdiget.dart';
 

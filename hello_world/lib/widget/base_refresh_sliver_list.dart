@@ -60,7 +60,7 @@ class RefreshSliverList extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new RefreshSliverListState();
+    return RefreshSliverListState();
   }
 }
 
@@ -134,7 +134,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
             right: paddingRight,
             left: paddingLeft),
         sliver: SliverGrid(
-          delegate: new SliverChildBuilderDelegate(
+          delegate:SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               if (list.length == 0) {
                 return Center();
@@ -157,7 +157,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
     } else {
       child = SliverList(
           delegate:
-              new SliverChildBuilderDelegate((BuildContext context, int index) {
+             SliverChildBuilderDelegate((BuildContext context, int index) {
         if (list.length == 0) {
           return Center();
         }
@@ -172,7 +172,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
       child: getLoadingView(),
     ));
 
-    return new NotificationListener(
+    return NotificationListener(
       onNotification: (notification) {
         return initScrollListener(notification);
       },

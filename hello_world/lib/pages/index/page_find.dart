@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/widget/base_appbar.dart';
 
 class FindPage extends StatefulWidget {
   FindPage({Key key}) : super(key: key);
@@ -14,9 +15,8 @@ class FindPageState extends State<FindPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: Center(
-        child: Text('我是发现'),
-      ),
+      appBar: baseAppbar(context, '发现', Center(), Center()),
+      body: Center(),
     );
   }
 

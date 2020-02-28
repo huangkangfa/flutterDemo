@@ -28,7 +28,7 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
     refreshData();
     _streamSubscription = registerEvent<HomeActivitysBarEvent>((data) {
       if (data is HomeActivitysBarEvent) {
-        switch(data.cmd){
+        switch (data.cmd) {
           case 'refreshData':
             refreshData();
             break;
@@ -37,7 +37,7 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
     });
   }
 
-  refreshData(){
+  refreshData() {
     HomeDao.getHomeActivitys(cancelToken: tag).then((data) {
       setState(() {
         dataActivitys = data;
@@ -66,12 +66,10 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
           child: Container(
-//            color: colorBg,
             decoration: BoxDecoration(
-              color: colorBg,
-              border:
-              Border(bottom: BorderSide(width: 1, color: Colors.grey[300])),
-            ),
+                color: colorBg,
+                border: Border.all(color: Colors.grey[200], width: 1.0),
+                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5))),
             child: Padding(
               padding: EdgeInsets.all(ThemeSize.marginSize12),
               child: Row(
@@ -84,8 +82,18 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(dataActivitys[index].name,maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(color: colorTv1,fontSize: ScreenUtil().setSp(15))),
-                        Text(dataActivitys[index].subName,maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(color: colorTv2,fontSize: ScreenUtil().setSp(12))),
+                        Text(dataActivitys[index].name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: colorTv1,
+                                fontSize: ScreenUtil().setSp(15))),
+                        Text(dataActivitys[index].subName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: colorTv2,
+                                fontSize: ScreenUtil().setSp(12))),
                       ],
                     ),
                   ),
@@ -112,7 +120,6 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
     _streamSubscription.cancel();
     HttpManager.getInstance().cancelRequests(tag);
   }
-
 }
 
 class HomeActivitysBarEvent {
