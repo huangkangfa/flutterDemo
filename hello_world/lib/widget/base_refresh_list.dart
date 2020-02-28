@@ -5,7 +5,6 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/model/model_refresh_list_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/http/result_data.dart';
-import 'package:hello_world/util/util_screen.dart';
 
 //刷新状态枚举
 enum LoadingStatus {
