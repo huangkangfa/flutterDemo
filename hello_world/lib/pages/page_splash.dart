@@ -31,7 +31,7 @@ class SplashPageState extends State<SplashPage> {
   void _initSplash() async {
     await SpUtil.getInstance();
     setState(() {
-      hasAd = SpUtil.getBool(Keys.SWITCH_AD);
+      hasAd = SpUtil.getBool(Keys.SWITCH_AD,defValue: true);
       if (hasAd) {
         _doCountDown();
       } else {

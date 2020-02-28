@@ -9,6 +9,7 @@ import 'package:hello_world/model/model_item_shop_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_placeholder.dart';
 
 class ShopBar extends StatefulWidget {
   ShopBar({Key key}) : super(key: key);
@@ -52,6 +53,12 @@ class ShopBarState extends State<ShopBar> {
 
   @override
   Widget build(BuildContext context) {
+    if(dataShops.length==0){
+      return PlaceHolderView(
+          ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
+              ThemeSize.marginSizeMin * 2,
+          ScreenUtil().setWidth(130));
+    }
     List<Widget> childs = [];
     for (int i = 0; i < dataShops.length; i++) {
       childs.add(Padding(

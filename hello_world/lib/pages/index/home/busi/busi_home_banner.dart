@@ -10,6 +10,7 @@ import 'package:hello_world/model/model_banner_list_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_placeholder.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
 class HomeBanner extends StatefulWidget {
@@ -43,7 +44,6 @@ class HomeBannerState extends State<HomeBanner> {
   refreshData() {
     HomeDao.getHomeBanner({'platform': 0, 'position': 1}, cancelToken: tag)
         .then((data) {
-          log('============= '+data.toString());
       setState(() {
         dataBanner = data;
       });
@@ -52,10 +52,11 @@ class HomeBannerState extends State<HomeBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (dataBanner.length <= 0) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
+    if (dataBanner.length == 0) {
+      return PlaceHolderView(
+          ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
+              ThemeSize.marginSizeMin * 2,
+          ScreenUtil().setWidth(140));
     }
     return Container(
       color: dataBanner.length > 0 ? Colors.white : Colors.grey[300],

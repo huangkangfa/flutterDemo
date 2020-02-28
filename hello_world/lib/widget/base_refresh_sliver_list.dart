@@ -52,10 +52,7 @@ class RefreshSliverList extends StatefulWidget {
   final List<Widget> sliverFooter;
 
   RefreshSliverList(this.type, this.api, this.buildItemLayout,
-      {Key key,
-      this.onRefresh,
-      this.sliverHeader,
-      this.sliverFooter})
+      {Key key, this.onRefresh, this.sliverHeader, this.sliverFooter})
       : super(key: key);
 
   @override
@@ -96,9 +93,11 @@ class RefreshSliverListState extends State<RefreshSliverList> {
   }
 
   initScrollListener(notification) {
-    if(notification is ScrollNotification){
+    if (notification is ScrollNotification) {
       ScrollMetrics metrics = notification.metrics;
-      if (metrics.extentAfter < 40) {
+      if (metrics.extentAfter < 40 &&
+          metrics.axis == Axis.vertical &&
+          metrics.axisDirection == AxisDirection.down) {
         ////判断滑到底部的时候,触发加载更多
         getData(false);
       }
@@ -134,7 +133,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
             right: paddingRight,
             left: paddingLeft),
         sliver: SliverGrid(
-          delegate:SliverChildBuilderDelegate(
+          delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               if (list.length == 0) {
                 return Center();
@@ -157,7 +156,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
     } else {
       child = SliverList(
           delegate:
-             SliverChildBuilderDelegate((BuildContext context, int index) {
+              SliverChildBuilderDelegate((BuildContext context, int index) {
         if (list.length == 0) {
           return Center();
         }

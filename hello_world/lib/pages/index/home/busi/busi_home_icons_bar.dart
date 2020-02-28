@@ -8,6 +8,7 @@ import 'package:hello_world/model/model_item_icon_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_placeholder.dart';
 
 class HomeIconsBar extends StatefulWidget {
   @override
@@ -46,6 +47,12 @@ class HomeIconsBarState extends State<HomeIconsBar> {
 
   @override
   Widget build(BuildContext context) {
+    if(dataIcons.length==0){
+      return PlaceHolderView(
+          ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
+              ThemeSize.marginSizeMin * 2,
+          ScreenUtil().setWidth(70));
+    }
     List<Widget> children = [];
     for (int i = 0; i < dataIcons.length; i++) {
       children.add(Expanded(

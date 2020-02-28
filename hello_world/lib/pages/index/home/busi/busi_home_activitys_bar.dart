@@ -9,6 +9,7 @@ import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_gridview.dart';
+import 'package:hello_world/widget/base_placeholder.dart';
 
 class HomeActivitysBar extends StatefulWidget {
   @override
@@ -47,6 +48,12 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
 
   @override
   Widget build(BuildContext context) {
+    if(dataActivitys.length==0){
+      return PlaceHolderView(
+          ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
+              ThemeSize.marginSizeMin * 2,
+          ScreenUtil().setWidth(160));
+    }
     return Padding(
       padding: EdgeInsets.only(top: ScreenUtil().setWidth(10)),
       child: ComGridView(dataActivitys, buildItemLayoutOfActivitys, 2,
