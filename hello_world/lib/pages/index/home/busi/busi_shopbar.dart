@@ -52,45 +52,52 @@ class ShopBarState extends State<ShopBar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> childs = [new Text('哈哈哈哈哈')];
-//    for(int i=0;i<dataShops.length;i++){
-//      childs.add(Padding(
-//        padding: EdgeInsets.only(left: ThemeSize.marginSizeMid,top: ThemeSize.marginSizeMid,bottom: ThemeSize.marginSizeMid),
-//        child: Column(
-//          mainAxisSize: MainAxisSize.min,
-//          children: <Widget>[
-//            Expanded(
-//                flex: 1,
-//                child: Image.network(
-//                  dataShops[i].advertisingImg,
-//                  width: ScreenUtil().setWidth(154),
-//                  height: ScreenUtil().setWidth(100),
-//                  fit: BoxFit.fill,
-//                )),
-//            Container(
-//              height: ScreenUtil().setWidth(45),
-//              child: Padding(
-//                padding: EdgeInsets.only(
-//                    left: ThemeSize.marginSizeMid,
-//                    right: ThemeSize.marginSizeMid),
-//                child: Align(
-//                  alignment: Alignment.centerLeft,
-//                  child: Text(dataShops[i].shop,
-//                      maxLines: 2,
-//                      overflow: TextOverflow.ellipsis,
-//                      style: TextStyle(
-//                          fontSize: ThemeSize.fontSize14,
-//                          color: ThemeColors.colorFont_333)),
-//                ),
-//              ),
-//            ),
-//          ],
-//        ),
-//      ));
-//    }
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: childs,
+    List<Widget> childs = [];
+    for (int i = 0; i < dataShops.length; i++) {
+      childs.add(Padding(
+        padding: EdgeInsets.only(
+            left: ThemeSize.marginSizeMid,
+            top: ThemeSize.marginSizeMid,
+            bottom: ThemeSize.marginSizeMid,
+            right: i == dataShops.length - 1 ? ThemeSize.marginSizeMid : 0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Image.network(
+              dataShops[i].advertisingImg,
+              width: ScreenUtil().setWidth(154),
+              height: ScreenUtil().setWidth(100),
+              fit: BoxFit.fill,
+            ),
+            Container(
+              constraints: BoxConstraints(
+                maxWidth: ScreenUtil().setWidth(154),
+                minWidth: ScreenUtil().setWidth(154),
+              ),
+              height: ScreenUtil().setWidth(30),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  dataShops[i].shop,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontSize: ThemeSize.fontSize14,
+                      color: ThemeColors.colorFont_333),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ));
+    }
+
+    return Container(
+      height: ScreenUtil().setWidth(146),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: childs,
+      ),
     );
   }
 

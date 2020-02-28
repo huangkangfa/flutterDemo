@@ -11,6 +11,7 @@ class ThemeColors {
   static const Color colorFont_999 = Color(0xFF999999);
   static const Color colorFontHint = Color(0XFFBCBCBC);
   static const Color colorBg_EEECEC = Color(0xFFEEECEC);
+  static const Color colorBg_F2F2F2 = Color(0XFFFAFAFA);
 }
 
 //自定义主题色-颜色的集合

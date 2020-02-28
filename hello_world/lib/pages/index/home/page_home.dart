@@ -16,6 +16,7 @@ import 'package:hello_world/widget/base_refresh_sliver_list.dart';
 import 'busi/busi_home_banner.dart';
 import 'busi/busi_home_list_item_product.dart';
 import 'busi/busi_search_bar.dart';
+import 'busi/busi_shopbar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -47,7 +48,7 @@ class HomePageState extends State<HomePage>
       converter: (store) => store.state.userInfo,
       builder: (context, userInfo) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: ThemeColors.colorBg_F2F2F2,
           appBar: comAppbar(context, appBar: SearchBar()),
           body: RefreshSliverList(
               TypeOfSliverGridView(2,
@@ -63,7 +64,7 @@ class HomePageState extends State<HomePage>
             SliverToBoxAdapter(child: HomeIconsBar()),
             SliverToBoxAdapter(child: HomeActivitysBar()),
             SliverToBoxAdapter(child: HomeSmallTitle('健康聚集地')),
-//            SliverToBoxAdapter(child: ShopBar()),
+            SliverToBoxAdapter(child: ShopBar()),
             SliverToBoxAdapter(child: HomeSmallTitle('热门推荐'))
           ]),
         );

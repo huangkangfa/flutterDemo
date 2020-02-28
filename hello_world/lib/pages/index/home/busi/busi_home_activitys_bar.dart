@@ -64,11 +64,12 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
           child: Container(
-            decoration: BoxDecoration(
-              color: color,
-              border:
-              Border(bottom: BorderSide(width: 1.5, color: Colors.grey[300])),
-            ),
+            color: color,
+//            decoration: BoxDecoration(
+//              color: color,
+//              border:
+//              Border(bottom: BorderSide(width: 1.5, color: Colors.grey[300])),
+//            ),
             child: Padding(
               padding: EdgeInsets.all(ThemeSize.marginSize12),
               child: Row(
