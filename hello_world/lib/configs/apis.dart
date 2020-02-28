@@ -15,4 +15,7 @@ class Apis {
   //首页活动列表
   static const activity_list_home =
       '/api/trade/indexActivity/selectIndexActivityList';
+
+  //按照距离获取商户信息
+  static const shops_list_distance_home = '/api/trade/recommend/distance';
 }

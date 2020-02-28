@@ -48,7 +48,7 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: ScreenUtil().setWidth(20)),
+      padding: EdgeInsets.only(top: ScreenUtil().setWidth(10)),
       child: ComGridView(dataActivitys, buildItemLayoutOfActivitys, 2,
           padding: ThemeSize.marginSizeMid,
           mainAxisSpacing: ThemeSize.marginSizeMin,
@@ -64,18 +64,27 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
           child: Container(
-            color: color,
+            decoration: BoxDecoration(
+              color: color,
+              border:
+              Border(bottom: BorderSide(width: 1.5, color: Colors.grey[300])),
+            ),
             child: Padding(
               padding: EdgeInsets.all(ThemeSize.marginSize12),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(dataActivitys[index].name),
-                      Text(dataActivitys[index].subName),
-                    ],
+                  Container(
+                    constraints: BoxConstraints(
+                      maxWidth: ScreenUtil().setWidth(100),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(dataActivitys[index].name,maxLines: 1,overflow: TextOverflow.ellipsis,),
+                        Text(dataActivitys[index].subName,maxLines: 1,overflow: TextOverflow.ellipsis,),
+                      ],
+                    ),
                   ),
                   Expanded(
                     flex: 1,

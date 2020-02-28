@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,8 @@ class HomeBannerState extends State<HomeBanner> {
     super.initState();
     refreshData();
     _streamSubscription = registerEvent<HomeBannerEvent>((data) {
-      if(data is HomeBannerEvent){
-        switch(data.cmd){
+      if (data is HomeBannerEvent) {
+        switch (data.cmd) {
           case 'refreshData':
             refreshData();
             break;
@@ -42,6 +43,7 @@ class HomeBannerState extends State<HomeBanner> {
   refreshData() {
     HomeDao.getHomeBanner({'platform': 0, 'position': 1}, cancelToken: tag)
         .then((data) {
+          log('============= '+data.toString());
       setState(() {
         dataBanner = data;
       });
@@ -79,7 +81,7 @@ class HomeBannerState extends State<HomeBanner> {
               ),
             );
           },
-          itemCount: dataBanner?.length ?? 0,
+          itemCount: dataBanner.length,
           viewportFraction: 0.8,
           scale: 0.8,
 //      pagination: SwiperPagination(),

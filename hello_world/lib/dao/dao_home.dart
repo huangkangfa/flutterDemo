@@ -3,6 +3,7 @@ import 'package:hello_world/configs/apis.dart';
 import 'package:hello_world/model/model_banner_list_entity.dart';
 import 'package:hello_world/model/model_item_activity_entity.dart';
 import 'package:hello_world/model/model_item_icon_entity.dart';
+import 'package:hello_world/model/model_item_shop_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/http/result_data.dart';
 
@@ -38,6 +39,19 @@ class HomeDao {
     List<ModelItemActivityEntity> data = [];
     for (int i = 0; i < resultData.result.length; i++) {
       data.add(ModelItemActivityEntity().fromJson(resultData.result[i]));
+    }
+    return data;
+  }
+
+  ///获取首页商户列表数据
+  static Future<List<ModelItemShopEntity>> getHomeShops(params,
+      {CancelToken cancelToken}) async {
+    ResultData resultData = await HttpManager.getInstance()
+        .get(Apis.shops_list_distance_home, params, cancelToken: cancelToken);
+    if (resultData == null) return [];
+    List<ModelItemShopEntity> data = [];
+    for (int i = 0; i < resultData.result.length; i++) {
+      data.add(ModelItemShopEntity().fromJson(resultData.result[i]));
     }
     return data;
   }

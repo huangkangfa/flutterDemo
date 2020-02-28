@@ -26,8 +26,8 @@ class HomeIconsBarState extends State<HomeIconsBar> {
     super.initState();
     refreshData();
     _streamSubscription = registerEvent<HomeIconsBarEvent>((data) {
-      if(data is HomeIconsBarEvent){
-        switch(data.cmd){
+      if (data is HomeIconsBarEvent) {
+        switch (data.cmd) {
           case 'refreshData':
             refreshData();
             break;
@@ -67,7 +67,7 @@ class HomeIconsBarState extends State<HomeIconsBar> {
           )));
     }
     return Padding(
-      padding: EdgeInsets.only(top: ScreenUtil().setWidth(20)),
+      padding: EdgeInsets.only(top: ScreenUtil().setWidth(10)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +82,6 @@ class HomeIconsBarState extends State<HomeIconsBar> {
     _streamSubscription.cancel();
     HttpManager.getInstance().cancelRequests(tag);
   }
-
 }
 
 class HomeIconsBarEvent {
