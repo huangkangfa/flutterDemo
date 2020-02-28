@@ -60,6 +60,14 @@ class HomePageState extends State<HomePage>
     );
   }
 
+  Widget getListItem() {
+    return Row(
+      children: <Widget>[
+        new Text('哈哈哈哈'),
+      ],
+    );
+  }
+
   Widget getListBody() {
     return RefreshList(
         TypeOfListView(header: getListHeader()), Apis.products_home,
@@ -67,11 +75,7 @@ class HomePageState extends State<HomePage>
       return Container(
         height: 80,
         color: index % 2 == 0 ? Colors.red : Colors.blue,
-        child: Row(
-          children: <Widget>[
-            new Text('哈哈哈哈'),
-          ],
-        ),
+        child: getListItem(),
       );
     }, onRefresh: () {
       refreshHomeData();
