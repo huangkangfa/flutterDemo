@@ -38,6 +38,7 @@ class HomePageState extends State<HomePage>
     sendEvent(HomeBannerEvent('refreshData'));
     sendEvent(HomeIconsBarEvent('refreshData'));
     sendEvent(HomeActivitysBarEvent('refreshData'));
+    sendEvent(ShopBarEvent('refreshData'));
   }
 
   @override

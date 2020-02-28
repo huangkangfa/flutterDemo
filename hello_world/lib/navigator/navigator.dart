@@ -24,6 +24,7 @@ class NavigatorState extends State<MyNavigator> {
         drawer: MyDrawer(),
         body: PageView(
           controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             HomePage(),
             ShoppingMallPage(),

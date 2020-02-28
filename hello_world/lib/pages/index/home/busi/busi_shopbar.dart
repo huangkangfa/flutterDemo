@@ -58,39 +58,67 @@ class ShopBarState extends State<ShopBar> {
         padding: EdgeInsets.only(
             left: ThemeSize.marginSizeMid,
             top: ThemeSize.marginSizeMid,
-            bottom: ThemeSize.marginSizeMid,
-            right: i == dataShops.length - 1 ? ThemeSize.marginSizeMid : 0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Image.network(
-              dataShops[i].advertisingImg,
-              width: ScreenUtil().setWidth(154),
-              height: ScreenUtil().setWidth(100),
-              fit: BoxFit.fill,
-            ),
-            Container(
-              constraints: BoxConstraints(
-                maxWidth: ScreenUtil().setWidth(154),
-                minWidth: ScreenUtil().setWidth(154),
-              ),
-              height: ScreenUtil().setWidth(30),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  dataShops[i].shop,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: ThemeSize.fontSize14,
-                      color: ThemeColors.colorFont_333),
+            bottom: ThemeSize.marginSizeMid),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Image.network(
+                  dataShops[i].advertisingImg,
+                  width: ScreenUtil().setWidth(154),
+                  height: ScreenUtil().setWidth(100),
+                  fit: BoxFit.fill,
                 ),
-              ),
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: ScreenUtil().setWidth(154),
+                    minWidth: ScreenUtil().setWidth(154),
+                  ),
+                  height: ScreenUtil().setWidth(30),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: ThemeSize.marginSizeMin,
+                          right: ThemeSize.marginSizeMin),
+                      child: Text(
+                        dataShops[i].shop,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: ThemeSize.fontSize14,
+                            color: ThemeColors.colorFont_333),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ));
     }
+
+    childs.add(Padding(
+      padding: EdgeInsets.all(ThemeSize.marginSizeMid),
+      child: Container(
+        color: Colors.grey,
+        child: Padding(
+          padding: EdgeInsets.all(ThemeSize.marginSizeMax),
+          child: Center(
+            child: Text(
+              '更\n多',
+              style: TextStyle(
+                  color: Colors.white, fontSize: ThemeSize.fontSizeMid),
+            ),
+          ),
+        ),
+      ),
+    ));
 
     return Container(
       height: ScreenUtil().setWidth(146),
