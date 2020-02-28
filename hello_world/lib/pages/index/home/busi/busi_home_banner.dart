@@ -27,6 +27,7 @@ class HomeBannerState extends State<HomeBanner> {
   @override
   void initState() {
     super.initState();
+    refreshData();
     _streamSubscription = registerEvent<HomeBannerEvent>((data) {
       if(data is HomeBannerEvent){
         switch(data.cmd){
@@ -36,7 +37,6 @@ class HomeBannerState extends State<HomeBanner> {
         }
       }
     });
-    refreshData();
   }
 
   refreshData() {

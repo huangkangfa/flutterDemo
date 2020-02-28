@@ -24,6 +24,7 @@ class HomeIconsBarState extends State<HomeIconsBar> {
   @override
   void initState() {
     super.initState();
+    refreshData();
     _streamSubscription = registerEvent<HomeIconsBarEvent>((data) {
       if(data is HomeIconsBarEvent){
         switch(data.cmd){
@@ -33,7 +34,6 @@ class HomeIconsBarState extends State<HomeIconsBar> {
         }
       }
     });
-    refreshData();
   }
 
   refreshData() {

@@ -25,6 +25,7 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
   @override
   void initState() {
     super.initState();
+    refreshData();
     _streamSubscription = registerEvent<HomeActivitysBarEvent>((data) {
       if (data is HomeActivitysBarEvent) {
         switch(data.cmd){
@@ -34,7 +35,6 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
         }
       }
     });
-    refreshData();
   }
 
   refreshData(){
