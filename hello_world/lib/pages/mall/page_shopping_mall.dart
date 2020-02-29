@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/pages/home/busi/busi_search_bar.dart';
 import 'package:hello_world/widget/base_appbar.dart';
 
@@ -21,20 +20,8 @@ class ShoppingMallPageState extends State<ShoppingMallPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      appBar: baseAppbar(context, '商城', Center(), Center()),
-      body: Column(
-        children: <Widget>[
-          Container(
-              color: Colors.white,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    left: ThemeSize.marginSizeMid,
-                    right: ThemeSize.marginSizeMid),
-                child: SearchBar(noLocationInfo: true),
-              )),
-          Expanded(flex: 1, child: MallView())
-        ],
-      ),
+      appBar: comAppbar(context, appBar: SearchBar()),
+      body: MallView(),
     );
   }
 

@@ -64,7 +64,8 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
   }
 
   ///活动子项布局渲染
-  Widget buildItemLayoutOfActivitys(index) {
+  Widget buildItemLayoutOfActivitys(result,index) {
+    ModelItemActivityEntity item = result as ModelItemActivityEntity;
     Color colorBg = index % 4 < 2 ? Color(0xffFFF4F7) : Color(0xfffff4eb);
     Color colorTv1 = index % 4 < 2 ? Color(0xffFC4D79) : Color(0xffFF703D);
     Color colorTv2 = index % 4 < 2 ? Color(0xffFB5B86) : Color(0xffFF9973);
@@ -89,13 +90,13 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(dataActivitys[index].name,
+                        Text(item.name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: colorTv1,
                                 fontSize: ScreenUtil().setSp(15))),
-                        Text(dataActivitys[index].subName,
+                        Text(item.subName,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -109,7 +110,7 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
                     child: Center(),
                   ),
                   Image.network(
-                    dataActivitys[index].img,
+                    item.img,
                     width: ScreenUtil().setWidth(50),
                     height: ScreenUtil().setWidth(50),
                     fit: BoxFit.fill,

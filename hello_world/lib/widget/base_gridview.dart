@@ -30,7 +30,8 @@ class ComGridView extends StatelessWidget {
       List<Widget> items = [];
       for (double j = 0; j < columnCount; j++) {
         if (i * columnCount + j <= max) {
-          items.add(buildItemLayout(i * columnCount + j.toInt()));
+          int tempIndex = i * columnCount + j.toInt();
+          items.add(buildItemLayout(data[tempIndex],tempIndex));
           if (j < columnCount - 1) {
             items.add(getMainAxisSpacing());
           }
