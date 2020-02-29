@@ -41,6 +41,22 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        debug {
+            storeFile file("xixian.jks")
+            storePassword 'xx123456'
+            keyAlias 'xx123456'
+            keyPassword 'xx123456'
+        }
+
+        release {
+            storeFile file('xixian.jks')
+            storePassword 'xx123456'
+            keyAlias 'xx123456'
+            keyPassword 'xx123456'
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
