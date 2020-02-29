@@ -49,7 +49,7 @@ class HomePageState extends State<HomePage>
       converter: (store) => store.state.userInfo,
       builder: (context, userInfo) {
         return Scaffold(
-          backgroundColor: ThemeColors.colorBg_F2F2F2,
+          backgroundColor: Colors.white,
           appBar: comAppbar(context, appBar: SearchBar()),
           body: RefreshSliverList(
               TypeOfSliverGridView(2,
