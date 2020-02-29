@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/_index.dart';
 import 'package:hello_world/pages/page_error.dart';
-import 'package:hello_world/pages/page_splash.dart';
+import 'package:hello_world/pages/splash/page_splash.dart';
 import 'package:hello_world/redux/app_state.dart';
-import 'package:hello_world/routes.dart';
 import 'package:hello_world/widget/base_toast.dart';
 import 'package:redux/redux.dart';
 
@@ -33,7 +32,6 @@ class MyApp extends StatelessWidget {
     return StoreProvider(
       store: store,
       child: MaterialApp(
-        routes: initRoutes(),
         onUnknownRoute: (RouteSettings setting) {
           String name = setting.name;
           showToast("onUnknownRoute:$name");

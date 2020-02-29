@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/util/util_screen.dart';
 
 double adapt(double w) {
-  return ScreenUtil().setWidth(w);
+  return w;
 }
 
 double sp(num) {

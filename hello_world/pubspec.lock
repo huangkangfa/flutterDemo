@@ -104,6 +104,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_fai_webview:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "6e5e29798d36f8c403b40c84364c780011b54256"
+      url: "https://github.com/zhaolongs/Flutter_Fai_Webview.git"
+    source: git
+    version: "0.0.2"
   flutter_page_indicator:
     dependency: transitive
     description:
