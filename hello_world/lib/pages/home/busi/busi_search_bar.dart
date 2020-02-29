@@ -7,6 +7,10 @@ import 'package:hello_world/widget/base_appbar.dart';
 import 'package:hello_world/widget/widget_edit_search.dart';
 
 class SearchBar extends StatefulWidget {
+  final bool noLocationInfo;
+
+  SearchBar({this.noLocationInfo, Key key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return SearchBarState();
@@ -20,17 +24,15 @@ class SearchBarState extends State<SearchBar> {
   void initState() {
     super.initState();
     _streamSubscription = registerEvent<SearchBarEvent>((data) {
-      if (data is SearchBarEvent) {
-
-      }
+      if (data is SearchBarEvent) {}
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return comAppbar(
-      context,
-      left: Row(
+    Widget left = Center();
+    if (widget.noLocationInfo == null || widget.noLocationInfo == false) {
+      left = Row(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(left: ThemeSize.marginSizeMin),
@@ -43,7 +45,11 @@ class SearchBarState extends State<SearchBar> {
             child: Text('杭州', style: TextStyle(fontSize: ThemeSize.fontSize14)),
           )
         ],
-      ),
+      );
+    }
+    return comAppbar(
+      context,
+      left: left,
       center: EditSearchWidget(),
       right: Padding(
         padding: EdgeInsets.only(
@@ -58,7 +64,6 @@ class SearchBarState extends State<SearchBar> {
     super.dispose();
     _streamSubscription.cancel();
   }
-
 }
 
 class SearchBarEvent {
