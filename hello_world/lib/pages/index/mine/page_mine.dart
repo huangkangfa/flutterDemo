@@ -23,6 +23,12 @@ class MinePageState extends State<MinePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    List<Widget> childs=[];
+    childs.add(MySliverAppBar());
+    childs.add(MyCard1());
+    for(int i=0;i<20;i++){
+      childs.add(MyCard2());
+    }
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification notification) {
         ScrollMetrics metrics = notification.metrics;
@@ -38,14 +44,7 @@ class MinePageState extends State<MinePage>
       child: Scaffold(
         backgroundColor: ThemeColors.colorBg_F2F2F2,
         body: CustomScrollView(
-          slivers: <Widget>[
-            MySliverAppBar(),
-            MyCard1(),
-            MyCard2(),
-            MyCard2(),
-            MyCard2(),
-            MyCard2(),
-          ],
+          slivers: childs,
         ),
       ),
     );
