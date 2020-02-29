@@ -71,6 +71,7 @@ flutter:
     - images/icon_setting.png
     - images/icon_shop_car.png
     - images/icon_coupon.png
+    - images/icon_to_top.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

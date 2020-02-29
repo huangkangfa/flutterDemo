@@ -1,4 +1,6 @@
 //刷新状态枚举
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/model/model_refresh_list_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/http/result_data.dart';
+import 'package:hello_world/util/util_event.dart';
 
 //刷新状态枚举
 enum LoadingStatus {
@@ -48,12 +51,18 @@ class RefreshSliverList extends StatefulWidget {
   final Function onRefresh;
   final Function onNotification;
   final RefreshSliverListType type;
+  final String tag;
 
   final List<Widget> sliverHeader;
   final List<Widget> sliverFooter;
 
   RefreshSliverList(this.type, this.api, this.buildItemLayout,
-      {Key key, this.onRefresh, this.sliverHeader, this.sliverFooter,this.onNotification})
+      {Key key,
+      this.onRefresh,
+      this.sliverHeader,
+      this.sliverFooter,
+      this.onNotification,
+      this.tag})
       : super(key: key);
 
   @override
@@ -64,6 +73,7 @@ class RefreshSliverList extends StatefulWidget {
 
 class RefreshSliverListState extends State<RefreshSliverList> {
   CancelToken tag = CancelToken();
+  StreamSubscription _streamSubscription;
 
   //数据源
   List list = List();
@@ -91,6 +101,15 @@ class RefreshSliverListState extends State<RefreshSliverList> {
     super.initState();
     //第一页数据请求
     getData(true);
+    _streamSubscription = registerEvent<RefreshSliverListEvent>((data) {
+      if (widget.tag != null &&
+          data is RefreshSliverListEvent &&
+          data.tag == widget.tag) {
+        if (data.cmd == 'toTop') {
+          _controller.jumpTo(_controller.position.minScrollExtent);
+        }
+      }
+    });
   }
 
   initScrollListener(notification) {
@@ -174,7 +193,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
 
     return NotificationListener(
       onNotification: (notification) {
-        if(widget.onNotification!=null) {
+        if (widget.onNotification != null) {
           widget.onNotification(notification);
         }
         return initScrollListener(notification);
@@ -282,6 +301,14 @@ class RefreshSliverListState extends State<RefreshSliverList> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+    _streamSubscription.cancel();
     HttpManager.getInstance().cancelRequests(tag);
   }
+}
+
+class RefreshSliverListEvent {
+  String cmd;
+  String tag;
+
+  RefreshSliverListEvent(this.tag, this.cmd);
 }

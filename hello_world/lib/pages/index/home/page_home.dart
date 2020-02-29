@@ -7,6 +7,7 @@ import 'package:hello_world/model/model_item_product_entity.dart';
 import 'package:hello_world/model/model_user_entity.dart';
 import 'package:hello_world/pages/index/home/busi/busi_home_activitys_bar.dart';
 import 'package:hello_world/pages/index/home/busi/busi_home_icons_bar.dart';
+import 'package:hello_world/pages/index/mine/busi/busi_mine_button_top.dart';
 import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
@@ -19,6 +20,7 @@ import 'busi/busi_search_bar.dart';
 import 'busi/busi_shopbar.dart';
 
 class HomePage extends StatefulWidget {
+  static const pageTag = 'home';
   HomePage({Key key}) : super(key: key);
 
   @override
@@ -29,6 +31,8 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin<HomePage> {
+  bool showTop = false;
+
   @override
   void initState() {
     super.initState();
@@ -41,6 +45,19 @@ class HomePageState extends State<HomePage>
     sendEvent(ShopBarEvent('refreshData'));
   }
 
+  controlTopVisibility(notification) {
+    if (notification is ScrollNotification) {
+      ScrollMetrics metrics = notification.metrics;
+      bool result = metrics.extentBefore > ScreenUtil().setWidth(300);
+      if (result != showTop && metrics.axis == Axis.vertical) {
+        setState(() {
+          showTop = result;
+          sendEvent(ButtonOfTopEvent('home', 'changeFlag', flag: showTop));
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -51,23 +68,35 @@ class HomePageState extends State<HomePage>
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: comAppbar(context, appBar: SearchBar()),
-          body: RefreshSliverList(
-              TypeOfSliverGridView(2,
-                  mainAxisSpacing: ScreenUtil().setWidth(10),
-                  childAspectRatio: 0.7,
-                  crossAxisSpacing: ThemeSize.marginSizeMin,
-                  paddingLeft: ThemeSize.marginSizeMid,
-                  paddingRight: ThemeSize.marginSizeMid),
-              Apis.products_home, (item, index) {
-            return ListItemOfProduct(ModelItemProductEntity().fromJson(item));
-          }, sliverHeader: [
-            SliverToBoxAdapter(child: HomeBanner()),
-            SliverToBoxAdapter(child: HomeIconsBar()),
-            SliverToBoxAdapter(child: HomeActivitysBar()),
-            SliverToBoxAdapter(child: HomeSmallTitle('健康聚集地')),
-            SliverToBoxAdapter(child: ShopBar()),
-            SliverToBoxAdapter(child: HomeSmallTitle('热门推荐'))
-          ]),
+          body: Stack(
+            children: <Widget>[
+              RefreshSliverList(
+                  TypeOfSliverGridView(2,
+                      mainAxisSpacing: ScreenUtil().setWidth(10),
+                      childAspectRatio: 0.7,
+                      crossAxisSpacing: ThemeSize.marginSizeMin,
+                      paddingLeft: ThemeSize.marginSizeMid,
+                      paddingRight: ThemeSize.marginSizeMid),
+                  Apis.products_home,
+                  (item, index) {
+                    return ListItemOfProduct(
+                        ModelItemProductEntity().fromJson(item));
+                  },
+                  tag: HomePage.pageTag,
+                  sliverHeader: [
+                    SliverToBoxAdapter(child: HomeBanner()),
+                    SliverToBoxAdapter(child: HomeIconsBar()),
+                    SliverToBoxAdapter(child: HomeActivitysBar()),
+                    SliverToBoxAdapter(child: HomeSmallTitle('健康聚集地')),
+                    SliverToBoxAdapter(child: ShopBar()),
+                    SliverToBoxAdapter(child: HomeSmallTitle('热门推荐'))
+                  ],
+                  onNotification: (notification) {
+                    controlTopVisibility(notification);
+                  }),
+              ButtonOfTop(HomePage.pageTag)
+            ],
+          ),
         );
       },
     );

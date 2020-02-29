@@ -5,9 +5,10 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/model/model_item_product_entity.dart';
 import 'package:hello_world/pages/index/home/busi/busi_home_list_item_product.dart';
 import 'package:hello_world/pages/index/home/page_home.dart';
+import 'package:hello_world/pages/index/mine/busi/busi_mine_button_top.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
-import 'package:hello_world/pages/index/mine/busi/busi_mine_sliver_appbar.Dart';
+import 'package:hello_world/pages/index/mine/busi/busi_mine_sliver_appbar.dart';
 import 'package:hello_world/widget/base_refresh_sliver_list.dart';
 
 import 'busi/busi_mine_card1.dart';
@@ -15,6 +16,7 @@ import 'busi/busi_mine_card2.dart';
 import 'busi/busi_mine_card3.dart';
 
 class MinePage extends StatefulWidget {
+  static const pageTag = 'mine';
   MinePage({Key key}) : super(key: key);
 
   @override
@@ -27,20 +29,21 @@ class MinePageState extends State<MinePage>
     with AutomaticKeepAliveClientMixin<MinePage> {
   bool showHeadimg = false;
 
-  controlHeadImg(notification){
-    if(notification is ScrollNotification){
+  controlHeadImg(notification) {
+    if (notification is ScrollNotification) {
       ScrollMetrics metrics = notification.metrics;
       bool result = metrics.extentBefore > ScreenUtil().setWidth(170);
-      if (result != showHeadimg) {
+      if (result != showHeadimg && metrics.axis == Axis.vertical) {
         setState(() {
           showHeadimg = result;
           sendEvent(MySliverAppBarEvent('showHeadImg', flag: showHeadimg));
+          sendEvent(ButtonOfTopEvent('mine', 'changeFlag', flag: showHeadimg));
         });
       }
     }
   }
 
-  List<Widget> getHeader(){
+  List<Widget> getHeader() {
     List<Widget> childs = [];
     childs.add(MySliverAppBar());
     childs.add(MyCard1());
@@ -61,38 +64,30 @@ class MinePageState extends State<MinePage>
 
     return Scaffold(
       backgroundColor: ThemeColors.colorBg_F2F2F2,
-      body: RefreshSliverList(
-          TypeOfSliverGridView(2,
-              mainAxisSpacing: ScreenUtil().setWidth(10),
-              childAspectRatio: 0.7,
-              crossAxisSpacing: ThemeSize.marginSizeMin,
-              paddingLeft: ThemeSize.marginSizeMax,
-              paddingRight: ThemeSize.marginSizeMax),
-          Apis.products_home, (item, index) {
-        return ListItemOfProduct(ModelItemProductEntity().fromJson(item));
-      }, sliverHeader: getHeader(),onNotification:(notification){
-        controlHeadImg(notification);
-      }),
+      body: Stack(
+        children: <Widget>[
+          RefreshSliverList(
+              TypeOfSliverGridView(2,
+                  mainAxisSpacing: ScreenUtil().setWidth(10),
+                  childAspectRatio: 0.7,
+                  crossAxisSpacing: ThemeSize.marginSizeMin,
+                  paddingLeft: ThemeSize.marginSizeMax,
+                  paddingRight: ThemeSize.marginSizeMax),
+              Apis.products_home,
+              (item, index) {
+                return ListItemOfProduct(
+                    ModelItemProductEntity().fromJson(item));
+              },
+              sliverHeader: getHeader(),
+              tag: MinePage.pageTag,
+              onNotification: (notification) {
+                controlHeadImg(notification);
+              }),
+          ButtonOfTop(MinePage.pageTag)
+        ],
+      ),
     );
   }
-
-//  @override
-//  Widget build(BuildContext context) {
-//    super.build(context);
-//
-//    return NotificationListener<ScrollNotification>(
-//      onNotification: (ScrollNotification notification) {
-//        controlHeadImg(notification);
-//        return false;
-//      },
-//      child: Scaffold(
-//        backgroundColor: ThemeColors.colorBg_F2F2F2,
-//        body: CustomScrollView(
-//          slivers: getHeader(),
-//        ),
-//      ),
-//    );
-//  }
 
   @override
   bool get wantKeepAlive => true;
