@@ -3,22 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/configs/colors.dart';
 import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/model/model_com_icon_entity.dart';
+import 'package:hello_world/pages/index/home/page_home.dart';
 import 'package:hello_world/util/util_screen.dart';
 
 class MyCard2 extends StatelessWidget {
   final List<ModelComIconEntity> data = [
     ModelComIconEntity(
-        name: '消息',
-        img:
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582918869288&di=15c42b4f3d3c15e252c2767ca5632b6b&imgtype=0&src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F00%2F24%2F82%2F8856d00ea961ccc.jpg'),
+        name: '待付款',
+        img:'images/icon_order_pending_payment.png'),
     ModelComIconEntity(
-        name: '签到',
-        img:
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582918983439&di=282445e6a5cc18220f44c0d4faa2d57d&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F7e989165784c9c159cc3fd075f6c715b1e1e1e2f3a3e-KzR6gj_fw658'),
+        name: '未使用',
+        img:'images/icon_order_unused.png'),
     ModelComIconEntity(
-        name: '积分',
-        img:
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582919024353&di=312bc3aac524f994c79dfa99ef568804&imgtype=0&src=http%3A%2F%2Fpic.downcc.com%2Fupload%2F2018-5%2F20185111653247870.png'),
+        name: '待收货',
+        img:'images/icon_order_to_be_delivered.png'),
+    ModelComIconEntity(
+        name: '待评价',
+        img:'images/icon_order_comment.png'),
   ];
 
   @override
@@ -33,12 +34,20 @@ class MyCard2 extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
           child: Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.grey[300], width: 1.0),
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8))),
-            child: Row(
-              children: childs,
+            color: Colors.white,
+            child: Column(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child:Padding(
+                    padding: EdgeInsets.only(left: ThemeSize.marginSizeMid),
+                    child: HomeSmallTitle('订单'),
+                  ),
+                ),
+                Row(
+                  children: childs,
+                )
+              ],
             ),
           ),
         ),
@@ -55,13 +64,11 @@ class MyCard2 extends StatelessWidget {
               top: ThemeSize.marginSizeMax, bottom: ThemeSize.marginSizeMax),
           child: Column(
             children: <Widget>[
-              ClipOval(
-                child: Image.network(
-                  data[index].img,
-                  height: ScreenUtil().setWidth(40),
-                  width: ScreenUtil().setWidth(40),
-                  fit: BoxFit.cover,
-                ),
+              Image.asset(
+                data[index].img,
+                height: ScreenUtil().setWidth(40),
+                width: ScreenUtil().setWidth(40),
+                fit: BoxFit.cover,
               ),
               Padding(
                 padding: EdgeInsets.only(top: ThemeSize.marginSizeMid),

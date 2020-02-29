@@ -46,13 +46,14 @@ class RefreshSliverList extends StatefulWidget {
   final String api;
   final Function buildItemLayout;
   final Function onRefresh;
+  final Function onNotification;
   final RefreshSliverListType type;
 
   final List<Widget> sliverHeader;
   final List<Widget> sliverFooter;
 
   RefreshSliverList(this.type, this.api, this.buildItemLayout,
-      {Key key, this.onRefresh, this.sliverHeader, this.sliverFooter})
+      {Key key, this.onRefresh, this.sliverHeader, this.sliverFooter,this.onNotification})
       : super(key: key);
 
   @override
@@ -173,6 +174,9 @@ class RefreshSliverListState extends State<RefreshSliverList> {
 
     return NotificationListener(
       onNotification: (notification) {
+        if(widget.onNotification!=null) {
+          widget.onNotification(notification);
+        }
         return initScrollListener(notification);
       },
       child: RefreshIndicator(
