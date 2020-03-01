@@ -9,7 +9,7 @@ class TypeSelector extends StatefulWidget {
   final String tag;
   final Function onTap;
 
-  TypeSelector(this.tag, {Key key,this.onTap}) : super(key: key);
+  TypeSelector(this.tag, {Key key, this.onTap}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -34,11 +34,11 @@ class TypeSelectorState extends State<TypeSelector> {
   }
 
   onClick(index) {
-    if(index != selectedIndex){
-      if(widget.onTap!=null){
+    if (index != selectedIndex) {
+      if (widget.onTap != null) {
         widget.onTap(index);
       }
-      if(this.mounted){
+      if (this.mounted) {
         setState(() {
           selectedIndex = index;
         });
@@ -50,7 +50,7 @@ class TypeSelectorState extends State<TypeSelector> {
   Widget build(BuildContext context) {
     List<Widget> childs = [];
     for (int i = 0; i < data.length; i++) {
-      childs.add(InkWell(
+      childs.add(GestureDetector(
         onTap: () {
           onClick(i);
         },
@@ -64,9 +64,13 @@ class TypeSelectorState extends State<TypeSelector> {
                   color: selectedIndex == i
                       ? ThemeColors.colorPrimary
                       : Colors.grey),
-              Text(data[i].name,style: TextStyle(color: selectedIndex == i
-                  ? ThemeColors.colorFont_333
-                  : Colors.grey),),
+              Text(
+                data[i].name,
+                style: TextStyle(
+                    color: selectedIndex == i
+                        ? ThemeColors.colorFont_333
+                        : Colors.grey),
+              ),
             ],
           ),
         ),

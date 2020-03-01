@@ -122,7 +122,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
         getData(false);
       }
     }
-    return false;
+    return true;
   }
 
   @override

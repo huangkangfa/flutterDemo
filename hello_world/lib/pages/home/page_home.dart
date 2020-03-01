@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/apis.dart';
@@ -52,7 +54,7 @@ class HomePageState extends State<HomePage>
       ScrollMetrics metrics = notification.metrics;
       bool result = metrics.extentBefore > ScreenUtil().setWidth(300);
       if (result != showTop && metrics.axis == Axis.vertical) {
-        if(this.mounted){
+        if (this.mounted) {
           setState(() {
             showTop = result;
             sendEvent(ButtonOfTopEvent('home', 'changeFlag', flag: showTop));
@@ -87,11 +89,14 @@ class HomePageState extends State<HomePage>
                         ModelItemProductEntity().fromJson(item));
                   },
                   tag: HomePage.pageTag,
+                  onRefresh: () {
+                    refreshHomeData();
+                  },
                   sliverHeader: [
                     SliverToBoxAdapter(child: HomeBanner()),
                     SliverToBoxAdapter(child: HomeIconsBar()),
                     SliverToBoxAdapter(child: HomeActivitysBar()),
-                    SliverToBoxAdapter(child: getHomeHealth()),
+                    SliverToBoxAdapter(child: HomeHealthTitle()),
                     SliverToBoxAdapter(child: ShopBar()),
                     SliverToBoxAdapter(child: HomeSmallTitle('热门推荐'))
                   ],
@@ -106,7 +111,18 @@ class HomePageState extends State<HomePage>
     );
   }
 
-  getHomeHealth() {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+}
+
+class HomeHealthTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
         HomeSmallTitle('健康聚集地'),
@@ -120,14 +136,6 @@ class HomePageState extends State<HomePage>
       ],
     );
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  bool get wantKeepAlive => true;
 }
 
 class HomeSmallTitle extends StatelessWidget {

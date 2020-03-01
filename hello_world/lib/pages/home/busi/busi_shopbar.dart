@@ -51,10 +51,10 @@ class ShopBarState extends State<ShopBar> {
         .then((data) {
       if (this.mounted) {
         setState(() {
+//          if(controller.hasClients){
+//            controller.jumpTo(controller.position.minScrollExtent);
+//          }
           dataShops = data;
-          if(controller.hasClients){
-            controller.jumpTo(controller.position.minScrollExtent);
-          }
         });
       }
     });

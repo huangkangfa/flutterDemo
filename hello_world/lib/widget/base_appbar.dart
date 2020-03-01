@@ -19,7 +19,7 @@ backAppbar(BuildContext context, String title,
         backgroundColor:
             backgroundColor == null ? Colors.white : backgroundColor,
         leading: _leading(context),
-        title: InkWell(
+        title: GestureDetector(
           child: Text(
             title,
             style: TextStyle(
@@ -44,7 +44,7 @@ backActionAppbar(BuildContext context, String title, Widget action,
         backgroundColor:
             backgroundColor == null ? Colors.white : backgroundColor,
         leading: _leading(context, backFunc: backFunc),
-        title: InkWell(
+        title: GestureDetector(
           child: Text(
             title,
             style: TextStyle(
@@ -79,7 +79,7 @@ baseAppbar(BuildContext context, String title, Widget leading, Widget action,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[leading],
         ),
-        title: InkWell(
+        title: GestureDetector(
           child: Text(
             title,
             style: TextStyle(

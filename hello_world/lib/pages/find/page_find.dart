@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/pages/home/busi/busi_search_bar.dart';
 import 'package:hello_world/widget/base_appbar.dart';
 
 class FindPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class FindPageState extends State<FindPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      appBar: baseAppbar(context, '发现', Center(), Center()),
+      appBar: comAppbar(context, appBar: SearchBar()),
       body: Center(),
     );
   }

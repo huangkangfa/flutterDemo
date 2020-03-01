@@ -2,7 +2,7 @@
 class Config {
   static const appName = '江小鹿';
   static String token;
-  static BaseEnv env = new OnLine();
+  static BaseEnv env = OnLine();
 }
 
 ///开发环境
@@ -27,7 +27,7 @@ class OnLine implements BaseEnv {
 
   @override
   bool getDebug() {
-    return false;
+    return true;
   }
 }
 

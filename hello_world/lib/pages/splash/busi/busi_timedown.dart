@@ -56,9 +56,10 @@ class _SplashTimeDownState extends State<SplashTimeDown> {
   @override
   Widget build(BuildContext context) {
     return ClipOval(
-        child: InkWell(
+        child: GestureDetector(
             onTap: () {
               if (widget.callback != null) {
+                if (_timerUtil != null) _timerUtil.cancel();
                 widget.callback();
               }
             },

@@ -40,7 +40,7 @@ class SplashPageState extends State<SplashPage> {
   }
 
   void _goMain() {
-    push(context, MyNavigator());
+    reset(context, MyNavigator());
   }
 
   @override

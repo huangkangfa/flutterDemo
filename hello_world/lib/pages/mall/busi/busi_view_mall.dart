@@ -159,7 +159,7 @@ class MallViewState extends State<MallView> {
     return Container(
       color: i == selectedIndex ? Colors.white : Color(0x00000000),
       height: ScreenUtil().setWidth(40),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           if (selectedIndex != i) {
             if(this.mounted){

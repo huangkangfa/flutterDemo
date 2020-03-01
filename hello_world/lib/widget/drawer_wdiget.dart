@@ -130,7 +130,7 @@ class MyDrawerState extends State<MyDrawer> {
           children: <Widget>[
             Padding(
                 padding: EdgeInsets.only(top: ScreenUtil.statusBarHeight),
-                child: InkWell(
+                child: GestureDetector(
                   onTap: () {
                     checkLogin(userInfo == null);
                   },
@@ -145,7 +145,7 @@ class MyDrawerState extends State<MyDrawer> {
                 )),
             Padding(
                 padding: EdgeInsets.only(top: ScreenUtil().setWidth(5)),
-                child: InkWell(
+                child: GestureDetector(
                   onTap: () {
                     checkLogin(userInfo == null);
                   },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/pages/home/page_home.dart';
 import 'package:hello_world/pages/mine/page_mine.dart';
-import 'package:hello_world/pages/page_find.dart';
+import 'package:hello_world/pages/find/page_find.dart';
 import 'package:hello_world/pages/page_member.dart';
 import 'package:hello_world/pages/mall/page_shopping_mall.dart';
 import 'package:hello_world/widget/drawer_wdiget.dart';
