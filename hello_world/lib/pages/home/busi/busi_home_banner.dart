@@ -29,15 +29,15 @@ class HomeBannerState extends State<HomeBanner> {
   void initState() {
     super.initState();
     refreshData();
-    _streamSubscription = registerEvent<HomeBannerEvent>((data) {
-      if (data is HomeBannerEvent) {
-        switch (data.cmd) {
-          case 'refreshData':
-            refreshData();
-            break;
-        }
-      }
-    });
+//    _streamSubscription = registerEvent<HomeBannerEvent>((data) {
+//      if (data is HomeBannerEvent) {
+//        switch (data.cmd) {
+//          case 'refreshData':
+//            refreshData();
+//            break;
+//        }
+//      }
+//    });
   }
 
   refreshData() {

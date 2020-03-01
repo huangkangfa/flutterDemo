@@ -59,7 +59,7 @@ class FindBannerState extends State<FindBanner> {
       return PlaceHolderView(
           ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
               ThemeSize.marginSizeMin * 2,
-          ScreenUtil().setWidth(140));
+          ScreenUtil().setWidth(130));
     }
     return Container(
       color: dataBanner.length > 0 ? Colors.white : Colors.grey[300],

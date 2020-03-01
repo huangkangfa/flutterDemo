@@ -40,6 +40,7 @@ dependencies:
   cookie_jar: ^1.0.0
   event_bus: ^1.1.1
   permission_handler: ^3.2.0
+  cached_network_image: ^2.0.0
 
   flutter_fai_webview:
     git:

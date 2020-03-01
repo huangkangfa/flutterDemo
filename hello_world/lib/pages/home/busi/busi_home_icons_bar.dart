@@ -27,15 +27,15 @@ class HomeIconsBarState extends State<HomeIconsBar> {
   void initState() {
     super.initState();
     refreshData();
-    _streamSubscription = registerEvent<HomeIconsBarEvent>((data) {
-      if (data is HomeIconsBarEvent) {
-        switch (data.cmd) {
-          case 'refreshData':
-            refreshData();
-            break;
-        }
-      }
-    });
+//    _streamSubscription = registerEvent<HomeIconsBarEvent>((data) {
+//      if (data is HomeIconsBarEvent) {
+//        switch (data.cmd) {
+//          case 'refreshData':
+//            refreshData();
+//            break;
+//        }
+//      }
+//    });
   }
 
   refreshData() {

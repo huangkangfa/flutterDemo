@@ -53,6 +53,7 @@ class RefreshSliverList extends StatefulWidget {
   final RefreshSliverListType type;
   final ScrollPhysics scrollPhysics;
   final String tag;
+  final Map<String, dynamic> params;
 
   final List<Widget> sliverHeader;
   final List<Widget> sliverFooter;
@@ -64,6 +65,7 @@ class RefreshSliverList extends StatefulWidget {
       this.sliverFooter,
       this.onNotification,
       this.scrollPhysics,
+      this.params,
       this.tag})
       : super(key: key);
 
@@ -78,7 +80,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
   StreamSubscription _streamSubscription;
 
   //数据源
-  List list = List();
+  List list = [];
 
   //foot文本
   String loadingText = '加载中...';
@@ -90,7 +92,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
   int pageNo = 1;
 
   //总数据大小
-  int total = 999;
+  int total = 0;
 
   //当前上拉加载更多的状态
   LoadingStatus loadingStatus = LoadingStatus.STATUS_IDEL;
@@ -98,9 +100,12 @@ class RefreshSliverListState extends State<RefreshSliverList> {
   //滑动控制器
   ScrollController _controller = ScrollController();
 
+  Map<String, dynamic> params;
+
   @override
   void initState() {
     super.initState();
+    params = widget.params;
     //第一页数据请求
     getData(true);
     _streamSubscription = registerEvent<RefreshSliverListEvent>((data) {
@@ -222,15 +227,22 @@ class RefreshSliverListState extends State<RefreshSliverList> {
     getData(true);
   }
 
-  Future getData(bool isFirst) async {
+  Future getData(bool isFirst, {Map<String, dynamic> param}) async {
+    if (param != null) {
+      params = param;
+    }
+    if (params == null) {
+      params = Map<String,dynamic>();
+    }
+    params['pageNo'] = pageNo;
+    params['pageSize'] = pageSize;
     if (isFirst) {
       //下拉刷新或者第一次加载数据
       loadingStatus = LoadingStatus.STATUS_LOADING;
       loadingText = '加载中...';
       list.clear();
       pageNo = 1;
-      List listMore = await requstData(
-          widget.api, {'pageNo': pageNo, 'pageSize': pageSize});
+      List listMore = await requstData(widget.api, params);
       if (this.mounted) {
         setState(() {
           list.addAll(listMore);
@@ -252,8 +264,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
         }
         pageNo++;
         //获取增联数据赋值listMore
-        List listMore = await requstData(
-            widget.api, {'pageNo': pageNo, 'pageSize': pageSize});
+        List listMore = await requstData(widget.api, params);
         //准备完数据，再设置状态
         if (this.mounted) {
           setState(() {

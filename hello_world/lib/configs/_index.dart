@@ -27,7 +27,7 @@ class OnLine implements BaseEnv {
 
   @override
   bool getDebug() {
-    return true;
+    return false;
   }
 }
 

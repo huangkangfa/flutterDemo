@@ -49,12 +49,13 @@ class RefreshList extends StatefulWidget {
   final Function buildItemLayout;
   final Function onRefresh;
   final RefreshListType type;
+  final Map<String, dynamic> params;
 
   //空背景
   final Widget emptyBg;
 
   RefreshList(this.type, this.api, this.buildItemLayout,
-      {Key key, this.emptyBg, this.onRefresh})
+      {Key key, this.emptyBg, this.onRefresh, this.params})
       : super(key: key);
 
   @override
@@ -90,10 +91,12 @@ class RefreshListState extends State<RefreshList> {
   //滑动控制器
   ScrollController controller = ScrollController();
 
+  Map<String, dynamic> params;
+
   @override
   void initState() {
     super.initState();
-
+    params = widget.params;
     controller.addListener(() {
       //判断滑到底部的时候,触发加载更多
       if (controller.position.pixels == controller.position.maxScrollExtent) {
@@ -193,16 +196,23 @@ class RefreshListState extends State<RefreshList> {
     getData(true);
   }
 
-  Future getData(bool isFirst) async {
+  Future getData(bool isFirst, {Map<String, dynamic> param}) async {
+    if (param != null) {
+      params = param;
+    }
+    if (params == null) {
+      params = Map<String, dynamic>();
+    }
+    params['pageNo'] = pageNo;
+    params['pageSize'] = pageSize;
     if (isFirst) {
       //下拉刷新或者第一次加载数据
       loadingStatus = LoadingStatus.STATUS_LOADING;
       loadingText = '加载中...';
       list.clear();
       pageNo = 1;
-      List listMore = await requstData(
-          widget.api, {'pageNo': pageNo, 'pageSize': pageSize});
-      if(this.mounted){
+      List listMore = await requstData(widget.api, params);
+      if (this.mounted) {
         setState(() {
           list.addAll(listMore);
           if (list.length >= total) {
@@ -216,17 +226,16 @@ class RefreshListState extends State<RefreshList> {
     } else {
       //避免重复加载更多
       if (loadingStatus == LoadingStatus.STATUS_IDEL) {
-        if(this.mounted){
+        if (this.mounted) {
           setState(() {
             loadingStatus = LoadingStatus.STATUS_LOADING;
           });
         }
         pageNo++;
         //获取增联数据赋值listMore
-        List listMore = await requstData(
-            widget.api, {'pageNo': pageNo, 'pageSize': pageSize});
+        List listMore = await requstData(widget.api, params);
         //准备完数据，再设置状态
-        if(this.mounted){
+        if (this.mounted) {
           setState(() {
             if (list.length < total) {
               list.addAll(listMore);

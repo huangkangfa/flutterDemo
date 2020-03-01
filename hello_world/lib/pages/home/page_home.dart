@@ -124,14 +124,14 @@ class HomeHealthTitle extends StatelessWidget {
     return Row(
       children: <Widget>[
         HomeSmallTitle('健康聚集地'),
-///以下内容放开会存在一个闪屏bug，就是选项处于好评时且列表处于置顶状态，点击空白处会闪屏
-//        Expanded(flex: 1, child: Center()),
-//        Padding(
-//          padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
-//          child: TypeSelector(HomePage.pageTag, onTap: (index) {
-//            sendEvent(ShopBarEvent('refreshData', isDistanceType: index == 1));
-//          }),
-//        )
+        ///以下内容放开会存在一个闪屏bug，就是选项处于好评时且列表处于置顶状态，点击空白处会闪屏
+        Expanded(flex: 1, child: Center()),
+        Padding(
+          padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
+          child: TypeSelector(HomePage.pageTag, onTap: (index) {
+            sendEvent(ShopBarEvent('refreshData', isDistanceType: index == 1));
+          }),
+        )
       ],
     );
   }
