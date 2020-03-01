@@ -45,7 +45,7 @@ class HomeDao {
 
   ///获取首页商户列表数据
   static Future<List<ModelItemShopEntity>> getHomeShops(params,
-      {CancelToken cancelToken, bool isDistance = true}) async {
+      {CancelToken cancelToken, bool isDistance}) async {
     ResultData resultData = await HttpManager.getInstance().get(
         isDistance
             ? Apis.shops_list_distance_home

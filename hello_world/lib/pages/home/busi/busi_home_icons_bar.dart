@@ -9,6 +9,7 @@ import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
+import 'package:hello_world/widget/base_toast.dart';
 
 class HomeIconsBar extends StatefulWidget {
   @override
@@ -39,7 +40,7 @@ class HomeIconsBarState extends State<HomeIconsBar> {
 
   refreshData() {
     HomeDao.getHomeIcons(cancelToken: tag).then((data) {
-      if(this.mounted){
+      if (this.mounted) {
         setState(() {
           dataIcons = data;
         });
@@ -47,9 +48,13 @@ class HomeIconsBarState extends State<HomeIconsBar> {
     });
   }
 
+  onClick(index) {
+    showToast('点击了'+index.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
-    if(dataIcons.length==0){
+    if (dataIcons.length == 0) {
       return PlaceHolderView(
           ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
               ThemeSize.marginSizeMin * 2,
@@ -59,20 +64,23 @@ class HomeIconsBarState extends State<HomeIconsBar> {
     for (int i = 0; i < dataIcons.length; i++) {
       children.add(Expanded(
           flex: 1,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.network(
-                dataIcons[i].img,
-                width: ScreenUtil().setWidth(42),
-                height: ScreenUtil().setWidth(42),
-                fit: BoxFit.fill,
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: ThemeSize.marginSizeMin),
-                child: Text(dataIcons[i].name),
-              ),
-            ],
+          child: GestureDetector(
+            onTap: () => onClick(i),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.network(
+                  dataIcons[i].img,
+                  width: ScreenUtil().setWidth(42),
+                  height: ScreenUtil().setWidth(42),
+                  fit: BoxFit.fill,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: ThemeSize.marginSizeMin),
+                  child: Text(dataIcons[i].name),
+                ),
+              ],
+            ),
           )));
     }
     return Padding(

@@ -10,6 +10,7 @@ import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_gridview.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
+import 'package:hello_world/widget/base_toast.dart';
 
 class HomeActivitysBar extends StatefulWidget {
   @override
@@ -65,6 +66,10 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
     );
   }
 
+  onClick(index){
+    showToast('点击了'+index.toString());
+  }
+
   ///活动子项布局渲染
   Widget buildItemLayoutOfActivitys(result,index) {
     ModelItemActivityEntity item = result as ModelItemActivityEntity;
@@ -73,51 +78,54 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
     Color colorTv2 = index % 4 < 2 ? Color(0xffFB5B86) : Color(0xffFF9973);
     return Expanded(
         flex: 1,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
-          child: Container(
-            decoration: BoxDecoration(
-                color: colorBg,
-                border: Border.all(color: Colors.grey[200], width: 1.0),
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5))),
-            child: Padding(
-              padding: EdgeInsets.all(ThemeSize.marginSize12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    constraints: BoxConstraints(
-                      maxWidth: ScreenUtil().setWidth(100),
+        child: GestureDetector(
+          onTap: ()=>onClick(index),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: colorBg,
+                  border: Border.all(color: Colors.grey[200], width: 1.0),
+                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5))),
+              child: Padding(
+                padding: EdgeInsets.all(ThemeSize.marginSize12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      constraints: BoxConstraints(
+                        maxWidth: ScreenUtil().setWidth(100),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(item.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: colorTv1,
+                                  fontSize: ScreenUtil().setSp(15))),
+                          Text(item.subName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: colorTv2,
+                                  fontSize: ScreenUtil().setSp(12))),
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(item.name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: colorTv1,
-                                fontSize: ScreenUtil().setSp(15))),
-                        Text(item.subName,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: colorTv2,
-                                fontSize: ScreenUtil().setSp(12))),
-                      ],
+                    Expanded(
+                      flex: 1,
+                      child: Center(),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Center(),
-                  ),
-                  Image.network(
-                    item.img,
-                    width: ScreenUtil().setWidth(50),
-                    height: ScreenUtil().setWidth(50),
-                    fit: BoxFit.fill,
-                  )
-                ],
+                    Image.network(
+                      item.img,
+                      width: ScreenUtil().setWidth(50),
+                      height: ScreenUtil().setWidth(50),
+                      fit: BoxFit.fill,
+                    )
+                  ],
+                ),
               ),
             ),
           ),

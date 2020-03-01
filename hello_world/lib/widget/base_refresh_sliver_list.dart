@@ -51,6 +51,7 @@ class RefreshSliverList extends StatefulWidget {
   final Function onRefresh;
   final Function onNotification;
   final RefreshSliverListType type;
+  final ScrollPhysics scrollPhysics;
   final String tag;
 
   final List<Widget> sliverHeader;
@@ -62,6 +63,7 @@ class RefreshSliverList extends StatefulWidget {
       this.sliverHeader,
       this.sliverFooter,
       this.onNotification,
+      this.scrollPhysics,
       this.tag})
       : super(key: key);
 
@@ -115,6 +117,10 @@ class RefreshSliverListState extends State<RefreshSliverList> {
   initScrollListener(notification) {
     if (notification is ScrollNotification) {
       ScrollMetrics metrics = notification.metrics;
+//      print('距离顶部距离 = ' + metrics.extentBefore.toString());
+//      print('距离底部距离 = ' + metrics.extentAfter.toString());
+//      print('列表方向 = ' + metrics.axis.toString());
+//      print('列表滑动方法 = ' + metrics.axisDirection.toString());
       if (metrics.extentAfter < 40 &&
           metrics.axis == Axis.vertical &&
           metrics.axisDirection == AxisDirection.down) {
@@ -202,7 +208,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
         onRefresh: _onRefresh,
         child: CustomScrollView(
           controller: _controller,
-          physics: ScrollPhysics(),
+          physics: widget.scrollPhysics ?? ScrollPhysics(),
           slivers: childs,
         ),
       ),

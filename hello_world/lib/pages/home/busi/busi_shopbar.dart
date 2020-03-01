@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
+import 'package:hello_world/widget/base_toast.dart';
 
 class ShopBar extends StatefulWidget {
   ShopBar({Key key}) : super(key: key);
@@ -51,13 +51,21 @@ class ShopBarState extends State<ShopBar> {
         .then((data) {
       if (this.mounted) {
         setState(() {
-//          if(controller.hasClients){
-//            controller.jumpTo(controller.position.minScrollExtent);
-//          }
+          if (controller.hasClients) {
+            controller.jumpTo(controller.position.minScrollExtent);
+          }
           dataShops = data;
         });
       }
     });
+  }
+
+  onClick(index) {
+    showToast('点击了' + index.toString());
+  }
+
+  onMoreClick() {
+    showToast('点击了更多');
   }
 
   @override
@@ -77,45 +85,49 @@ class ShopBarState extends State<ShopBar> {
             bottom: ThemeSize.marginSizeMid),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.grey[200], width: 1.0),
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5))),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Image.network(
-                  dataShops[i].advertisingImg,
-                  width: ScreenUtil().setWidth(154),
-                  height: ScreenUtil().setWidth(100),
-                  fit: BoxFit.fill,
-                ),
-                Container(
-                  constraints: BoxConstraints(
-                    maxWidth: ScreenUtil().setWidth(154),
-                    minWidth: ScreenUtil().setWidth(154),
+          child: GestureDetector(
+            onTap: () => onClick(i),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey[200], width: 1.0),
+                  borderRadius:
+                      BorderRadius.circular(ScreenUtil().setWidth(5))),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Image.network(
+                    dataShops[i].advertisingImg,
+                    width: ScreenUtil().setWidth(154),
+                    height: ScreenUtil().setWidth(100),
+                    fit: BoxFit.fill,
                   ),
-                  height: ScreenUtil().setWidth(30),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: ThemeSize.marginSizeMin,
-                          right: ThemeSize.marginSizeMin),
-                      child: Text(
-                        dataShops[i].shop,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: ThemeSize.fontSize14,
-                            color: ThemeColors.colorFont_333),
+                  Container(
+                    constraints: BoxConstraints(
+                      maxWidth: ScreenUtil().setWidth(154),
+                      minWidth: ScreenUtil().setWidth(154),
+                    ),
+                    height: ScreenUtil().setWidth(30),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: ThemeSize.marginSizeMin,
+                            right: ThemeSize.marginSizeMin),
+                        child: Text(
+                          dataShops[i].shop,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: ThemeSize.fontSize14,
+                              color: ThemeColors.colorFont_333),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -124,15 +136,18 @@ class ShopBarState extends State<ShopBar> {
 
     childs.add(Padding(
       padding: EdgeInsets.all(ThemeSize.marginSizeMid),
-      child: Container(
-        color: Colors.grey,
-        child: Padding(
-          padding: EdgeInsets.all(ThemeSize.marginSizeMax),
-          child: Center(
-            child: Text(
-              '更\n多',
-              style: TextStyle(
-                  color: Colors.white, fontSize: ThemeSize.fontSizeMid),
+      child: GestureDetector(
+        onTap: () => onMoreClick(),
+        child: Container(
+          color: Colors.grey,
+          child: Padding(
+            padding: EdgeInsets.all(ThemeSize.marginSizeMax),
+            child: Center(
+              child: Text(
+                '更\n多',
+                style: TextStyle(
+                    color: Colors.white, fontSize: ThemeSize.fontSizeMid),
+              ),
             ),
           ),
         ),

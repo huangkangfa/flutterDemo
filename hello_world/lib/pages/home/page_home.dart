@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/apis.dart';
@@ -67,7 +65,6 @@ class HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     return StoreConnector<AppState, ModelUserEntity>(
       converter: (store) => store.state.userInfo,
       builder: (context, userInfo) {
@@ -92,6 +89,7 @@ class HomePageState extends State<HomePage>
                   onRefresh: () {
                     refreshHomeData();
                   },
+                  scrollPhysics: BouncingScrollPhysics(),
                   sliverHeader: [
                     SliverToBoxAdapter(child: HomeBanner()),
                     SliverToBoxAdapter(child: HomeIconsBar()),
@@ -126,13 +124,13 @@ class HomeHealthTitle extends StatelessWidget {
     return Row(
       children: <Widget>[
         HomeSmallTitle('健康聚集地'),
-        Expanded(flex: 1, child: Center()),
-        Padding(
-          padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
-          child: TypeSelector(HomePage.pageTag, onTap: (index) {
-            sendEvent(ShopBarEvent('refreshData', isDistanceType: index == 1));
-          }),
-        )
+//        Expanded(flex: 1, child: Center()),
+//        Padding(
+//          padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
+//          child: TypeSelector(HomePage.pageTag, onTap: (index) {
+//            sendEvent(ShopBarEvent('refreshData', isDistanceType: index == 1));
+//          }),
+//        )
       ],
     );
   }
