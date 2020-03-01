@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/colors.dart';
 import 'package:hello_world/configs/size.dart';
@@ -23,8 +24,8 @@ class ListItemOfProduct extends StatelessWidget {
           children: <Widget>[
             Expanded(
                 flex: 1,
-                child: Image.network(
-                  product.images,
+                child: CachedNetworkImage(
+                  imageUrl: product.images,
                   fit: BoxFit.fill,
                 )),
             Container(

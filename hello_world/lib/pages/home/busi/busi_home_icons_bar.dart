@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/size.dart';
@@ -27,15 +28,15 @@ class HomeIconsBarState extends State<HomeIconsBar> {
   void initState() {
     super.initState();
     refreshData();
-//    _streamSubscription = registerEvent<HomeIconsBarEvent>((data) {
-//      if (data is HomeIconsBarEvent) {
-//        switch (data.cmd) {
-//          case 'refreshData':
-//            refreshData();
-//            break;
-//        }
-//      }
-//    });
+    _streamSubscription = registerEvent<HomeIconsBarEvent>((data) {
+      if (data is HomeIconsBarEvent) {
+        switch (data.cmd) {
+          case 'refreshData':
+            refreshData();
+            break;
+        }
+      }
+    });
   }
 
   refreshData() {
@@ -49,7 +50,7 @@ class HomeIconsBarState extends State<HomeIconsBar> {
   }
 
   onClick(index) {
-    showToast('点击了'+index.toString());
+    showToast('点击了' + index.toString());
   }
 
   @override
@@ -69,8 +70,8 @@ class HomeIconsBarState extends State<HomeIconsBar> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.network(
-                  dataIcons[i].img,
+                CachedNetworkImage(
+                  imageUrl: dataIcons[i].img,
                   width: ScreenUtil().setWidth(42),
                   height: ScreenUtil().setWidth(42),
                   fit: BoxFit.fill,

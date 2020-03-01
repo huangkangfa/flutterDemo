@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/widgets.dart';
 
@@ -81,19 +82,19 @@ class WidgetUtil {
     Image img = image != null
         ? image
         : ((url != null && url.isNotEmpty)
-        ? Image.network(url)
-        : Image.asset(localUrl, package: package));
+            ? CachedNetworkImage(imageUrl: url)
+            : Image.asset(localUrl, package: package));
     img.image
         .resolve(new ImageConfiguration())
         .addListener(new ImageStreamListener(
           (ImageInfo info, bool _) {
-        completer.complete(Rect.fromLTWH(0, 0, info.image.width.toDouble(),
-            info.image.height.toDouble()));
-      },
-      onError: (dynamic exception, StackTrace stackTrace) {
-        completer.completeError(exception, stackTrace);
-      },
-    ));
+            completer.complete(Rect.fromLTWH(0, 0, info.image.width.toDouble(),
+                info.image.height.toDouble()));
+          },
+          onError: (dynamic exception, StackTrace stackTrace) {
+            completer.completeError(exception, stackTrace);
+          },
+        ));
     return completer.future;
   }
 
@@ -114,19 +115,19 @@ class WidgetUtil {
     Image img = image != null
         ? image
         : ((url != null && url.isNotEmpty)
-        ? Image.network(url)
-        : Image.asset(localUrl, package: package));
+            ? CachedNetworkImage(imageUrl: url)
+            : Image.asset(localUrl, package: package));
     img.image
         .resolve(new ImageConfiguration())
         .addListener(new ImageStreamListener(
           (ImageInfo info, bool _) {
-        completer.complete(Rect.fromLTWH(0, 0, info.image.width.toDouble(),
-            info.image.height.toDouble()));
-      },
-      onError: (dynamic exception, StackTrace stackTrace) {
-        completer.completeError(exception, stackTrace);
-      },
-    ));
+            completer.complete(Rect.fromLTWH(0, 0, info.image.width.toDouble(),
+                info.image.height.toDouble()));
+          },
+          onError: (dynamic exception, StackTrace stackTrace) {
+            completer.completeError(exception, stackTrace);
+          },
+        ));
 
     return completer.future;
   }

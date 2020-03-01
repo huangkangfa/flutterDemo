@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -29,21 +30,21 @@ class HomeBannerState extends State<HomeBanner> {
   void initState() {
     super.initState();
     refreshData();
-//    _streamSubscription = registerEvent<HomeBannerEvent>((data) {
-//      if (data is HomeBannerEvent) {
-//        switch (data.cmd) {
-//          case 'refreshData':
-//            refreshData();
-//            break;
-//        }
-//      }
-//    });
+    _streamSubscription = registerEvent<HomeBannerEvent>((data) {
+      if (data is HomeBannerEvent) {
+        switch (data.cmd) {
+          case 'refreshData':
+            refreshData();
+            break;
+        }
+      }
+    });
   }
 
   refreshData() {
     HomeDao.getHomeBanner({'platform': 0, 'position': 1}, cancelToken: tag)
         .then((data) {
-      if(this.mounted){
+      if (this.mounted) {
         setState(() {
           dataBanner = data;
         });
@@ -77,8 +78,8 @@ class HomeBannerState extends State<HomeBanner> {
           itemBuilder: (BuildContext context, int index) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(ThemeSize.marginSizeMin),
-              child: Image.network(
-                dataBanner[index].img,
+              child: CachedNetworkImage(
+                imageUrl: dataBanner[index].img,
                 fit: BoxFit.fill,
               ),
             );

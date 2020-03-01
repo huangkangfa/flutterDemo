@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/colors.dart';
@@ -56,8 +57,8 @@ class MyCard1 extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ClipOval(
-                child: Image.network(
-                  data[index].img,
+                child: CachedNetworkImage(
+                  imageUrl: data[index].img,
                   height: ScreenUtil().setWidth(40),
                   width: ScreenUtil().setWidth(40),
                   fit: BoxFit.cover,

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/colors.dart';
@@ -29,7 +30,7 @@ class MySliverAppBarState extends State<MySliverAppBar> {
     _streamSubscription = registerEvent<MySliverAppBarEvent>((data) {
       if (data is MySliverAppBarEvent) {
         if (data.cmd == 'showHeadImg') {
-          if(this.mounted){
+          if (this.mounted) {
             setState(() {
               showHeadImg = data.flag;
             });
@@ -50,8 +51,9 @@ class MySliverAppBarState extends State<MySliverAppBar> {
               child: Container(
                 child: Center(
                   child: ClipOval(
-                    child: Image.network(
-                      userInfo?.headImg ?? DefaultPersion.defaultHeadImg,
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          userInfo?.headImg ?? DefaultPersion.defaultHeadImg,
                       height: headerWH,
                       width: headerWH,
                       fit: BoxFit.cover,
@@ -88,8 +90,8 @@ class MySliverAppBarState extends State<MySliverAppBar> {
             //只跟floating相对应，如果为true，floating必须为true，也就是向下滑动一点儿，整个大背景就会动画显示全部，网上滑动整个导航栏的内容就会消失
             snap: false,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                userInfo?.headImg ?? DefaultPersion.defaultHeadImg,
+              background: CachedNetworkImage(
+                imageUrl: userInfo?.headImg ?? DefaultPersion.defaultHeadImg,
                 fit: BoxFit.cover,
               ),
               title: Container(

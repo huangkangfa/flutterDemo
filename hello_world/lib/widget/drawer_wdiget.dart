@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/default_set.dart';
@@ -60,7 +61,8 @@ class MyDrawerState extends State<MyDrawer> {
     if (isLogin) {
       login();
     } else {
-      push(context, WebViewPage('https://github.com/zhaolongs/Flutter_Fai_Webview'));
+      push(context,
+          WebViewPage('https://github.com/zhaolongs/Flutter_Fai_Webview'));
       showToast('进入个人详情');
     }
   }
@@ -94,7 +96,7 @@ class MyDrawerState extends State<MyDrawer> {
         leading: Icon(Icons.grade),
         title: Text("广告页开关"),
         onTap: () {
-          bool switchOfAd = SpUtil.getBool(Keys.SWITCH_AD,defValue: true);
+          bool switchOfAd = SpUtil.getBool(Keys.SWITCH_AD, defValue: true);
           showToast('广告页 ' + (switchOfAd ? '关闭' : '开启'));
           SpUtil.putBool(Keys.SWITCH_AD, !switchOfAd);
         },
@@ -135,8 +137,9 @@ class MyDrawerState extends State<MyDrawer> {
                     checkLogin(userInfo == null);
                   },
                   child: ClipOval(
-                    child: Image.network(
-                      userInfo?.headImg ?? DefaultPersion.defaultHeadImg,
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          userInfo?.headImg ?? DefaultPersion.defaultHeadImg,
                       height: ScreenUtil().setWidth(80),
                       width: ScreenUtil().setWidth(80),
                       fit: BoxFit.cover,

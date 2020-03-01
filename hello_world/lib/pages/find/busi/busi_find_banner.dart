@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -90,8 +91,8 @@ class FindBannerState extends State<FindBanner> {
   buildItemLayout(BuildContext context, int index) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(ThemeSize.marginSizeMin),
-      child: Image.network(
-        dataBanner[index].img,
+      child: CachedNetworkImage(
+        imageUrl: dataBanner[index].img,
         fit: BoxFit.fill,
       ),
     );

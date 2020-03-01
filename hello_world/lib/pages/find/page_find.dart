@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/apis.dart';
 import 'package:hello_world/configs/colors.dart';
@@ -64,11 +65,11 @@ class FindPageState extends State<FindPage>
                 flex: 1,
                 child: Center(
                   child: ClipOval(
-                      child: Image.network(shopEntity.logo,
-//                          '${shopEntity.logo}?imageView2/2/interlace/1/w/10/h/10',
-                          fit: BoxFit.fill,
+                      child: CachedNetworkImage(
+                          imageUrl: shopEntity.logo,
                           width: ScreenUtil().setWidth(50),
-                          height: ScreenUtil().setWidth(50))),
+                          height: ScreenUtil().setWidth(50),
+                          fit: BoxFit.fill)),
                 ),
               ),
               Expanded(

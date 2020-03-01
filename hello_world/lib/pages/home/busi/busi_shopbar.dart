@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/colors.dart';
@@ -96,8 +97,8 @@ class ShopBarState extends State<ShopBar> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Image.network(
-                    dataShops[i].advertisingImg,
+                  CachedNetworkImage(
+                    imageUrl: dataShops[i].advertisingImg,
                     width: ScreenUtil().setWidth(154),
                     height: ScreenUtil().setWidth(100),
                     fit: BoxFit.fill,

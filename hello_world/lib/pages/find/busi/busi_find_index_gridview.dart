@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -104,8 +105,9 @@ class FindIndexGridViewState extends State<FindIndexGridView> {
     HttpManager.getInstance().cancelRequests(tag);
   }
 
-  buildCustomPagination(){
-    return SwiperCustomPagination(builder: (BuildContext context, SwiperPluginConfig config) {
+  buildCustomPagination() {
+    return SwiperCustomPagination(
+        builder: (BuildContext context, SwiperPluginConfig config) {
       return Align(
         alignment: Alignment.bottomCenter,
         child: PageIndicator(
@@ -132,13 +134,14 @@ class FindIndexGridViewState extends State<FindIndexGridView> {
     return Expanded(
       flex: 1,
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           showToast(item.name);
         },
         child: Center(
           child: Column(
             children: <Widget>[
-              Image.network(item.img,
+              CachedNetworkImage(
+                  imageUrl: item.img,
                   fit: BoxFit.fill,
                   width: ScreenUtil().setWidth(30),
                   height: ScreenUtil().setWidth(30)),
