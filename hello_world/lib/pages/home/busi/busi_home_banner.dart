@@ -43,9 +43,11 @@ class HomeBannerState extends State<HomeBanner> {
   refreshData() {
     HomeDao.getHomeBanner({'platform': 0, 'position': 1}, cancelToken: tag)
         .then((data) {
-      setState(() {
-        dataBanner = data;
-      });
+      if(this.mounted){
+        setState(() {
+          dataBanner = data;
+        });
+      }
     });
   }
 

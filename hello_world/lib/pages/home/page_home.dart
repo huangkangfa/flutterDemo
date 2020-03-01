@@ -18,9 +18,11 @@ import 'busi/busi_home_icons_bar.dart';
 import 'busi/busi_home_list_item_product.dart';
 import 'busi/busi_search_bar.dart';
 import 'busi/busi_shopbar.dart';
+import 'busi/busi_type_selector.dart';
 
 class HomePage extends StatefulWidget {
   static const pageTag = 'home';
+
   HomePage({Key key}) : super(key: key);
 
   @override
@@ -50,10 +52,12 @@ class HomePageState extends State<HomePage>
       ScrollMetrics metrics = notification.metrics;
       bool result = metrics.extentBefore > ScreenUtil().setWidth(300);
       if (result != showTop && metrics.axis == Axis.vertical) {
-        setState(() {
-          showTop = result;
-          sendEvent(ButtonOfTopEvent('home', 'changeFlag', flag: showTop));
-        });
+        if(this.mounted){
+          setState(() {
+            showTop = result;
+            sendEvent(ButtonOfTopEvent('home', 'changeFlag', flag: showTop));
+          });
+        }
       }
     }
   }
@@ -87,7 +91,7 @@ class HomePageState extends State<HomePage>
                     SliverToBoxAdapter(child: HomeBanner()),
                     SliverToBoxAdapter(child: HomeIconsBar()),
                     SliverToBoxAdapter(child: HomeActivitysBar()),
-                    SliverToBoxAdapter(child: HomeSmallTitle('健康聚集地')),
+                    SliverToBoxAdapter(child: getHomeHealth()),
                     SliverToBoxAdapter(child: ShopBar()),
                     SliverToBoxAdapter(child: HomeSmallTitle('热门推荐'))
                   ],
@@ -99,6 +103,21 @@ class HomePageState extends State<HomePage>
           ),
         );
       },
+    );
+  }
+
+  getHomeHealth() {
+    return Row(
+      children: <Widget>[
+        HomeSmallTitle('健康聚集地'),
+        Expanded(flex: 1, child: Center()),
+        Padding(
+          padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
+          child: TypeSelector(HomePage.pageTag, onTap: (index) {
+            sendEvent(ShopBarEvent('refreshData', isDistanceType: index == 1));
+          }),
+        )
+      ],
     );
   }
 

@@ -202,36 +202,42 @@ class RefreshListState extends State<RefreshList> {
       pageNo = 1;
       List listMore = await requstData(
           widget.api, {'pageNo': pageNo, 'pageSize': pageSize});
-      setState(() {
-        list.addAll(listMore);
-        if (list.length >= total) {
-          loadingText = '';
-          loadingStatus = LoadingStatus.STATUS_COMPLETED;
-        } else {
-          loadingStatus = LoadingStatus.STATUS_IDEL;
-        }
-      });
+      if(this.mounted){
+        setState(() {
+          list.addAll(listMore);
+          if (list.length >= total) {
+            loadingText = '';
+            loadingStatus = LoadingStatus.STATUS_COMPLETED;
+          } else {
+            loadingStatus = LoadingStatus.STATUS_IDEL;
+          }
+        });
+      }
     } else {
       //避免重复加载更多
       if (loadingStatus == LoadingStatus.STATUS_IDEL) {
-        setState(() {
-          loadingStatus = LoadingStatus.STATUS_LOADING;
-        });
+        if(this.mounted){
+          setState(() {
+            loadingStatus = LoadingStatus.STATUS_LOADING;
+          });
+        }
         pageNo++;
         //获取增联数据赋值listMore
         List listMore = await requstData(
             widget.api, {'pageNo': pageNo, 'pageSize': pageSize});
         //准备完数据，再设置状态
-        setState(() {
-          if (list.length < total) {
-            list.addAll(listMore);
-            loadingStatus = LoadingStatus.STATUS_IDEL;
-            loadingText = '加载中...';
-          } else {
-            loadingText = '没有更多数据了';
-            loadingStatus = LoadingStatus.STATUS_COMPLETED;
-          }
-        });
+        if(this.mounted){
+          setState(() {
+            if (list.length < total) {
+              list.addAll(listMore);
+              loadingStatus = LoadingStatus.STATUS_IDEL;
+              loadingText = '加载中...';
+            } else {
+              loadingText = '没有更多数据了';
+              loadingStatus = LoadingStatus.STATUS_COMPLETED;
+            }
+          });
+        }
       }
     }
   }

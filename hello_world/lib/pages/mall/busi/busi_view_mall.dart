@@ -48,9 +48,11 @@ class MallViewState extends State<MallView> {
 
   refreshData() {
     MallDao.getMallProductType(cancelToken: tag).then((data) {
-      setState(() {
-        dataProductTypes = data;
-      });
+      if(this.mounted){
+        setState(() {
+          dataProductTypes = data;
+        });
+      }
     });
   }
 
@@ -160,10 +162,12 @@ class MallViewState extends State<MallView> {
       child: InkWell(
         onTap: () {
           if (selectedIndex != i) {
-            setState(() {
-              selectedIndex = i;
-              _controllerOfRight.jumpTo(_controllerOfRight.position.minScrollExtent);
-            });
+            if(this.mounted){
+              setState(() {
+                selectedIndex = i;
+                _controllerOfRight.jumpTo(_controllerOfRight.position.minScrollExtent);
+              });
+            }
           }
         },
         child: Stack(
@@ -201,6 +205,7 @@ class MallViewState extends State<MallView> {
   void dispose() {
     super.dispose();
     _streamSubscription.cancel();
+    _controllerOfRight.dispose();
     HttpManager.getInstance().cancelRequests(tag);
   }
 }

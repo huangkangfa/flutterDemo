@@ -33,9 +33,11 @@ class NavigatorState extends State<MyNavigator> {
             MinePage()
           ],
           onPageChanged: (index) {
-            setState(() {
-              _setAppBarTitle(index);
-            });
+            if(this.mounted){
+              setState(() {
+                _setAppBarTitle(index);
+              });
+            }
           },
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -43,9 +45,11 @@ class NavigatorState extends State<MyNavigator> {
             onTap: (index) {
               // 点击跳转对应的PageView
               _pageController.jumpToPage(index);
-              setState(() {
-                _setAppBarTitle(index);
-              });
+              if(this.mounted){
+                setState(() {
+                  _setAppBarTitle(index);
+                });
+              }
             },
             currentIndex: _currentIndex,
             items: BottomNavigationBarData.getBottomNavigationBarItems()));

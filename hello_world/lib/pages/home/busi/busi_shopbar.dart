@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ class ShopBarState extends State<ShopBar> {
   StreamSubscription _streamSubscription;
   CancelToken tag = CancelToken();
   List<ModelItemShopEntity> dataShops = [];
+  ScrollController controller = ScrollController();
+  bool isDistanceType = true;
 
   @override
   void initState() {
@@ -33,6 +36,7 @@ class ShopBarState extends State<ShopBar> {
       if (data is ShopBarEvent) {
         switch (data.cmd) {
           case 'refreshData':
+            isDistanceType = data.isDistanceType ?? true;
             refreshData();
             break;
         }
@@ -43,17 +47,22 @@ class ShopBarState extends State<ShopBar> {
   refreshData() {
     HomeDao.getHomeShops(
             {'lat': 30.289374, 'lng': 120.036316, 'cityCode': 330100},
-            cancelToken: tag)
+            cancelToken: tag, isDistance: isDistanceType)
         .then((data) {
-      setState(() {
-        dataShops = data;
-      });
+      if (this.mounted) {
+        setState(() {
+          dataShops = data;
+          if(controller.hasClients){
+            controller.jumpTo(controller.position.minScrollExtent);
+          }
+        });
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if(dataShops.length==0){
+    if (dataShops.length == 0) {
       return PlaceHolderView(
           ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
               ThemeSize.marginSizeMin * 2,
@@ -133,6 +142,7 @@ class ShopBarState extends State<ShopBar> {
     return Container(
       height: ScreenUtil().setWidth(150),
       child: ListView(
+        controller: controller,
         scrollDirection: Axis.horizontal,
         children: childs,
       ),
@@ -143,12 +153,14 @@ class ShopBarState extends State<ShopBar> {
   void dispose() {
     super.dispose();
     _streamSubscription.cancel();
+    controller.dispose();
     HttpManager.getInstance().cancelRequests(tag);
   }
 }
 
 class ShopBarEvent {
   String cmd;
+  bool isDistanceType;
 
-  ShopBarEvent(this.cmd);
+  ShopBarEvent(this.cmd, {this.isDistanceType});
 }

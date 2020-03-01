@@ -29,9 +29,11 @@ class MySliverAppBarState extends State<MySliverAppBar> {
     _streamSubscription = registerEvent<MySliverAppBarEvent>((data) {
       if (data is MySliverAppBarEvent) {
         if (data.cmd == 'showHeadImg') {
-          setState(() {
-            showHeadImg = data.flag;
-          });
+          if(this.mounted){
+            setState(() {
+              showHeadImg = data.flag;
+            });
+          }
         }
       }
     });

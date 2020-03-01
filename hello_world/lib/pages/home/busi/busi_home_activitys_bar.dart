@@ -40,9 +40,11 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
 
   refreshData() {
     HomeDao.getHomeActivitys(cancelToken: tag).then((data) {
-      setState(() {
-        dataActivitys = data;
-      });
+      if(this.mounted){
+        setState(() {
+          dataActivitys = data;
+        });
+      }
     });
   }
 

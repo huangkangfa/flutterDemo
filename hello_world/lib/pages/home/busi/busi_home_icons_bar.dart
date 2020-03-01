@@ -39,9 +39,11 @@ class HomeIconsBarState extends State<HomeIconsBar> {
 
   refreshData() {
     HomeDao.getHomeIcons(cancelToken: tag).then((data) {
-      setState(() {
-        dataIcons = data;
-      });
+      if(this.mounted){
+        setState(() {
+          dataIcons = data;
+        });
+      }
     });
   }
 

@@ -25,21 +25,25 @@ class _SplashTimeDownState extends State<SplashTimeDown> {
   }
 
   void init() {
-    setState(() {
-      if (widget.timeDown != null) {
-        timeDown = widget.timeDown;
-      }
-      _doCountDown();
-    });
+    if(this.mounted){
+      setState(() {
+        if (widget.timeDown != null) {
+          timeDown = widget.timeDown;
+        }
+        _doCountDown();
+      });
+    }
   }
 
   void _doCountDown() {
     _timerUtil = TimerUtil(mTotalTime: timeDown * 1000);
     _timerUtil.setOnTimerTickCallback((int tick) {
       double _tick = tick / 1000;
-      setState(() {
-        timeDown = _tick.toInt();
-      });
+      if(this.mounted){
+        setState(() {
+          timeDown = _tick.toInt();
+        });
+      }
       if (_tick == 0) {
         if (widget.callback != null) {
           widget.callback();

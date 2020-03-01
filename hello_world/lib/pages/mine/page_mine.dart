@@ -34,11 +34,13 @@ class MinePageState extends State<MinePage>
       ScrollMetrics metrics = notification.metrics;
       bool result = metrics.extentBefore > ScreenUtil().setWidth(170);
       if (result != showHeadimg && metrics.axis == Axis.vertical) {
-        setState(() {
-          showHeadimg = result;
-          sendEvent(MySliverAppBarEvent('showHeadImg', flag: showHeadimg));
-          sendEvent(ButtonOfTopEvent('mine', 'changeFlag', flag: showHeadimg));
-        });
+        if(this.mounted){
+          setState(() {
+            showHeadimg = result;
+            sendEvent(MySliverAppBarEvent('showHeadImg', flag: showHeadimg));
+            sendEvent(ButtonOfTopEvent('mine', 'changeFlag', flag: showHeadimg));
+          });
+        }
       }
     }
   }

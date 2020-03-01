@@ -29,12 +29,14 @@ class SplashPageState extends State<SplashPage> {
 
   void _initSplash() async {
     await SpUtil.getInstance();
-    setState(() {
-      hasAd = SpUtil.getBool(Keys.SWITCH_AD, defValue: true);
-      if (!hasAd) {
-        _goMain();
-      }
-    });
+    if(this.mounted){
+      setState(() {
+        hasAd = SpUtil.getBool(Keys.SWITCH_AD, defValue: true);
+        if (!hasAd) {
+          _goMain();
+        }
+      });
+    }
   }
 
   void _goMain() {
