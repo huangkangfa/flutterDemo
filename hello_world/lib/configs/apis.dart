@@ -18,9 +18,19 @@ class Apis {
 
   ///按照距离获取商户信息
   static const shops_list_distance_home = '/api/trade/recommend/distance';
+
   ///按照好评获取商户信息
   static const shops_list_popularity_home = '/api/trade/recommend/popularity';
 
   ///商城列表数据
-  static const tradeClassification = '/api/trade/tradeClassification/listClassIficationByParentId';
+  static const tradeClassification =
+      '/api/trade/tradeClassification/listClassIficationByParentId';
+
+  ///发现页的index功能数据列表
+  static const selectIndexServerCategoryList =
+      '/api/trade/MchServerCategory/selectIndexServerCategoryList';
+
+  ///发现页商户列表
+  static const selectServerMchInfoPaging =
+      '/api/ucenter/mchInfo/selectServerMchInfoPaging';
 }
