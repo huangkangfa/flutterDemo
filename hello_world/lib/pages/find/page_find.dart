@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/apis.dart';
 import 'package:hello_world/model/model_item_find_shop_entity.dart';
+import 'package:hello_world/model/model_item_product_entity.dart';
 import 'package:hello_world/pages/home/busi/busi_search_bar.dart';
 import 'package:hello_world/pages/mine/busi/busi_mine_button_top.dart';
 import 'package:hello_world/util/util_event.dart';
@@ -56,7 +57,8 @@ class FindPageState extends State<FindPage>
           children: <Widget>[
             RefreshSliverList(
                 TypeOfSliverFixedExtentListView(ScreenUtil().setWidth(80)),
-                Apis.selectServerMchInfoPaging,
+//                Apis.selectServerMchInfoPaging,
+                Apis.products_home,
                 (item, index) => buildItemLayout(item, index),
                 sliverHeader: <Widget>[
                   SliverToBoxAdapter(child: FindIndexGridView()),
@@ -83,7 +85,15 @@ class FindPageState extends State<FindPage>
   }
 
   buildItemLayout(item, index) {
-    ModelItemFindShopEntity shopEntity = ModelItemFindShopEntity().fromJson(item);
+    ModelItemFindShopEntity shopEntity = ModelItemFindShopEntity();
+    ModelItemProductEntity obj = ModelItemProductEntity().fromJson(item);
+    shopEntity.id = obj.id;
+    shopEntity.logo = obj.images;
+    shopEntity.shop = obj.name;
+    shopEntity.address = obj.name;
+    shopEntity.distance = 100;
+    shopEntity.unit = 'm';
+//    ModelItemFindShopEntity shopEntity = ModelItemFindShopEntity().fromJson(item);
     return ItemOfList(shopEntity,index, callback: () => onClick(index),key: ValueKey(shopEntity.id));
   }
 
