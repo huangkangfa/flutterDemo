@@ -14,6 +14,7 @@ import 'package:hello_world/widget/base_placeholder.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
 class HomeActivitysBar extends StatefulWidget {
+  HomeActivitysBar({Key key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return new HomeActivitysBarState();

@@ -8,7 +8,7 @@ import 'package:hello_world/util/util_screen.dart';
 class ListItemOfProduct extends StatelessWidget {
   final ModelItemProductEntity product;
 
-  ListItemOfProduct(this.product);
+  ListItemOfProduct(this.product,{Key key}):super(key :key);
 
   @override
   Widget build(BuildContext context) {

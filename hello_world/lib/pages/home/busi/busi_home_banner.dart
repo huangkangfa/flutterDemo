@@ -14,6 +14,8 @@ import 'package:hello_world/widget/base_placeholder.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
 class HomeBanner extends StatefulWidget {
+  HomeBanner({Key key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return new HomeBannerState();

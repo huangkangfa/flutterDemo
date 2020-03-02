@@ -17,6 +17,7 @@ import 'busi/busi_mine_sliver_appbar.dart';
 
 class MinePage extends StatefulWidget {
   static const pageTag = 'mine';
+
   MinePage({Key key}) : super(key: key);
 
   @override
@@ -34,11 +35,12 @@ class MinePageState extends State<MinePage>
       ScrollMetrics metrics = notification.metrics;
       bool result = metrics.extentBefore > ScreenUtil().setWidth(170);
       if (result != showHeadimg && metrics.axis == Axis.vertical) {
-        if(this.mounted){
+        if (this.mounted) {
           setState(() {
             showHeadimg = result;
             sendEvent(MySliverAppBarEvent('showHeadImg', flag: showHeadimg));
-            sendEvent(ButtonOfTopEvent('mine', 'changeFlag', flag: showHeadimg));
+            sendEvent(
+                ButtonOfTopEvent('mine', 'changeFlag', flag: showHeadimg));
           });
         }
       }
@@ -77,8 +79,9 @@ class MinePageState extends State<MinePage>
                   paddingRight: ThemeSize.marginSizeMax),
               Apis.products_home,
               (item, index) {
-                return ListItemOfProduct(
-                    ModelItemProductEntity().fromJson(item));
+                ModelItemProductEntity obj =
+                    ModelItemProductEntity().fromJson(item);
+                return ListItemOfProduct(obj, key: ValueKey(obj.id));
               },
               sliverHeader: getHeader(),
               tag: MinePage.pageTag,

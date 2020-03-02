@@ -82,8 +82,9 @@ class HomePageState extends State<HomePage>
                       paddingRight: ThemeSize.marginSizeMid),
                   Apis.products_home,
                   (item, index) {
-                    return ListItemOfProduct(
-                        ModelItemProductEntity().fromJson(item));
+                    ModelItemProductEntity obj =
+                        ModelItemProductEntity().fromJson(item);
+                    return ListItemOfProduct(obj, key: ValueKey(obj.id));
                   },
                   tag: HomePage.pageTag,
                   onRefresh: () {
@@ -119,11 +120,14 @@ class HomePageState extends State<HomePage>
 }
 
 class HomeHealthTitle extends StatelessWidget {
+  HomeHealthTitle({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
         HomeSmallTitle('健康聚集地'),
+
         ///以下内容放开会存在一个闪屏bug，就是选项处于好评时且列表处于置顶状态，点击空白处会闪屏
         Expanded(flex: 1, child: Center()),
         Padding(
