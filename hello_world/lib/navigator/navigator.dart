@@ -83,7 +83,7 @@ class BottomNavigationBarData {
   static getBottomNavigationBarItems() {
     var bottomNavigationBarData = <BottomNavigationBarItem>[];
     for (int i = 0; i < BottomNavigationBarData.TITLES.length; i++) {
-      bottomNavigationBarData.add(new BottomNavigationBarItem(
+      bottomNavigationBarData.add(BottomNavigationBarItem(
           icon: Icon(BottomNavigationBarData.ICONS[i]),
           title: Text(BottomNavigationBarData.TITLES[i]),
           backgroundColor: BottomNavigationBarData.COLORS[i]));

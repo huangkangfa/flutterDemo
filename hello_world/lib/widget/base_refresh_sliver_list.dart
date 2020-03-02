@@ -10,6 +10,7 @@ import 'package:hello_world/model/model_refresh_list_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/http/result_data.dart';
 import 'package:hello_world/util/util_event.dart';
+import 'package:hello_world/util/util_screen.dart';
 
 //刷新状态枚举
 enum LoadingStatus {
@@ -25,6 +26,12 @@ enum LoadingStatus {
 abstract class RefreshSliverListType {}
 
 class TypeOfSliverListView extends RefreshSliverListType {}
+
+class TypeOfSliverFixedExtentListView extends RefreshSliverListType {
+  final itemExtent;
+
+  TypeOfSliverFixedExtentListView(this.itemExtent);
+}
 
 class TypeOfSliverGridView extends RefreshSliverListType {
   final double columnCount;
@@ -114,6 +121,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
           data.tag == widget.tag) {
         if (data.cmd == 'toTop' && _controller.hasClients) {
           _controller.jumpTo(_controller.position.minScrollExtent);
+          getData(true);
         }
       }
     });
@@ -184,6 +192,18 @@ class RefreshSliverListState extends State<RefreshSliverList> {
               crossAxisSpacing: crossAxisSpacing),
         ),
       );
+    } else if (widget.type is TypeOfSliverFixedExtentListView) {
+      TypeOfSliverFixedExtentListView typeOfSliverFixedExtentListView =
+          widget.type as TypeOfSliverFixedExtentListView;
+      child = SliverFixedExtentList(
+          itemExtent: typeOfSliverFixedExtentListView.itemExtent,
+          delegate:
+              SliverChildBuilderDelegate((BuildContext context, int index) {
+            if (list.length == 0) {
+              return Center();
+            }
+            return widget.buildItemLayout(list[index], index);
+          }, childCount: list.length));
     } else {
       child = SliverList(
           delegate:
@@ -232,7 +252,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
       params = param;
     }
     if (params == null) {
-      params = Map<String,dynamic>();
+      params = Map<String, dynamic>();
     }
     params['pageNo'] = pageNo;
     params['pageSize'] = pageSize;
