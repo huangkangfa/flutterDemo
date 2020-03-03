@@ -21,10 +21,7 @@ class ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 48),
-          child: ProductBody(widget.id),
-        ),
+        ProductBody(widget.id)
 //        ProductHeader(),
 //        ProductFooter(),
       ],

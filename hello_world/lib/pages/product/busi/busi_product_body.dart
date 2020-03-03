@@ -50,24 +50,27 @@ class ProductBodyState extends State<ProductBody> {
     }
 
     return Container(
-      color: Colors.yellow,
-      height: ScreenUtil().setWidth(250),
-      child: Swiper(
-        autoplay: false,
-        index: curBannerIndex,
-        onIndexChanged: (index) {
-          curBannerIndex = index;
-        },
-        onTap: (index) {
-          showToast('index = ' + index.toString());
-        },
-        itemBuilder: (BuildContext context, int index) =>
-            buildItemLayout(context, index),
-        itemCount: count,
-        viewportFraction: 1,
-        pagination: SwiperPagination(),
-        scale: 1,
-      ),
+      color: Colors.white,
+      child: Column(children: [
+        Container(
+            height: ScreenUtil().setWidth(250),
+            child: Swiper(
+              autoplay: false,
+              index: curBannerIndex,
+              onIndexChanged: (index) {
+                curBannerIndex = index;
+              },
+              onTap: (index) {
+                showToast('index = ' + index.toString());
+              },
+              itemBuilder: (BuildContext context, int index) =>
+                  buildItemLayout(context, index),
+              itemCount: count,
+              viewportFraction: 1,
+              pagination: SwiperPagination(),
+              scale: 1,
+            ))
+      ]),
     );
   }
 
