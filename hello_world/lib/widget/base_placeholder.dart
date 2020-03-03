@@ -7,14 +7,15 @@ class PlaceHolderView extends StatelessWidget {
   final double height;
   final double radius;
   final Color bgColor;
+  final double padding;
 
-  PlaceHolderView(this.width, this.height, {this.radius, this.bgColor, Key key})
+  PlaceHolderView(this.width, this.height, {this.radius, this.bgColor,this.padding, Key key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(ThemeSize.marginSizeMid),
+      padding: EdgeInsets.all(padding??ThemeSize.marginSizeMid),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(radius ?? 5),
         child: Container(

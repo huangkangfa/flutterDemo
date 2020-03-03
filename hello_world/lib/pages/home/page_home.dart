@@ -6,8 +6,10 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/model/model_item_product_entity.dart';
 import 'package:hello_world/model/model_user_entity.dart';
 import 'package:hello_world/pages/mine/busi/busi_mine_button_top.dart';
+import 'package:hello_world/pages/product/page_product.dart';
 import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/util/util_event.dart';
+import 'package:hello_world/util/util_route_jump.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_appbar.dart';
 import 'package:hello_world/widget/base_refresh_sliver_list.dart';
@@ -84,7 +86,13 @@ class HomePageState extends State<HomePage>
                   (item, index) {
                     ModelItemProductEntity obj =
                         ModelItemProductEntity().fromJson(item);
-                    return ListItemOfProduct(obj, key: ValueKey(obj.id));
+                    return ListItemOfProduct(
+                      obj,
+                      key: ValueKey(obj.id),
+                      onTap: () {
+                        push(context, ProductPage(obj.id));
+                      },
+                    );
                   },
                   tag: HomePage.pageTag,
                   onRefresh: () {

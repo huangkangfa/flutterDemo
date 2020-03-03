@@ -25,6 +25,8 @@ import 'package:hello_world/model/model_item_find_shop_entity.dart';
 import 'package:hello_world/generated/json/model_item_find_shop_entity_helper.dart';
 import 'package:hello_world/model/model_item_icon_entity.dart';
 import 'package:hello_world/generated/json/model_item_icon_entity_helper.dart';
+import 'package:hello_world/model/model_product_entity.dart';
+import 'package:hello_world/generated/json/model_product_entity_helper.dart';
 
 class JsonConvert<T> {
 	T fromJson(Map<String, dynamic> json) {
@@ -46,7 +48,13 @@ class JsonConvert<T> {
 			return modelItemShopEntityFromJson(data as ModelItemShopEntity, json) as T;			case ModelUserEntity:
 			return modelUserEntityFromJson(data as ModelUserEntity, json) as T;			case ModelItemFindShopEntity:
 			return modelItemFindShopEntityFromJson(data as ModelItemFindShopEntity, json) as T;			case ModelItemIconEntity:
-			return modelItemIconEntityFromJson(data as ModelItemIconEntity, json) as T;    }
+			return modelItemIconEntityFromJson(data as ModelItemIconEntity, json) as T; case ModelProductEntity:
+			return modelProductEntityFromJson(data as ModelProductEntity, json) as T;			case ModelProductProductCommantCountReponseList:
+			return modelProductProductCommantCountReponseListFromJson(data as ModelProductProductCommantCountReponseList, json) as T;			case ModelProductProductComment:
+			return modelProductProductCommentFromJson(data as ModelProductProductComment, json) as T;			case ModelProductProductAttrList:
+			return modelProductProductAttrListFromJson(data as ModelProductProductAttrList, json) as T;			case ModelProductProductSkuList:
+			return modelProductProductSkuListFromJson(data as ModelProductProductSkuList, json) as T;			case ModelProductUserAddressResponses:
+			return modelProductUserAddressResponsesFromJson(data as ModelProductUserAddressResponses, json) as T;   }
     return data as T;
   }  static _getToJson<T>(Type type, data) {
 		switch (type) {			case ModelRefreshListEntity:
@@ -63,7 +71,13 @@ class JsonConvert<T> {
 			return modelItemShopEntityToJson(data as ModelItemShopEntity);			case ModelUserEntity:
 			return modelUserEntityToJson(data as ModelUserEntity);			case ModelItemFindShopEntity:
 			return modelItemFindShopEntityToJson(data as ModelItemFindShopEntity);			case ModelItemIconEntity:
-			return modelItemIconEntityToJson(data as ModelItemIconEntity);    }
+			return modelItemIconEntityToJson(data as ModelItemIconEntity); case ModelProductEntity:
+			return modelProductEntityToJson(data as ModelProductEntity);			case ModelProductProductCommantCountReponseList:
+			return modelProductProductCommantCountReponseListToJson(data as ModelProductProductCommantCountReponseList);			case ModelProductProductComment:
+			return modelProductProductCommentToJson(data as ModelProductProductComment);			case ModelProductProductAttrList:
+			return modelProductProductAttrListToJson(data as ModelProductProductAttrList);			case ModelProductProductSkuList:
+			return modelProductProductSkuListToJson(data as ModelProductProductSkuList);			case ModelProductUserAddressResponses:
+			return modelProductUserAddressResponsesToJson(data as ModelProductUserAddressResponses);     }
     return data as T;
   }  static T fromJsonAsT<T>(json) {
     switch (T.toString()) {			case 'ModelRefreshListEntity':
@@ -80,6 +94,12 @@ class JsonConvert<T> {
 			return ModelItemShopEntity().fromJson(json) as T;			case 'ModelUserEntity':
 			return ModelUserEntity().fromJson(json) as T;			case 'ModelItemFindShopEntity':
 			return ModelItemFindShopEntity().fromJson(json) as T;			case 'ModelItemIconEntity':
-			return ModelItemIconEntity().fromJson(json) as T;    }
+			return ModelItemIconEntity().fromJson(json) as T; case 'ModelProductEntity':
+			return ModelProductEntity().fromJson(json) as T;			case 'ModelProductProductCommantCountReponseList':
+			return ModelProductProductCommantCountReponseList().fromJson(json) as T;			case 'ModelProductProductComment':
+			return ModelProductProductComment().fromJson(json) as T;			case 'ModelProductProductAttrList':
+			return ModelProductProductAttrList().fromJson(json) as T;			case 'ModelProductProductSkuList':
+			return ModelProductProductSkuList().fromJson(json) as T;			case 'ModelProductUserAddressResponses':
+			return ModelProductUserAddressResponses().fromJson(json) as T;    }
     return null;
   }}

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hello_world/util/util_event.dart';
+import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_appbar.dart';
 
 class ProductHeader extends StatefulWidget {
 
@@ -9,7 +11,7 @@ class ProductHeader extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new ProductHeaderState();
+    return ProductHeaderState();
   }
 }
 
@@ -28,7 +30,12 @@ class ProductHeaderState extends State<ProductHeader> {
 
   @override
   Widget build(BuildContext context) {
-    return null;
+    return Container(
+      constraints: BoxConstraints(
+        maxHeight: 48
+      ),
+      child: backActionAppbar(context,'',Text('右边'),backgroundColor:Colors.red),
+    );
   }
 
   @override

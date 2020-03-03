@@ -12,6 +12,9 @@ class Apis {
   ///首页商品列表
   static const products_home = '/api/trade/trade/selectIndexProduct';
 
+  ///获取商品详情
+  static const products_detail = '/api/trade/trade/selectProductDetail';
+
   ///首页活动列表
   static const activity_list_home =
       '/api/trade/indexActivity/selectIndexActivityList';

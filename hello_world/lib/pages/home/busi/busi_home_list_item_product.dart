@@ -7,90 +7,96 @@ import 'package:hello_world/util/util_screen.dart';
 
 class ListItemOfProduct extends StatelessWidget {
   final ModelItemProductEntity product;
+  final Function onTap;
 
-  ListItemOfProduct(this.product,{Key key}):super(key :key);
+  ListItemOfProduct(this.product, {Key key, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.grey[200], width: 1.0),
-            borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8))),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Expanded(
-                flex: 1,
-                child: CachedNetworkImage(
-                  imageUrl: product.images,
-                  fit: BoxFit.fill,
-                )),
-            Container(
-              height: ScreenUtil().setWidth(45),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: ThemeSize.marginSizeMid,
-                      right: ThemeSize.marginSizeMid),
+    return InkWell(
+      onTap: () {
+        if (onTap != null) onTap();
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.grey[200], width: 1.0),
+              borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8))),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Expanded(
+                  flex: 1,
+                  child: CachedNetworkImage(
+                    imageUrl: product.images,
+                    fit: BoxFit.fill,
+                  )),
+              Container(
+                height: ScreenUtil().setWidth(45),
+                child: Align(
+                  alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(top: ThemeSize.marginSizeMin),
-                    child: Stack(
-                      children: <Widget>[
-                        RichText(
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(children: <TextSpan>[
-                            TextSpan(
-                                text: '自营 ',
-                                style: TextStyle(
-                                    fontSize: ThemeSize.fontSizeMin,
-                                    color: Color(0x009CD3CF))),
-                            TextSpan(
-                                text: product.name,
-                                style: TextStyle(
-                                    fontSize: ThemeSize.fontSize14,
-                                    color: ThemeColors.colorFont_333)),
-                          ]),
-                        ),
-                        ShopFlag()
-                      ],
+                    padding: EdgeInsets.only(
+                        left: ThemeSize.marginSizeMid,
+                        right: ThemeSize.marginSizeMid),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: ThemeSize.marginSizeMin),
+                      child: Stack(
+                        children: <Widget>[
+                          RichText(
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            text: TextSpan(children: <TextSpan>[
+                              TextSpan(
+                                  text: '自营 ',
+                                  style: TextStyle(
+                                      fontSize: ThemeSize.fontSizeMin,
+                                      color: Color(0x009CD3CF))),
+                              TextSpan(
+                                  text: product.name,
+                                  style: TextStyle(
+                                      fontSize: ThemeSize.fontSize14,
+                                      color: ThemeColors.colorFont_333)),
+                            ]),
+                          ),
+                          ShopFlag()
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              height: ScreenUtil().setWidth(30),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: ThemeSize.marginSizeMid,
-                        right: ThemeSize.marginSizeMid),
-                    child: Text('￥${product.price / 100}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Color(0xffff4d7a),
-                            fontSize: ThemeSize.fontSize14)),
-                  ),
-                  Expanded(flex: 1, child: Center()),
-                  Padding(
-                    padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
-                    child: product.isVipPrice == 1
-                        ? MemberPriceFlag(
-                            price: product.minVipPrice?.toDouble())
-                        : Center(),
-                  )
-                ],
-              ),
-            )
-          ],
+              Container(
+                height: ScreenUtil().setWidth(30),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: ThemeSize.marginSizeMid,
+                          right: ThemeSize.marginSizeMid),
+                      child: Text('￥${product.price / 100}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Color(0xffff4d7a),
+                              fontSize: ThemeSize.fontSize14)),
+                    ),
+                    Expanded(flex: 1, child: Center()),
+                    Padding(
+                      padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
+                      child: product.isVipPrice == 1
+                          ? MemberPriceFlag(
+                              price: product.minVipPrice?.toDouble())
+                          : Center(),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

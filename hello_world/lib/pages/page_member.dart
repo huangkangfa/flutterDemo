@@ -47,6 +47,7 @@ class MemberPageState extends State<MemberPage>
                             Shadow(color: Colors.black26, offset: Offset(0, 1)),
                           ])),
                       centerTitle: true,
+                      backgroundColor: Colors.blue,
                       bottom: TabBar(
                           indicatorColor: Colors.red,
                           tabs: _tabs

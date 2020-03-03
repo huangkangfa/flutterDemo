@@ -1,9 +1,19 @@
-
 import 'package:flutter/material.dart';
 
-class ProductBottom extends StatelessWidget {
+class ProductFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.blue,);
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        color: Colors.blue,
+        constraints: BoxConstraints(maxHeight: 48),
+        child: Row(
+          children: <Widget>[
+            Center(),
+          ],
+        ),
+      ),
+    );
   }
 }

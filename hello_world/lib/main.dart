@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
           });
         },
         title: Config.appName,
+        debugShowCheckedModeBanner: false,  // 去掉调试模式的debug标签
         theme: ThemeData(
           primarySwatch: MyPrimarySwatch.primarySwatchColor,
         ),

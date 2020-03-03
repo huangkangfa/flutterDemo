@@ -64,7 +64,6 @@ class FindPageState extends State<FindPage>
                   SliverToBoxAdapter(child: FindIndexGridView()),
                   SliverToBoxAdapter(child: FindBanner()),
                 ],
-                scrollPhysics: BouncingScrollPhysics(),
                 params: {
                   'lat': 30.289374,
                   'lng': 120.036316,
