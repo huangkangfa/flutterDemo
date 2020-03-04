@@ -9,6 +9,8 @@ import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_appbar.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
+import 'busi_product_body.dart';
+
 class ProductHeader extends StatefulWidget {
   ProductHeader({Key key}) : super(key: key);
 
@@ -21,6 +23,7 @@ class ProductHeader extends StatefulWidget {
 class ProductHeaderState extends State<ProductHeader> {
   StreamSubscription _streamSubscription;
   bool isShowHeader = false;
+  int indexOfHeader = 0;
 
   @override
   void initState() {
@@ -33,8 +36,31 @@ class ProductHeaderState extends State<ProductHeader> {
               isShowHeader = data.flag ?? false;
             });
             break;
+          case 'type_0':
+            setState(() {
+              indexOfHeader = 0;
+            });
+            break;
+          case 'type_1':
+            setState(() {
+              indexOfHeader = 1;
+            });
+            break;
+          case 'type_2':
+            setState(() {
+              indexOfHeader = 2;
+            });
+            break;
         }
       }
+    });
+  }
+
+  onClick(int index) {
+    if (indexOfHeader == index) return;
+    setState(() {
+      indexOfHeader = index;
+      sendEvent(ProductBodyEvent('changeIndexOfHeader', num: index));
     });
   }
 
@@ -47,7 +73,24 @@ class ProductHeaderState extends State<ProductHeader> {
       child: comAppbar(context,
           center: Visibility(
             visible: isShowHeader,
-            child: Center(child: Text('标题')),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                HeaderTitleTypeItem(
+                    name: '商品',
+                    hasLine: indexOfHeader == 0,
+                    onClick: () => onClick(0)),
+                HeaderTitleTypeItem(
+                    name: '评价',
+                    hasLine: indexOfHeader == 1,
+                    onClick: () => onClick(1)),
+                HeaderTitleTypeItem(
+                    name: '详情',
+                    hasLine: indexOfHeader == 2,
+                    onClick: () => onClick(2)),
+              ],
+            ),
           ),
           left: GestureDetector(
             onTap: () => pop(context),
@@ -89,6 +132,44 @@ class ProductHeaderState extends State<ProductHeader> {
   void dispose() {
     super.dispose();
     _streamSubscription.cancel();
+  }
+}
+
+class HeaderTitleTypeItem extends StatelessWidget {
+  final String name;
+  final bool hasLine;
+  final Function onClick;
+
+  HeaderTitleTypeItem(
+      {@required this.name, this.hasLine, this.onClick, Key key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        if (onClick != null) onClick();
+      },
+      child: Padding(
+        padding: EdgeInsets.only(
+            left: ThemeSize.marginSizeMid, right: ThemeSize.marginSizeMid),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(name, style: TextStyle(fontSize: ThemeSize.fontSizeMid)),
+            Container(
+              color: hasLine ? ThemeColors.primary : Colors.white,
+              margin: EdgeInsets.only(top: 3),
+              constraints: BoxConstraints(
+                minHeight: ScreenUtil().setWidth(3),
+                minWidth: ScreenUtil().setWidth(18),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 

@@ -3,7 +3,6 @@ import 'package:hello_world/configs/colors.dart';
 import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/model/model_product_entity.dart';
 import 'package:hello_world/pages/home/busi/busi_home_list_item_product.dart';
-import 'package:hello_world/util/util_screen.dart';
 
 class ProductDetailTitle extends StatelessWidget {
   final ModelProductEntity data;

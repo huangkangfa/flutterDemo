@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hello_world/dao/dao_product.dart';
 import 'package:hello_world/model/model_product_entity.dart';
@@ -24,6 +26,7 @@ class ProductBody extends StatefulWidget {
 }
 
 class ProductBodyState extends State<ProductBody> {
+  StreamSubscription _streamSubscription;
   ModelProductEntity data;
   ScrollController controller;
   bool isShowAppbar = false;
@@ -34,6 +37,7 @@ class ProductBodyState extends State<ProductBody> {
     super.initState();
     controller = ScrollController();
     controller.addListener(() {
+      ///控制头部显隐
       if (controller.offset > ScreenUtil().setWidth(300) && !isShowAppbar) {
         isShowAppbar = true;
         sendEvent(ProductHeaderEvent("isShowHeader", flag: true));
@@ -41,6 +45,46 @@ class ProductBodyState extends State<ProductBody> {
           isShowAppbar) {
         isShowAppbar = false;
         sendEvent(ProductHeaderEvent("isShowHeader", flag: false));
+      }
+
+      ///控制头部状态切换
+      if (controller.offset < ScreenUtil().setWidth(400)) {
+        if (indexOfHeader != 0) {
+          indexOfHeader = 0;
+          sendEvent(ProductHeaderEvent("type_0"));
+        }
+      } else if (controller.offset < ScreenUtil().setWidth(600)) {
+        if (indexOfHeader != 1) {
+          indexOfHeader = 1;
+          sendEvent(ProductHeaderEvent("type_1"));
+        }
+      } else {
+        if (indexOfHeader != 2) {
+          indexOfHeader = 2;
+          sendEvent(ProductHeaderEvent("type_2"));
+        }
+      }
+    });
+    _streamSubscription = registerEvent<ProductBodyEvent>((data) {
+      if (data is ProductBodyEvent && data != null) {
+        switch (data.cmd) {
+          case 'changeIndexOfHeader':
+            indexOfHeader = data.num ?? 0;
+            if (controller.hasClients) {
+              switch (indexOfHeader) {
+                case 0:
+                  controller.jumpTo(controller.position.minScrollExtent);
+                  break;
+                case 1:
+                  controller.jumpTo(ScreenUtil().setWidth(400));
+                  break;
+                case 2:
+                  controller.jumpTo(ScreenUtil().setWidth(600));
+                  break;
+              }
+            }
+            break;
+        }
       }
     });
     refreshData();
@@ -74,5 +118,13 @@ class ProductBodyState extends State<ProductBody> {
   void dispose() {
     super.dispose();
     controller?.dispose();
+    _streamSubscription.cancel();
   }
+}
+
+class ProductBodyEvent {
+  String cmd;
+  int num;
+
+  ProductBodyEvent(this.cmd, {this.num});
 }
