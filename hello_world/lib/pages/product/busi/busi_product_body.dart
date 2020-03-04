@@ -6,6 +6,7 @@ import 'package:hello_world/model/model_product_entity.dart';
 import 'package:hello_world/pages/product/busi/busi_product_body_select.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/video/widget_video_view.dart';
 
 import 'busi_product_body_comment.dart';
 import 'busi_product_body_html.dart';
@@ -94,12 +95,16 @@ class ProductBodyState extends State<ProductBody> {
     ProductDao.getProductDetail({'id': widget.id}).then((result) {
       setState(() {
         data = result;
+        data.videoUrl = 'http://1252463788.vod2.myqcloud.com/95576ef5vodtransgzp1252463788/e1ab85305285890781763144364/v.f10.mp4';
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+//    if(data!=null&&data.videoUrl!=null){
+//      return VideoView(url: data.videoUrl);
+//    }
     return ListView(
       controller: controller,
       padding: EdgeInsets.all(0),

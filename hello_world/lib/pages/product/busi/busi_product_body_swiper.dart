@@ -6,6 +6,7 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
 import 'package:hello_world/widget/base_toast.dart';
+import 'package:hello_world/widget/video/widget_video_view.dart';
 
 class ProductDetailSwiper extends StatefulWidget {
   final String videoUrl;
@@ -22,6 +23,8 @@ class ProductDetailSwiper extends StatefulWidget {
 
 class ProductDetailSwiperState extends State<ProductDetailSwiper> {
   int curBannerIndex = 0;
+  int startTime = 0;
+  bool isPause = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +42,10 @@ class ProductDetailSwiperState extends State<ProductDetailSwiper> {
         height: ScreenUtil().setWidth(300),
         child: Swiper(
           autoplay: false,
+          loop: false,
           index: curBannerIndex,
           onIndexChanged: (index) {
             curBannerIndex = index;
-          },
-          onTap: (index) {
-            showToast('index = ' + index.toString());
           },
           itemBuilder: (BuildContext context, int index) =>
               buildItemLayout(context, index),
@@ -58,7 +59,17 @@ class ProductDetailSwiperState extends State<ProductDetailSwiper> {
   buildItemLayout(BuildContext context, int index) {
     if (widget.videoUrl != null) {
       if (index == 0) {
-//        return ;
+        return VideoView(
+          url: widget.videoUrl,
+          startTime: startTime,
+          isPause: isPause,
+          currentPrograss: (time) {
+            startTime = time;
+          },
+          playStatus: (result) {
+            isPause = result;
+          },
+        );
       } else {
         return CachedNetworkImage(
           imageUrl: widget.imgUrlList[index - 1],
@@ -73,47 +84,52 @@ class ProductDetailSwiperState extends State<ProductDetailSwiper> {
   }
 
   buildCustomPagination() {
-    return SwiperCustomPagination(
-        builder: (BuildContext context, SwiperPluginConfig config) {
-      return Align(
-        alignment: Alignment.bottomRight,
-        child: Padding(
-          padding: EdgeInsets.all(ThemeSize.marginSizeMid),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(ThemeSize.marginSizeMax),
-            child: Container(
-              color: Color(0x30000000),
-              constraints: BoxConstraints(maxWidth: ScreenUtil().setWidth(100)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    '${config.activeIndex + 1}',
-                    style: TextStyle(
-                        fontSize: ThemeSize.fontSize14,
-                        color: Colors.white,
-                        shadows: <Shadow>[
-                          Shadow(color: Colors.black26, offset: Offset(0, 1)),
-                        ]),
-                  ),
-                  Text(
-                    '/',
-                    style: TextStyle(
-                        fontSize: ThemeSize.fontSize14,
-                        color: Colors.white,
-                        shadows: <Shadow>[
-                          Shadow(color: Colors.black26, offset: Offset(0, 1)),
-                        ]),
-                  ),
-                  Text('${config.itemCount}',
+    return SwiperCustomPagination(builder: (BuildContext context, SwiperPluginConfig config) {
+      bool hide = widget.videoUrl != null && curBannerIndex == 0;
+      return Visibility(
+        visible: !hide,
+        child: Align(
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: EdgeInsets.all(ThemeSize.marginSizeMid),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(ThemeSize.marginSizeMax),
+              child: Container(
+                color: Color(0x30000000),
+                constraints:
+                    BoxConstraints(maxWidth: ScreenUtil().setWidth(100)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      '${config.activeIndex + 1}',
                       style: TextStyle(
-                          fontSize: ThemeSize.fontSizeMid,
+                          fontSize: ThemeSize.fontSize14,
                           color: Colors.white,
                           shadows: <Shadow>[
                             Shadow(color: Colors.black26, offset: Offset(0, 1)),
-                          ])),
-                ],
+                          ]),
+                    ),
+                    Text(
+                      '/',
+                      style: TextStyle(
+                          fontSize: ThemeSize.fontSize14,
+                          color: Colors.white,
+                          shadows: <Shadow>[
+                            Shadow(color: Colors.black26, offset: Offset(0, 1)),
+                          ]),
+                    ),
+                    Text('${config.itemCount}',
+                        style: TextStyle(
+                            fontSize: ThemeSize.fontSizeMid,
+                            color: Colors.white,
+                            shadows: <Shadow>[
+                              Shadow(
+                                  color: Colors.black26, offset: Offset(0, 1)),
+                            ])),
+                  ],
+                ),
               ),
             ),
           ),

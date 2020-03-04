@@ -15,7 +15,7 @@ import 'package:hello_world/widget/base_toast.dart';
 class MySliverAppBar extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new MySliverAppBarState();
+    return MySliverAppBarState();
   }
 }
 
