@@ -75,7 +75,7 @@ class MySliverAppBarState extends State<MySliverAppBar> {
             elevation: 1,
             //是否显示阴影
             forceElevated: true,
-            backgroundColor: ThemeColors.colorPrimary,
+            backgroundColor: ThemeColors.primary,
             brightness: Brightness.light,
             //appbar是否显示在屏幕的最上面，为false是显示在最上面，为true就显示在状态栏的下面
             primary: true,

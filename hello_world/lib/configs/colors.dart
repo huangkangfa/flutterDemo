@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 
 class ThemeColors {
   //主题色
-  static const Color colorPrimary =
+  static const Color primary =
       Color(MyPrimarySwatch._primarySwatchColorValue);
   //字体相关
-  static const Color colorFont_333 = Color(0xFF333333);
-  static const Color colorFont_666 = Color(0xFF666666);
-  static const Color colorFont_999 = Color(0xFF999999);
-  static const Color colorFontHint = Color(0XFFBCBCBC);
-  static const Color colorBg_EEECEC = Color(0xFFEEECEC);
-  static const Color colorBg_F2F2F2 = Color(0XFFFAFAFA);
+  static const Color colorFont_333 = Color(0xff333333);
+  static const Color colorFont_666 = Color(0xff666666);
+  static const Color colorFont_999 = Color(0xff999999);
+  static const Color colorFontHint = Color(0xffbcbcbc);
+  static const Color colorBg_EEECEC = Color(0xffeeecec);
+  static const Color colorBg_F2F2F2 = Color(0xfffafafa);
+  static const Color transparent = Color(0x00000000);
 }
 
 //自定义主题色-颜色的集合

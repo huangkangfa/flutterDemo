@@ -9,7 +9,10 @@ push(BuildContext context, route) {
 }
 
 pop(BuildContext context) {
-  return Navigator.pop(context);
+  if (Navigator.canPop(context)) {
+    return Navigator.pop(context);
+  }
+  return false;
 }
 
 reset(BuildContext context, route) {

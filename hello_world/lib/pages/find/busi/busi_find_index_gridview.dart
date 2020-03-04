@@ -116,7 +116,7 @@ class FindIndexGridViewState extends State<FindIndexGridView> {
           space: ThemeSize.marginSizeMin,
           count: config.itemCount,
           controller: config.pageController,
-          color: ThemeColors.colorPrimary,
+          color: ThemeColors.primary,
           activeColor: ThemeColors.colorFont_333,
         ),
       );

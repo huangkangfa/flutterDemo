@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/configs/colors.dart';
 import 'package:hello_world/pages/product/busi/busi_product_body.dart';
+import 'package:hello_world/widget/base_statusbar.dart';
 
 import 'busi/busi_product_footer.dart';
 import 'busi/busi_product_header.dart';
@@ -11,7 +13,6 @@ class ProductPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return ProductPageState();
   }
 }
@@ -19,12 +20,15 @@ class ProductPage extends StatefulWidget {
 class ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        ProductBody(widget.id)
-//        ProductHeader(),
-//        ProductFooter(),
-      ],
+    return Scaffold(
+      backgroundColor: ThemeColors.colorBg_F2F2F2,
+      body: Stack(
+        children: <Widget>[
+          ProductBody(widget.id),
+          ProductHeader(),
+          ProductFooter(),
+        ],
+      ),
     );
   }
 }

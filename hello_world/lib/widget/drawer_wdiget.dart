@@ -4,10 +4,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/default_set.dart';
 import 'package:hello_world/configs/keys.dart';
 import 'package:hello_world/model/model_user_entity.dart';
-import 'package:hello_world/widget/base_internal_browser.dart';
 import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/redux/reducer/reducer_user.dart';
-import 'package:hello_world/util/util_route_jump.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
@@ -61,8 +59,6 @@ class MyDrawerState extends State<MyDrawer> {
     if (isLogin) {
       login();
     } else {
-      push(context,
-          WebViewPage('https://github.com/zhaolongs/Flutter_Fai_Webview'));
       showToast('进入个人详情');
     }
   }

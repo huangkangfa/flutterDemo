@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/pages/home/page_home.dart';
-import 'package:hello_world/pages/mine/page_mine.dart';
 import 'package:hello_world/pages/find/page_find.dart';
-import 'package:hello_world/pages/page_member.dart';
+import 'package:hello_world/pages/home/page_home.dart';
 import 'package:hello_world/pages/mall/page_shopping_mall.dart';
+import 'package:hello_world/pages/mine/page_mine.dart';
+import 'package:hello_world/pages/page_member.dart';
 import 'package:hello_world/widget/drawer_wdiget.dart';
 
 class MyNavigator extends StatefulWidget {
@@ -22,6 +22,7 @@ class NavigatorState extends State<MyNavigator> {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: MyDrawer(),
+        resizeToAvoidBottomPadding: true,
         body: PageView(
           controller: _pageController,
           physics: NeverScrollableScrollPhysics(),

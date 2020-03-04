@@ -206,7 +206,7 @@ class MallViewState extends State<MallView> {
                   constraints: BoxConstraints(
                     maxHeight: ScreenUtil().setWidth(40),
                   ),
-                  color: ThemeColors.colorPrimary,
+                  color: ThemeColors.primary,
                   width: ScreenUtil().setWidth(5),
                 ),
               ),

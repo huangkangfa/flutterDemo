@@ -1,7 +1,8 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_fai_webview (0.0.1):
+  - flutter_tencentplayer (0.0.1):
     - Flutter
+    - TXLiteAVSDK_Player (= 6.8.7969)
   - fluttertoast (0.0.2):
     - Flutter
   - FMDB (2.7.5):
@@ -22,10 +23,11 @@ PODS:
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
+  - TXLiteAVSDK_Player (6.8.7969)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - flutter_fai_webview (from `.symlinks/plugins/flutter_fai_webview/ios`)
+  - flutter_tencentplayer (from `.symlinks/plugins/flutter_tencentplayer/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
@@ -38,12 +40,13 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - FMDB
+    - TXLiteAVSDK_Player
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  flutter_fai_webview:
-    :path: ".symlinks/plugins/flutter_fai_webview/ios"
+  flutter_tencentplayer:
+    :path: ".symlinks/plugins/flutter_tencentplayer/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   path_provider:
@@ -63,7 +66,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_fai_webview: 7ecaa35047fd557c12e86a698e05fba18f5b25eb
+  flutter_tencentplayer: a2e2650df150941cc7f6a694f1f18bd53b983bcd
   fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
@@ -73,6 +76,7 @@ SPEC CHECKSUMS:
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+  TXLiteAVSDK_Player: a3799add98c6802e382972d98cc0e7bacb50984f
 
 PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
 

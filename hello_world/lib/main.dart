@@ -24,10 +24,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     ///初始化日志
     LogUtil.init(isDebug: Config.env.getDebug(), tag: Config.appName);
-
     /// 通过 StoreProvider 应用 store
     return StoreProvider(
       store: store,

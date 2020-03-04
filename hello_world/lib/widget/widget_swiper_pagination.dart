@@ -82,7 +82,7 @@ class NioPainter extends NioBasePainter {
     double secondOffset = index == widget.count - 1
         ? radius
         : radius + ((index + 1) * (size + space));
-    _paint.color = ThemeColors.colorPrimary;
+    _paint.color = ThemeColors.primary;
     _paint.strokeWidth = lineMin;
     canvas.drawLine(new Offset(secondOffset - lineOffset, radius),
         new Offset(secondOffset + lineOffset, radius), _paint);

@@ -4,10 +4,10 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<flutter_fai_webview/FlutterFaiWebviewPlugin.h>)
-#import <flutter_fai_webview/FlutterFaiWebviewPlugin.h>
+#if __has_include(<flutter_tencentplayer/FlutterTencentplayerPlugin.h>)
+#import <flutter_tencentplayer/FlutterTencentplayerPlugin.h>
 #else
-@import flutter_fai_webview;
+@import flutter_tencentplayer;
 #endif
 
 #if __has_include(<fluttertoast/FluttertoastPlugin.h>)
@@ -43,7 +43,7 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [FlutterFaiWebviewPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterFaiWebviewPlugin"]];
+  [FlutterTencentplayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterTencentplayerPlugin"]];
   [FluttertoastPlugin registerWithRegistrar:[registry registrarForPlugin:@"FluttertoastPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [PermissionHandlerPlugin registerWithRegistrar:[registry registrarForPlugin:@"PermissionHandlerPlugin"]];

@@ -140,7 +140,7 @@ class MemberPriceFlag extends StatelessWidget {
               child: Text(
                 '￥${price == null ? 0 : price / 100}',
                 style: TextStyle(
-                    color: Color(0xffFF7848), fontSize: ScreenUtil().setSp(10)),
+                    color: Color(0xffE5CDA2), fontSize: ScreenUtil().setSp(10)),
               ),
             ),
           )

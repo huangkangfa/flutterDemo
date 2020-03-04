@@ -62,7 +62,7 @@ class TypeSelectorState extends State<TypeSelector> {
               Icon(data[i].icon,
                   size: ThemeSize.fontSizeMid,
                   color: selectedIndex == i
-                      ? ThemeColors.colorPrimary
+                      ? ThemeColors.primary
                       : Colors.grey),
               Text(
                 data[i].name,
