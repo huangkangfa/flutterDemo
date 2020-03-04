@@ -42,10 +42,14 @@ class ProductHeaderState extends State<ProductHeader> {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(maxHeight: ScreenUtil().setWidth(70)),
-      child: baseAppbar(
-          context,
-          '',
-          GestureDetector(
+      color: isShowHeader ? Colors.white : ThemeColors.transparent,
+      padding: EdgeInsets.only(top: ScreenUtil.statusBarHeight),
+      child: comAppbar(context,
+          center: Visibility(
+            visible: isShowHeader,
+            child: Center(child: Text('标题')),
+          ),
+          left: GestureDetector(
             onTap: () => pop(context),
             child: Padding(
               padding: EdgeInsets.only(left: ThemeSize.marginSizeMid),
@@ -60,7 +64,7 @@ class ProductHeaderState extends State<ProductHeader> {
                       ))),
             ),
           ),
-          GestureDetector(
+          right: GestureDetector(
               onTap: () => showToast('分享'),
               child: Padding(
                 padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
@@ -76,7 +80,8 @@ class ProductHeaderState extends State<ProductHeader> {
                         ))),
               )),
           backgroundColor:
-              isShowHeader ? Colors.white : ThemeColors.transparent),
+              isShowHeader ? Colors.white : ThemeColors.transparent,
+          top: false),
     );
   }
 

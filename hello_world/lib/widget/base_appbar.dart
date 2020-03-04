@@ -102,7 +102,12 @@ baseAppbar(BuildContext context, String title, Widget leading, Widget action,
 
 ///完全自定义
 comAppbar(BuildContext context,
-    {Widget appBar, Widget left, Widget center, Widget right}) {
+    {Widget appBar,
+    Widget left,
+    Widget center,
+    Widget right,
+    Color backgroundColor,
+    bool top}) {
   if (appBar == null) {
     List<Widget> list = [];
     if (left != null) list.add(left);
@@ -117,8 +122,9 @@ comAppbar(BuildContext context,
   return PreferredSize(
       preferredSize: Size.fromHeight(adapt(48)),
       child: SafeArea(
-        top: true,
+        top: top ?? true,
         child: Container(
+          color: backgroundColor == null ? Colors.white : backgroundColor,
           height: adapt(48),
           alignment: Alignment.center,
           child: appBar,
