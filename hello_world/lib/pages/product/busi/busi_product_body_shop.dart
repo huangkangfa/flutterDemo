@@ -12,6 +12,9 @@ class ProductDetailShop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(data==null){
+      return Center();
+    }
     return Container(
       margin: EdgeInsets.only(bottom: ThemeSize.marginSizeMid),
       color: Colors.white,

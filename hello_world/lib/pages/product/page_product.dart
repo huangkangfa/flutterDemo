@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/colors.dart';
 import 'package:hello_world/pages/product/busi/busi_product_body.dart';
-import 'package:hello_world/widget/base_statusbar.dart';
 
 import 'busi/busi_product_footer.dart';
 import 'busi/busi_product_header.dart';

@@ -20,12 +20,21 @@ class ProductHeader extends StatefulWidget {
 
 class ProductHeaderState extends State<ProductHeader> {
   StreamSubscription _streamSubscription;
+  bool isShowHeader = false;
 
   @override
   void initState() {
     super.initState();
     _streamSubscription = registerEvent<ProductHeaderEvent>((data) {
-      if (data is ProductHeaderEvent) {}
+      if (data is ProductHeaderEvent && data != null) {
+        switch (data.cmd) {
+          case 'isShowHeader':
+            setState(() {
+              isShowHeader = data.flag ?? false;
+            });
+            break;
+        }
+      }
     });
   }
 
@@ -39,33 +48,35 @@ class ProductHeaderState extends State<ProductHeader> {
           GestureDetector(
             onTap: () => pop(context),
             child: Padding(
-              padding: EdgeInsets.only(
-                  left: ThemeSize.marginSizeMid),
+              padding: EdgeInsets.only(left: ThemeSize.marginSizeMid),
               child: ClipOval(
                   child: Container(
-                      color: Color(0x30000000),
+                      color: Color(isShowHeader ? 0x00000000 : 0x30000000),
                       child: Padding(
                         padding: EdgeInsets.all(ThemeSize.marginSizeMin),
                         child: Icon(Icons.arrow_back_ios,
-                            color: Colors.white, size: ThemeSize.fontSize20),
+                            color: isShowHeader ? Colors.black : Colors.white,
+                            size: ThemeSize.fontSize20),
                       ))),
             ),
           ),
           GestureDetector(
               onTap: () => showToast('分享'),
               child: Padding(
-                padding: EdgeInsets.only(
-                    right: ThemeSize.marginSizeMid),
+                padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
                 child: ClipOval(
                     child: Container(
-                        color: Color(0x30000000),
+                        color: Color(isShowHeader ? 0x00000000 : 0x30000000),
                         child: Padding(
                           padding: EdgeInsets.all(ThemeSize.marginSizeMin),
                           child: Icon(Icons.share,
-                              size: ThemeSize.fontSize20, color: Colors.white),
+                              size: ThemeSize.fontSize20,
+                              color:
+                                  isShowHeader ? Colors.black : Colors.white),
                         ))),
               )),
-          backgroundColor: ThemeColors.transparent),
+          backgroundColor:
+              isShowHeader ? Colors.white : ThemeColors.transparent),
     );
   }
 
@@ -78,6 +89,7 @@ class ProductHeaderState extends State<ProductHeader> {
 
 class ProductHeaderEvent {
   String cmd;
+  bool flag;
 
-  ProductHeaderEvent(this.cmd);
+  ProductHeaderEvent(this.cmd, {this.flag});
 }
