@@ -11,7 +11,7 @@ import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_gridview.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
-import 'package:hello_world/widget/base_toast.dart';
+import 'package:hello_world/widget/base_dialog.dart';
 import 'package:hello_world/widget/swiper/widget_swiper_pagination.dart';
 
 class FindIndexGridView extends StatefulWidget {

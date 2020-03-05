@@ -30,7 +30,7 @@ class ThemeOfJxl extends BaseTheme {
               200: Color(0xFFA5D6A7),
               300: Color(0xFF81C784),
               400: Color(0xFF66BB6A),
-              500: Color(0XFF9CD4CD),
+              500: Color(0XFF9CD4CD), //主题色
               600: Color(0xFF43A047),
               700: Color(0xFF388E3C),
               800: Color(0xFF2E7D32),
@@ -45,7 +45,7 @@ class ThemeOfJxl extends BaseTheme {
               200: Color(0xFFA5D6A7),
               300: Color(0xFF81C784),
               400: Color(0xFF66BB6A),
-              500: Color(0XFF9CD4CD),
+              500: Color(0XFF9CD4CD), //主题色
               600: Color(0xFF43A047),
               700: Color(0xFF388E3C),
               800: Color(0xFF2E7D32),

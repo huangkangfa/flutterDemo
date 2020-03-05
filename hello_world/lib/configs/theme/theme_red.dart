@@ -30,7 +30,7 @@ class ThemeOfRed extends BaseTheme {
               200: Color(0xFFEF9A9A),
               300: Color(0xFFE57373),
               400: Color(0xFFEF5350),
-              500: Color(0xFFF44336),
+              500: Color(0xFFF44336), //主题色
               600: Color(0xFFE53935),
               700: Color(0xFFD32F2F),
               800: Color(0xFFC62828),
@@ -45,7 +45,7 @@ class ThemeOfRed extends BaseTheme {
               200: Color(0xFFEF9A9A),
               300: Color(0xFFE57373),
               400: Color(0xFFEF5350),
-              500: Color(0xFFF44336),
+              500: Color(0xFFF44336), //主题色
               600: Color(0xFFE53935),
               700: Color(0xFFD32F2F),
               800: Color(0xFFC62828),

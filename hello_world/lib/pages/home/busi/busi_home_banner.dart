@@ -9,7 +9,7 @@ import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
 import 'package:hello_world/widget/base_event_stateful.dart';
-import 'package:hello_world/widget/base_toast.dart';
+import 'package:hello_world/widget/base_dialog.dart';
 
 class HomeBanner extends StatefulWidget {
   HomeBanner({Key key}) : super(key: key);

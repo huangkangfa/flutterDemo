@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/app_default.dart';
-import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/configs/app_keys.dart';
+import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/model/model_user_entity.dart';
 import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/redux/reducer/reducer_user.dart';
 import 'package:hello_world/util/util_screen.dart';
-import 'package:hello_world/widget/base_toast.dart';
+import 'package:hello_world/widget/base_dialog.dart';
 
 import 'base_sp.dart';
 
