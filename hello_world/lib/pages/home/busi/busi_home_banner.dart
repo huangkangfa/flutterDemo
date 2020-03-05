@@ -78,7 +78,6 @@ class HomeBannerState extends EventStateful<HomeBanner, HomeBannerEvent> {
             return ClipRRect(
               borderRadius: BorderRadius.circular(AppSize.marginSizeMin),
               child: CachedNetworkImage(
-                color: null,
                 imageUrl: dataBanner[index].img,
                 fit: BoxFit.fill,
               ),

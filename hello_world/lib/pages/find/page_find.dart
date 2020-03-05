@@ -51,6 +51,7 @@ class FindPageState extends State<FindPage>
     super.build(context);
     return Scaffold(
       appBar: comAppbar(context, appBar: SearchBar()),
+      backgroundColor: Config.theme.getBackgroundColor(),
       body: Align(
         alignment: Alignment.topCenter,
         child: Stack(

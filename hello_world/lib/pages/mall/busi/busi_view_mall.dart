@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/app_colors.dart';
 import 'package:hello_world/configs/app_size.dart';
+import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/dao/dao_mall.dart';
 import 'package:hello_world/model/model_product_type_entity.dart';
 import 'package:hello_world/util/http/http.dart';
@@ -193,7 +194,7 @@ class MallViewState extends EventStateful<MallView, MallViewEvent> {
                   constraints: BoxConstraints(
                     maxHeight: ScreenUtil().setWidth(40),
                   ),
-                  color: null,
+                  color: Config.theme.getPrimaryColor(),
                   width: ScreenUtil().setWidth(5),
                 ),
               ),

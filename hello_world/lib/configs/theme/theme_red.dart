@@ -16,7 +16,7 @@ class ThemeOfRed extends BaseTheme {
 
   @override
   Color getDividerColor({isDark: false}) {
-    return isDark ? Colors.grey[350] : Colors.grey[600];
+    return isDark ? Colors.grey[350] : Colors.white;
   }
 
   @override

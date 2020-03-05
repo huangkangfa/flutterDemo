@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/apis.dart';
 import 'package:hello_world/configs/app_colors.dart';
 import 'package:hello_world/configs/app_size.dart';
+import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/model/model_item_product_entity.dart';
 import 'package:hello_world/model/model_user_entity.dart';
 import 'package:hello_world/pages/mine/busi/busi_mine_button_top.dart';
@@ -72,6 +73,7 @@ class HomePageState extends State<HomePage>
       builder: (context, userInfo) {
         return Scaffold(
           appBar: comAppbar(context, appBar: SearchBar()),
+          backgroundColor: Config.theme.getBackgroundColor(),
           body: Stack(
             children: <Widget>[
               RefreshSliverList(
