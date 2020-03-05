@@ -9,7 +9,7 @@ import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_gridview.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
 import 'package:hello_world/widget/base_event_stateful.dart';
-import 'package:hello_world/widget/dialog/base_dialog.dart';
+import 'package:hello_world/widget/base_dialog.dart';
 
 class HomeActivitysBar extends StatefulWidget {
   HomeActivitysBar({Key key}) : super(key: key);

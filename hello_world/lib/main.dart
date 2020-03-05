@@ -6,7 +6,7 @@ import 'package:hello_world/model/model_theme.dart';
 import 'package:hello_world/pages/page_error.dart';
 import 'package:hello_world/pages/splash/page_splash.dart';
 import 'package:hello_world/redux/app_state.dart';
-import 'package:hello_world/widget/dialog/base_dialog.dart';
+import 'package:hello_world/widget/base_dialog.dart';
 import 'package:redux/redux.dart';
 
 import 'widget/base_statusbar.dart';

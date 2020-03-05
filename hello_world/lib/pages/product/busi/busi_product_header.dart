@@ -6,7 +6,7 @@ import 'package:hello_world/util/util_route_jump.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_appbar.dart';
 import 'package:hello_world/widget/base_event_stateful.dart';
-import 'package:hello_world/widget/dialog/base_dialog.dart';
+import 'package:hello_world/widget/base_dialog.dart';
 
 import 'busi_product_body.dart';
 

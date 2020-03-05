@@ -10,7 +10,7 @@ import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/redux/reducer/reducer_user.dart';
 import 'package:hello_world/util/util_route_jump.dart';
 import 'package:hello_world/util/util_screen.dart';
-import 'package:hello_world/widget/dialog/base_dialog.dart';
+import 'package:hello_world/widget/base_dialog.dart';
 
 import 'base_sp.dart';
 
