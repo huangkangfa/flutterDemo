@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +5,10 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/dao/dao_home.dart';
 import 'package:hello_world/model/model_item_activity_entity.dart';
 import 'package:hello_world/util/http/http.dart';
-import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_gridview.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
 class HomeActivitysBar extends StatefulWidget {
@@ -21,8 +19,7 @@ class HomeActivitysBar extends StatefulWidget {
   }
 }
 
-class HomeActivitysBarState extends State<HomeActivitysBar> {
-  StreamSubscription _streamSubscription;
+class HomeActivitysBarState extends EventStateful<HomeActivitysBar,HomeActivitysBarEvent> {
   CancelToken tag = CancelToken();
   List<ModelItemActivityEntity> dataActivitys = [];
 
@@ -30,15 +27,15 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
   void initState() {
     super.initState();
     refreshData();
-    _streamSubscription = registerEvent<HomeActivitysBarEvent>((data) {
-      if (data is HomeActivitysBarEvent) {
-        switch (data.cmd) {
-          case 'refreshData':
-            refreshData();
-            break;
-        }
-      }
-    });
+  }
+
+  @override
+  void doThingsForEvent(HomeActivitysBarEvent data) {
+    switch (data.cmd) {
+      case 'refreshData':
+        refreshData();
+        break;
+    }
   }
 
   refreshData() {
@@ -138,9 +135,9 @@ class HomeActivitysBarState extends State<HomeActivitysBar> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
     HttpManager.getInstance().cancelRequests(tag);
   }
+
 }
 
 class HomeActivitysBarEvent {

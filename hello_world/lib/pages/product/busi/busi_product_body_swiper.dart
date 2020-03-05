@@ -5,7 +5,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
-import 'package:hello_world/widget/base_toast.dart';
 import 'package:hello_world/widget/video/widget_video_view.dart';
 
 class ProductDetailSwiper extends StatefulWidget {

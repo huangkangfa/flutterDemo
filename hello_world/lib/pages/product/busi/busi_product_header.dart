@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/colors.dart';
 import 'package:hello_world/configs/size.dart';
@@ -7,6 +5,7 @@ import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_route_jump.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_appbar.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
 import 'busi_product_body.dart';
@@ -20,40 +19,14 @@ class ProductHeader extends StatefulWidget {
   }
 }
 
-class ProductHeaderState extends State<ProductHeader> {
-  StreamSubscription _streamSubscription;
+class ProductHeaderState
+    extends EventStateful<ProductHeader, ProductHeaderEvent> {
   bool isShowHeader = false;
   int indexOfHeader = 0;
 
   @override
   void initState() {
     super.initState();
-    _streamSubscription = registerEvent<ProductHeaderEvent>((data) {
-      if (data is ProductHeaderEvent && data != null) {
-        switch (data.cmd) {
-          case 'isShowHeader':
-            setState(() {
-              isShowHeader = data.flag ?? false;
-            });
-            break;
-          case 'type_0':
-            setState(() {
-              indexOfHeader = 0;
-            });
-            break;
-          case 'type_1':
-            setState(() {
-              indexOfHeader = 1;
-            });
-            break;
-          case 'type_2':
-            setState(() {
-              indexOfHeader = 2;
-            });
-            break;
-        }
-      }
-    });
   }
 
   onClick(int index) {
@@ -131,7 +104,32 @@ class ProductHeaderState extends State<ProductHeader> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
+  }
+
+  @override
+  void doThingsForEvent(ProductHeaderEvent data) {
+    switch (data.cmd) {
+      case 'isShowHeader':
+        setState(() {
+          isShowHeader = data.flag ?? false;
+        });
+        break;
+      case 'type_0':
+        setState(() {
+          indexOfHeader = 0;
+        });
+        break;
+      case 'type_1':
+        setState(() {
+          indexOfHeader = 1;
+        });
+        break;
+      case 'type_2':
+        setState(() {
+          indexOfHeader = 2;
+        });
+        break;
+    }
   }
 }
 

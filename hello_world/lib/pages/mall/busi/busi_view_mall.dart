@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +6,8 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/dao/dao_mall.dart';
 import 'package:hello_world/model/model_product_type_entity.dart';
 import 'package:hello_world/util/http/http.dart';
-import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_gridview.dart';
 
 class MallView extends StatefulWidget {
@@ -19,8 +17,7 @@ class MallView extends StatefulWidget {
   }
 }
 
-class MallViewState extends State<MallView> {
-  StreamSubscription _streamSubscription;
+class MallViewState extends EventStateful<MallView, MallViewEvent> {
   CancelToken tag = CancelToken();
   List<ModelProductTypeEntity> dataProductTypes = [];
   int selectedIndex = 0;
@@ -37,15 +34,6 @@ class MallViewState extends State<MallView> {
 
   void init() {
     refreshData();
-    _streamSubscription = registerEvent<MallViewEvent>((data) {
-      if (data is MallViewEvent) {
-        switch (data.cmd) {
-          case 'refreshData':
-            refreshData();
-            break;
-        }
-      }
-    });
   }
 
   refreshData() {
@@ -220,9 +208,17 @@ class MallViewState extends State<MallView> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
     _controllerOfRight.dispose();
     HttpManager.getInstance().cancelRequests(tag);
+  }
+
+  @override
+  void doThingsForEvent(MallViewEvent data) {
+    switch (data.cmd) {
+      case 'refreshData':
+        refreshData();
+        break;
+    }
   }
 }
 

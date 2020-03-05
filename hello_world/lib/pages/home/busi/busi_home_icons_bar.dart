@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -7,21 +5,21 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/dao/dao_home.dart';
 import 'package:hello_world/model/model_item_icon_entity.dart';
 import 'package:hello_world/util/http/http.dart';
-import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
 class HomeIconsBar extends StatefulWidget {
   HomeIconsBar({Key key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return HomeIconsBarState();
   }
 }
 
-class HomeIconsBarState extends State<HomeIconsBar> {
-  StreamSubscription _streamSubscription;
+class HomeIconsBarState extends EventStateful<HomeIconsBar, HomeIconsBarEvent> {
   CancelToken tag = CancelToken();
   List<ModelItemIconEntity> dataIcons = [];
 
@@ -29,15 +27,15 @@ class HomeIconsBarState extends State<HomeIconsBar> {
   void initState() {
     super.initState();
     refreshData();
-    _streamSubscription = registerEvent<HomeIconsBarEvent>((data) {
-      if (data is HomeIconsBarEvent) {
-        switch (data.cmd) {
-          case 'refreshData':
-            refreshData();
-            break;
-        }
-      }
-    });
+  }
+
+  @override
+  void doThingsForEvent(HomeIconsBarEvent data) {
+    switch (data.cmd) {
+      case 'refreshData':
+        refreshData();
+        break;
+    }
   }
 
   refreshData() {
@@ -98,7 +96,6 @@ class HomeIconsBarState extends State<HomeIconsBar> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
     HttpManager.getInstance().cancelRequests(tag);
   }
 }

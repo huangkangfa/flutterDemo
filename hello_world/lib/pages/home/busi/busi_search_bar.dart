@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/size.dart';
-import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/widget/base_appbar.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/widget_edit_search.dart';
 
 class SearchBar extends StatefulWidget {
@@ -17,16 +15,14 @@ class SearchBar extends StatefulWidget {
   }
 }
 
-class SearchBarState extends State<SearchBar> {
-  StreamSubscription _streamSubscription;
-
+class SearchBarState extends EventStateful<SearchBar, SearchBarEvent> {
   @override
   void initState() {
     super.initState();
-    _streamSubscription = registerEvent<SearchBarEvent>((data) {
-      if (data is SearchBarEvent) {}
-    });
   }
+
+  @override
+  void doThingsForEvent(SearchBarEvent data) {}
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +58,6 @@ class SearchBarState extends State<SearchBar> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
   }
 }
 

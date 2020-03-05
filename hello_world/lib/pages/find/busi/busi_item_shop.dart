@@ -15,7 +15,6 @@ class ItemOfList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('############################################### 重新构建 $index 子项 key = ${key.toString()}');
     return GestureDetector(
       onTap: () {
         if (this.callback != null) {

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +6,9 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/dao/dao_home.dart';
 import 'package:hello_world/model/model_banner_list_entity.dart';
 import 'package:hello_world/util/http/http.dart';
-import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
 class HomeBanner extends StatefulWidget {
@@ -22,9 +20,8 @@ class HomeBanner extends StatefulWidget {
   }
 }
 
-class HomeBannerState extends State<HomeBanner> {
+class HomeBannerState extends EventStateful<HomeBanner, HomeBannerEvent> {
   CancelToken tag = CancelToken();
-  StreamSubscription _streamSubscription;
   List<ModelBannerListData> dataBanner = [];
   int curBannerIndex = 0;
 
@@ -32,15 +29,15 @@ class HomeBannerState extends State<HomeBanner> {
   void initState() {
     super.initState();
     refreshData();
-    _streamSubscription = registerEvent<HomeBannerEvent>((data) {
-      if (data is HomeBannerEvent) {
-        switch (data.cmd) {
-          case 'refreshData':
-            refreshData();
-            break;
-        }
-      }
-    });
+  }
+
+  @override
+  void doThingsForEvent(HomeBannerEvent data) {
+    switch (data.cmd) {
+      case 'refreshData':
+        refreshData();
+        break;
+    }
   }
 
   refreshData() {
@@ -98,7 +95,6 @@ class HomeBannerState extends State<HomeBanner> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
     HttpManager.getInstance().cancelRequests(tag);
   }
 }

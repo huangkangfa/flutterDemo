@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/colors.dart';
 import 'package:hello_world/configs/size.dart';
-import 'package:hello_world/util/util_event.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 
 class TypeSelector extends StatefulWidget {
   final String tag;
@@ -17,8 +15,7 @@ class TypeSelector extends StatefulWidget {
   }
 }
 
-class TypeSelectorState extends State<TypeSelector> {
-  StreamSubscription _streamSubscription;
+class TypeSelectorState extends EventStateful<TypeSelector, TypeSelectorEvent> {
   int selectedIndex = 1;
   List<TypeSelectorItem> data = [
     TypeSelectorItem('好评', Icons.bookmark),
@@ -28,9 +25,6 @@ class TypeSelectorState extends State<TypeSelector> {
   @override
   void initState() {
     super.initState();
-    _streamSubscription = registerEvent<TypeSelectorEvent>((data) {
-      if (data is TypeSelectorEvent) {}
-    });
   }
 
   onClick(index) {
@@ -61,9 +55,8 @@ class TypeSelectorState extends State<TypeSelector> {
             children: <Widget>[
               Icon(data[i].icon,
                   size: ThemeSize.fontSizeMid,
-                  color: selectedIndex == i
-                      ? ThemeColors.primary
-                      : Colors.grey),
+                  color:
+                      selectedIndex == i ? ThemeColors.primary : Colors.grey),
               Text(
                 data[i].name,
                 style: TextStyle(
@@ -84,8 +77,10 @@ class TypeSelectorState extends State<TypeSelector> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
   }
+
+  @override
+  void doThingsForEvent(TypeSelectorEvent data) {}
 }
 
 class TypeSelectorEvent {

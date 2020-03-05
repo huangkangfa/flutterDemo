@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +7,10 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/dao/dao_find.dart';
 import 'package:hello_world/model/model_find_index_entity.dart';
 import 'package:hello_world/util/http/http.dart';
-import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_gridview.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_toast.dart';
 import 'package:hello_world/widget/widget_swiper_pagination.dart';
 
@@ -23,8 +21,7 @@ class FindIndexGridView extends StatefulWidget {
   }
 }
 
-class FindIndexGridViewState extends State<FindIndexGridView> {
-  StreamSubscription _streamSubscription;
+class FindIndexGridViewState extends EventStateful<FindIndexGridView,FindIndexGridViewEvent> {
   CancelToken tag = CancelToken();
   List<ModelFindIndexEntity> dataIndexs = [];
   List<IndexItem> dataPage = [];
@@ -34,15 +31,15 @@ class FindIndexGridViewState extends State<FindIndexGridView> {
   void initState() {
     super.initState();
     refreshData();
-    _streamSubscription = registerEvent<FindIndexGridViewEvent>((data) {
-      if (data is FindIndexGridViewEvent) {
-        switch (data.cmd) {
-          case 'refreshData':
-            refreshData();
-            break;
-        }
-      }
-    });
+  }
+
+  @override
+  void doThingsForEvent(data){
+    switch (data.cmd) {
+      case 'refreshData':
+        refreshData();
+        break;
+    }
   }
 
   refreshData() {
@@ -101,7 +98,6 @@ class FindIndexGridViewState extends State<FindIndexGridView> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
     HttpManager.getInstance().cancelRequests(tag);
   }
 

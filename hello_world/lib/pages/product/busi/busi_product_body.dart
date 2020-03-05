@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hello_world/dao/dao_product.dart';
 import 'package:hello_world/model/model_product_entity.dart';
 import 'package:hello_world/pages/product/busi/busi_product_body_select.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 
 import 'busi_product_body_comment.dart';
 import 'busi_product_body_html.dart';
@@ -25,8 +24,7 @@ class ProductBody extends StatefulWidget {
   }
 }
 
-class ProductBodyState extends State<ProductBody> {
-  StreamSubscription _streamSubscription;
+class ProductBodyState extends EventStateful<ProductBody, ProductBodyEvent> {
   ModelProductEntity data;
   ScrollController controller;
   bool isShowAppbar = false;
@@ -35,6 +33,11 @@ class ProductBodyState extends State<ProductBody> {
   @override
   void initState() {
     super.initState();
+    initController();
+    refreshData();
+  }
+
+  void initController() {
     controller = ScrollController();
     controller.addListener(() {
       ///控制头部显隐
@@ -65,36 +68,12 @@ class ProductBodyState extends State<ProductBody> {
         }
       }
     });
-    _streamSubscription = registerEvent<ProductBodyEvent>((data) {
-      if (data is ProductBodyEvent && data != null) {
-        switch (data.cmd) {
-          case 'changeIndexOfHeader':
-            indexOfHeader = data.num ?? 0;
-            if (controller.hasClients) {
-              switch (indexOfHeader) {
-                case 0:
-                  controller.jumpTo(controller.position.minScrollExtent);
-                  break;
-                case 1:
-                  controller.jumpTo(ScreenUtil().setWidth(400));
-                  break;
-                case 2:
-                  controller.jumpTo(ScreenUtil().setWidth(600));
-                  break;
-              }
-            }
-            break;
-        }
-      }
-    });
-    refreshData();
   }
 
   refreshData() {
     ProductDao.getProductDetail({'id': widget.id}).then((result) {
       setState(() {
         data = result;
-//        data.videoUrl = 'http://1252463788.vod2.myqcloud.com/95576ef5vodtransgzp1252463788/e1ab85305285890781763144364/v.f10.mp4';
       });
     });
   }
@@ -119,7 +98,28 @@ class ProductBodyState extends State<ProductBody> {
   void dispose() {
     super.dispose();
     controller?.dispose();
-    _streamSubscription.cancel();
+  }
+
+  @override
+  void doThingsForEvent(ProductBodyEvent data) {
+    switch (data.cmd) {
+      case 'changeIndexOfHeader':
+        indexOfHeader = data.num ?? 0;
+        if (controller.hasClients) {
+          switch (indexOfHeader) {
+            case 0:
+              controller.jumpTo(controller.position.minScrollExtent);
+              break;
+            case 1:
+              controller.jumpTo(ScreenUtil().setWidth(400));
+              break;
+            case 2:
+              controller.jumpTo(ScreenUtil().setWidth(600));
+              break;
+          }
+        }
+        break;
+    }
   }
 }
 

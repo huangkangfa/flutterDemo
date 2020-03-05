@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -8,8 +6,8 @@ import 'package:hello_world/configs/default_set.dart';
 import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/model/model_user_entity.dart';
 import 'package:hello_world/redux/app_state.dart';
-import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
 class MySliverAppBar extends StatefulWidget {
@@ -19,25 +17,14 @@ class MySliverAppBar extends StatefulWidget {
   }
 }
 
-class MySliverAppBarState extends State<MySliverAppBar> {
-  StreamSubscription _streamSubscription;
+class MySliverAppBarState
+    extends EventStateful<MySliverAppBar, MySliverAppBarEvent> {
   double headerWH = ScreenUtil().setWidth(40);
   bool showHeadImg = false;
 
   @override
   void initState() {
     super.initState();
-    _streamSubscription = registerEvent<MySliverAppBarEvent>((data) {
-      if (data is MySliverAppBarEvent) {
-        if (data.cmd == 'showHeadImg') {
-          if (this.mounted) {
-            setState(() {
-              showHeadImg = data.flag;
-            });
-          }
-        }
-      }
-    });
   }
 
   @override
@@ -111,7 +98,19 @@ class MySliverAppBarState extends State<MySliverAppBar> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
+  }
+
+  @override
+  void doThingsForEvent(MySliverAppBarEvent data) {
+    switch (data.cmd) {
+      case 'showHeadImg':
+        if (this.mounted) {
+          setState(() {
+            showHeadImg = data.flag;
+          });
+        }
+        break;
+    }
   }
 }
 

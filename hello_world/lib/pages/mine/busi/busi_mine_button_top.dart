@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/util/util_event.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_refresh_sliver_list.dart';
 import 'package:hello_world/widget/widget_button_to_top.dart';
 
@@ -17,8 +16,7 @@ class ButtonOfTop extends StatefulWidget {
   }
 }
 
-class ButtonOfTopState extends State<ButtonOfTop> {
-  StreamSubscription _streamSubscription;
+class ButtonOfTopState extends EventStateful<ButtonOfTop, ButtonOfTopEvent> {
   bool flag = false;
 
   _onTap() {
@@ -28,13 +26,6 @@ class ButtonOfTopState extends State<ButtonOfTop> {
   @override
   void initState() {
     super.initState();
-    _streamSubscription = registerEvent<ButtonOfTopEvent>((data) {
-      if (data is ButtonOfTopEvent && data.tag == widget.tag) {
-        if (data.cmd == 'changeFlag') {
-          flag = data.flag ?? false;
-        }
-      }
-    });
   }
 
   @override
@@ -56,7 +47,17 @@ class ButtonOfTopState extends State<ButtonOfTop> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
+  }
+
+  @override
+  void doThingsForEvent(ButtonOfTopEvent data) {
+    if (data.tag == widget.tag) {
+      switch (data.cmd) {
+        case 'changeFlag':
+          flag = data.flag ?? false;
+          break;
+      }
+    }
   }
 }
 

@@ -10,6 +10,7 @@ import 'package:hello_world/model/model_item_shop_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
 import 'package:hello_world/widget/base_toast.dart';
 
@@ -22,8 +23,7 @@ class ShopBar extends StatefulWidget {
   }
 }
 
-class ShopBarState extends State<ShopBar> {
-  StreamSubscription _streamSubscription;
+class ShopBarState extends EventStateful<ShopBar, ShopBarEvent> {
   CancelToken tag = CancelToken();
   List<ModelItemShopEntity> dataShops = [];
   ScrollController controller = ScrollController();
@@ -33,16 +33,6 @@ class ShopBarState extends State<ShopBar> {
   void initState() {
     super.initState();
     refreshData();
-    _streamSubscription = registerEvent<ShopBarEvent>((data) {
-      if (data is ShopBarEvent) {
-        switch (data.cmd) {
-          case 'refreshData':
-            isDistanceType = data.isDistanceType ?? true;
-            refreshData();
-            break;
-        }
-      }
-    });
   }
 
   refreshData() {
@@ -168,9 +158,18 @@ class ShopBarState extends State<ShopBar> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
     controller.dispose();
     HttpManager.getInstance().cancelRequests(tag);
+  }
+
+  @override
+  void doThingsForEvent(ShopBarEvent data) {
+    switch (data.cmd) {
+      case 'refreshData':
+        isDistanceType = data.isDistanceType ?? true;
+        refreshData();
+        break;
+    }
   }
 }
 
