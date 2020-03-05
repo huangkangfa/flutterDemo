@@ -9,7 +9,7 @@ import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_appbar.dart';
 import 'package:hello_world/widget/base_refresh_sliver_list.dart';
-import 'package:hello_world/widget/base_dialog.dart';
+import 'package:hello_world/widget/dialog/base_dialog.dart';
 
 import 'busi/busi_find_banner.dart';
 import 'busi/busi_find_index_gridview.dart';

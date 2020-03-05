@@ -2,13 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/app_default.dart';
-import 'package:hello_world/configs/app_keys.dart';
 import 'package:hello_world/configs/index.dart';
+import 'package:hello_world/configs/app_keys.dart';
 import 'package:hello_world/model/model_user_entity.dart';
 import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/redux/reducer/reducer_user.dart';
+import 'package:hello_world/util/util_route_jump.dart';
 import 'package:hello_world/util/util_screen.dart';
-import 'package:hello_world/widget/base_dialog.dart';
+import 'package:hello_world/widget/dialog/base_dialog.dart';
 
 import 'base_sp.dart';
 
@@ -69,17 +70,28 @@ class MyDrawerState extends State<MyDrawer> {
     var children = <Widget>[
       getHeadItems(userInfo),
       ListTile(
-        leading: Icon(Icons.camera),
-        title: Text("我的收藏"),
+        leading: Icon(Icons.do_not_disturb_alt),
+        title: Text("仿ios提示框"),
         onTap: () {
-          showToast('我的收藏');
+          showPromptDialog(context, title: '温馨提示', content: '哈哈哈哈哈哈哈哈哈哈嘿嘿嘿');
         },
       ),
       ListTile(
         leading: Icon(Icons.settings),
-        title: Text("设  置"),
+        title: Text("底部弹窗"),
         onTap: () {
-          showToast('设  置');
+          showActionsSheet(context, data: [
+            ActionsSheetData(
+                name: '拍照',
+                callback: () {
+                  pop<String>(context, obj: '拍照');
+                }),
+            ActionsSheetData(
+                name: '从相册中选择',
+                callback: () {
+                  pop<String>(context, obj: '从相册中选择');
+                })
+          ]);
         },
       ),
       ListTile(

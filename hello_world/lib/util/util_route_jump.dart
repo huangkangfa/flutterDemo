@@ -8,8 +8,11 @@ push(BuildContext context, route) {
   }));
 }
 
-pop(BuildContext context) {
+pop<T>(BuildContext context, {T obj}) {
   if (Navigator.canPop(context)) {
+    if (obj != null) {
+      return Navigator.pop(context, obj);
+    }
     return Navigator.pop(context);
   }
   return false;

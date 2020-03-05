@@ -8,7 +8,7 @@ import 'package:hello_world/model/model_user_entity.dart';
 import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_event_stateful.dart';
-import 'package:hello_world/widget/base_dialog.dart';
+import 'package:hello_world/widget/dialog/base_dialog.dart';
 
 class MySliverAppBar extends StatefulWidget {
   @override
