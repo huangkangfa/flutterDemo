@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hello_world/configs/app_colors.dart';
 import 'package:hello_world/util/util_route_jump.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'dart:math' as math;
 
 ///toast取消
 cancelToast() {
@@ -21,6 +22,44 @@ showToast(msg) {
       fontSize: 16.0);
 }
 
+///完全自定义弹框
+showAnyDialog(BuildContext context, {@required Widget content}) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoUserInterfaceLevel(
+          data: CupertinoUserInterfaceLevelData.elevated,
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaleFactor:
+                  math.max(MediaQuery.of(context).textScaleFactor, 1.0),
+            ),
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                return AnimatedPadding(
+                  padding: MediaQuery.of(context).viewInsets +
+                      const EdgeInsets.symmetric(
+                          horizontal: 40.0, vertical: 24.0),
+                  duration: Duration(milliseconds: 100),
+                  curve: Curves.decelerate,
+                  child: MediaQuery.removeViewInsets(
+                    removeLeft: true,
+                    removeTop: true,
+                    removeRight: true,
+                    removeBottom: true,
+                    context: context,
+                    child: Center(
+                      child: content,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      });
+}
+
 ///通用提示框  上文本  下按钮的那种
 showPromptDialog(BuildContext context,
     {String title: '',
@@ -34,7 +73,7 @@ showPromptDialog(BuildContext context,
     List<Widget> customActions,
     Function leftCallBack,
     Function rightCallBack}) {
-  showCupertinoDialog(
+  showDialog(
       context: context,
       builder: (context) {
         return CupertinoAlertDialog(

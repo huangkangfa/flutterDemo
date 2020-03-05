@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/configs/app_default.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/configs/app_keys.dart';
 import 'package:hello_world/model/model_user_entity.dart';
@@ -96,9 +97,18 @@ class MyDrawerState extends State<MyDrawer> {
       ),
       ListTile(
         leading: Icon(Icons.person),
-        title: Text("关  于"),
+        title: Text("自定义弹框"),
         onTap: () {
-          showToast('关  于');
+          showAnyDialog(context,
+              content: ClipRRect(
+                borderRadius: BorderRadius.circular(AppSize.marginSizeMid),
+                child: CachedNetworkImage(
+                  imageUrl: AppDefault.DEFAULT_IMG_HEAD,
+                  height: ScreenUtil().setWidth(200),
+                  width: ScreenUtil().setWidth(200),
+                  fit: BoxFit.cover,
+                ),
+              ));
         },
       ),
       ListTile(
