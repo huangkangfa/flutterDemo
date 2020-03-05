@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:hello_world/configs/app_colors.dart';
 import 'package:hello_world/configs/app_size.dart';
+import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/dao/dao_find.dart';
 import 'package:hello_world/model/model_find_index_entity.dart';
 import 'package:hello_world/util/http/http.dart';
@@ -113,7 +114,7 @@ class FindIndexGridViewState
           space: AppSize.marginSizeMin,
           count: config.itemCount,
           controller: config.pageController,
-          color: null,
+          color: Config.theme.getPrimaryColor(),
           activeColor: AppColors.C_333,
         ),
       );
