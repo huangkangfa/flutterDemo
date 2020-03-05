@@ -97,6 +97,7 @@ class RefreshSliverListState extends State<RefreshSliverList> {
 
   //当前请求的页码
   int pageNo = 1;
+  bool isOk = true;
 
   //总数据大小
   int total = 0;
@@ -121,7 +122,6 @@ class RefreshSliverListState extends State<RefreshSliverList> {
           data.tag == widget.tag) {
         if (data.cmd == 'toTop' && _controller.hasClients) {
           _controller.jumpTo(_controller.position.minScrollExtent);
-          getData(true);
         }
       }
     });
@@ -248,22 +248,21 @@ class RefreshSliverListState extends State<RefreshSliverList> {
   }
 
   Future getData(bool isFirst, {Map<String, dynamic> param}) async {
-    if (param != null) {
-      params = param;
-    }
-    if (params == null) {
-      params = Map<String, dynamic>();
-    }
-    params['pageNo'] = pageNo;
-    params['pageSize'] = pageSize;
-    if (isFirst) {
-      //下拉刷新或者第一次加载数据
-      loadingStatus = LoadingStatus.STATUS_LOADING;
-      loadingText = '加载中...';
-      list.clear();
-      pageNo = 1;
-      List listMore = await requstData(widget.api, params);
-      if (this.mounted) {
+    if (this.mounted) {
+      if (!isOk) {
+        return;
+      }
+      if (param != null) {
+        params = param;
+      }
+      isOk = false;
+      if (isFirst) {
+        //下拉刷新或者第一次加载数据
+        loadingStatus = LoadingStatus.STATUS_LOADING;
+        loadingText = '加载中...';
+        list.clear();
+        pageNo = 1;
+        List listMore = await requstData(widget.api, params);
         setState(() {
           list.addAll(listMore);
           if (list.length >= total) {
@@ -273,20 +272,16 @@ class RefreshSliverListState extends State<RefreshSliverList> {
             loadingStatus = LoadingStatus.STATUS_IDEL;
           }
         });
-      }
-    } else {
-      //避免重复加载更多
-      if (loadingStatus == LoadingStatus.STATUS_IDEL) {
-        if (this.mounted) {
+      } else {
+        //避免重复加载更多
+        if (loadingStatus == LoadingStatus.STATUS_IDEL) {
           setState(() {
             loadingStatus = LoadingStatus.STATUS_LOADING;
           });
-        }
-        pageNo++;
-        //获取增联数据赋值listMore
-        List listMore = await requstData(widget.api, params);
-        //准备完数据，再设置状态
-        if (this.mounted) {
+          pageNo++;
+          //获取增联数据赋值listMore
+          List listMore = await requstData(widget.api, params);
+          //准备完数据，再设置状态
           setState(() {
             if (list.length < total) {
               list.addAll(listMore);
@@ -299,10 +294,16 @@ class RefreshSliverListState extends State<RefreshSliverList> {
           });
         }
       }
+      isOk = true;
     }
   }
 
   Future<List<dynamic>> requstData(api, params) async {
+    if (params == null) {
+      params = Map<String, dynamic>();
+    }
+    params['pageNo'] = pageNo;
+    params['pageSize'] = pageSize;
     ResultData resultData =
         await HttpManager.getInstance().get(api, params, cancelToken: tag);
     if (resultData == null) return [];
