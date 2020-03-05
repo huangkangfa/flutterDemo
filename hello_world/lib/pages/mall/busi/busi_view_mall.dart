@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/dao/dao_mall.dart';
 import 'package:hello_world/model/model_product_type_entity.dart';
 import 'package:hello_world/util/http/http.dart';
@@ -100,9 +100,9 @@ class MallViewState extends EventStateful<MallView, MallViewEvent> {
       List<ModelProductTypechild> selectedChild, int j) {
     return Padding(
       padding: EdgeInsets.only(
-          left: ThemeSize.marginSizeMid,
-          right: ThemeSize.marginSizeMid,
-          top: ThemeSize.marginSizeMid),
+          left: AppSize.marginSizeMid,
+          right: AppSize.marginSizeMid,
+          top: AppSize.marginSizeMid),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
         child: Container(
@@ -111,21 +111,21 @@ class MallViewState extends EventStateful<MallView, MallViewEvent> {
                 border: Border.all(color: Colors.grey[300], width: 1.0),
                 borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8))),
             child: Padding(
-              padding: EdgeInsets.all(ThemeSize.marginSizeMid),
+              padding: EdgeInsets.all(AppSize.marginSizeMid),
               child: Column(
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text(selectedChild[j].name,
                         style: TextStyle(
-                            color: ThemeColors.colorFont_333,
-                            fontSize: ThemeSize.fontSizeMid)),
+                            color: AppColors.C_333,
+                            fontSize: AppSize.fontSizeMid)),
                   ),
                   ComGridView(selectedChild[j].children,
                       buildItemLayoutOfRightItemChild, 3,
-                      padding: ThemeSize.marginSizeMin,
-                      mainAxisSpacing: ThemeSize.marginSizeMin,
-                      crossAxisSpacing: ThemeSize.marginSizeMid)
+                      padding: AppSize.marginSizeMin,
+                      mainAxisSpacing: AppSize.marginSizeMin,
+                      crossAxisSpacing: AppSize.marginSizeMid)
                 ],
               ),
             )),
@@ -150,8 +150,7 @@ class MallViewState extends EventStateful<MallView, MallViewEvent> {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: ThemeColors.colorFont_333,
-                fontSize: ThemeSize.fontSize14),
+                color: AppColors.C_333, fontSize: AppSize.fontSize14),
           )
         ],
       ),
@@ -182,9 +181,9 @@ class MallViewState extends EventStateful<MallView, MallViewEvent> {
                   dataProductTypes[i].name,
                   style: TextStyle(
                       color: i == selectedIndex
-                          ? ThemeColors.colorFont_333
-                          : ThemeColors.colorFont_666,
-                      fontSize: ThemeSize.fontSizeMid),
+                          ? AppColors.C_333
+                          : AppColors.C_666,
+                      fontSize: AppSize.fontSizeMid),
                 )),
             Visibility(
               visible: i == selectedIndex,
@@ -194,7 +193,7 @@ class MallViewState extends EventStateful<MallView, MallViewEvent> {
                   constraints: BoxConstraints(
                     maxHeight: ScreenUtil().setWidth(40),
                   ),
-                  color: ThemeColors.primary,
+                  color: null,
                   width: ScreenUtil().setWidth(5),
                 ),
               ),

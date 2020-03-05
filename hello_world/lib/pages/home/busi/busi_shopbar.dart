@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/dao/dao_home.dart';
 import 'package:hello_world/model/model_item_shop_entity.dart';
 import 'package:hello_world/util/http/http.dart';
@@ -64,16 +64,16 @@ class ShopBarState extends EventStateful<ShopBar, ShopBarEvent> {
     if (dataShops.length == 0) {
       return PlaceHolderView(
           ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
-              ThemeSize.marginSizeMin * 2,
+              AppSize.marginSizeMin * 2,
           ScreenUtil().setWidth(130));
     }
     List<Widget> childs = [];
     for (int i = 0; i < dataShops.length; i++) {
       childs.add(Padding(
         padding: EdgeInsets.only(
-            left: ThemeSize.marginSizeMid,
-            top: ThemeSize.marginSizeMid,
-            bottom: ThemeSize.marginSizeMid),
+            left: AppSize.marginSizeMid,
+            top: AppSize.marginSizeMid,
+            bottom: AppSize.marginSizeMid),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
           child: GestureDetector(
@@ -103,16 +103,16 @@ class ShopBarState extends EventStateful<ShopBar, ShopBarEvent> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: EdgeInsets.only(
-                            left: ThemeSize.marginSizeMin,
-                            right: ThemeSize.marginSizeMin),
+                            left: AppSize.marginSizeMin,
+                            right: AppSize.marginSizeMin),
                         child: Text(
                           dataShops[i].shop,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: ThemeSize.fontSize14,
-                              color: ThemeColors.colorFont_333),
+                              fontSize: AppSize.fontSize14,
+                              color: AppColors.C_333),
                         ),
                       ),
                     ),
@@ -126,18 +126,18 @@ class ShopBarState extends EventStateful<ShopBar, ShopBarEvent> {
     }
 
     childs.add(Padding(
-      padding: EdgeInsets.all(ThemeSize.marginSizeMid),
+      padding: EdgeInsets.all(AppSize.marginSizeMid),
       child: GestureDetector(
         onTap: () => onMoreClick(),
         child: Container(
           color: Colors.grey,
           child: Padding(
-            padding: EdgeInsets.all(ThemeSize.marginSizeMax),
+            padding: EdgeInsets.all(AppSize.marginSizeMax),
             child: Center(
               child: Text(
                 '更\n多',
                 style: TextStyle(
-                    color: Colors.white, fontSize: ThemeSize.fontSizeMid),
+                    color: Colors.white, fontSize: AppSize.fontSizeMid),
               ),
             ),
           ),

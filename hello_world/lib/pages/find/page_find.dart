@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/apis.dart';
+import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/model/model_item_find_shop_entity.dart';
 import 'package:hello_world/model/model_item_product_entity.dart';
 import 'package:hello_world/pages/home/busi/busi_search_bar.dart';
@@ -50,7 +51,6 @@ class FindPageState extends State<FindPage>
     super.build(context);
     return Scaffold(
       appBar: comAppbar(context, appBar: SearchBar()),
-      backgroundColor: Colors.white,
       body: Align(
         alignment: Alignment.topCenter,
         child: Stack(

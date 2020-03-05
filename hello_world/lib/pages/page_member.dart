@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/default_set.dart';
+import 'package:hello_world/configs/app_default.dart';
 import 'package:hello_world/util/util_screen.dart';
 
 class MemberPage extends StatefulWidget {
@@ -37,7 +37,7 @@ class MemberPageState extends State<MemberPage>
                       expandedHeight: ScreenUtil().setWidth(200),
                       flexibleSpace: FlexibleSpaceBar(
                         background: CachedNetworkImage(
-                          imageUrl: DefaultPersion.defaultHeadImg,
+                          imageUrl: AppDefault.DEFAULT_IMG_HEAD,
                           fit: BoxFit.cover,
                         ),
                       ),

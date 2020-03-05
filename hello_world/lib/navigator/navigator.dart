@@ -6,6 +6,8 @@ import 'package:hello_world/pages/mine/page_mine.dart';
 import 'package:hello_world/pages/page_member.dart';
 import 'package:hello_world/widget/drawer_wdiget.dart';
 
+import 'bottom_bar.dart';
+
 class MyNavigator extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -34,7 +36,7 @@ class NavigatorState extends State<MyNavigator> {
             MinePage()
           ],
           onPageChanged: (index) {
-            if(this.mounted){
+            if (this.mounted) {
               setState(() {
                 _setAppBarTitle(index);
               });
@@ -46,7 +48,7 @@ class NavigatorState extends State<MyNavigator> {
             onTap: (index) {
               // 点击跳转对应的PageView
               _pageController.jumpToPage(index);
-              if(this.mounted){
+              if (this.mounted) {
                 setState(() {
                   _setAppBarTitle(index);
                 });
@@ -60,35 +62,5 @@ class NavigatorState extends State<MyNavigator> {
   _setAppBarTitle(index) {
     _currentIndex = index;
     appBarTitle = BottomNavigationBarData.TITLES[_currentIndex];
-  }
-}
-
-//底部栏配置数据
-class BottomNavigationBarData {
-  static const TITLES = ['首页', '商城', '会员', '发现', '我的'];
-  static const ICONS = [
-    Icons.home,
-    Icons.add_shopping_cart,
-    Icons.person_pin,
-    Icons.camera,
-    Icons.person
-  ];
-  static const COLORS = [
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white
-  ];
-
-  static getBottomNavigationBarItems() {
-    var bottomNavigationBarData = <BottomNavigationBarItem>[];
-    for (int i = 0; i < BottomNavigationBarData.TITLES.length; i++) {
-      bottomNavigationBarData.add(BottomNavigationBarItem(
-          icon: Icon(BottomNavigationBarData.ICONS[i]),
-          title: Text(BottomNavigationBarData.TITLES[i]),
-          backgroundColor: BottomNavigationBarData.COLORS[i]));
-    }
-    return bottomNavigationBarData;
   }
 }

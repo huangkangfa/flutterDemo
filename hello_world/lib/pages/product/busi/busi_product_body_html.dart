@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/util/util_screen.dart';
 
 class ProductDetailHtml extends StatelessWidget {
@@ -21,8 +21,8 @@ class ProductDetailHtml extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left:ThemeSize.marginSizeMid,right: ThemeSize.marginSizeMid,bottom: ThemeSize.marginSizeMax,top: ThemeSize.marginSizeMax),
-              child: Text('详情',style: TextStyle(fontWeight: FontWeight.bold,fontSize: ThemeSize.fontSizeMid),),
+              padding: EdgeInsets.only(left:AppSize.marginSizeMid,right: AppSize.marginSizeMid,bottom: AppSize.marginSizeMax,top: AppSize.marginSizeMax),
+              child: Text('详情',style: TextStyle(fontWeight: FontWeight.bold,fontSize: AppSize.fontSizeMid),),
             ),
             Html(data: htmlData)
           ],

@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/default_set.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_default.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/model/model_user_entity.dart';
 import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/util/util_screen.dart';
@@ -40,7 +40,7 @@ class MySliverAppBarState
                   child: ClipOval(
                     child: CachedNetworkImage(
                       imageUrl:
-                          userInfo?.headImg ?? DefaultPersion.defaultHeadImg,
+                          userInfo?.headImg ?? AppDefault.DEFAULT_IMG_HEAD,
                       height: headerWH,
                       width: headerWH,
                       fit: BoxFit.cover,
@@ -62,12 +62,11 @@ class MySliverAppBarState
             elevation: 1,
             //是否显示阴影
             forceElevated: true,
-            backgroundColor: ThemeColors.primary,
             brightness: Brightness.light,
             //appbar是否显示在屏幕的最上面，为false是显示在最上面，为true就显示在状态栏的下面
             primary: true,
             //标题两边的空白区域
-            titleSpacing: ThemeSize.marginSizeMax,
+            titleSpacing: AppSize.marginSizeMax,
             //默认高度是状态栏和导航栏的高度，如果有滚动视差的话，要大于前两者的高度
             expandedHeight: ScreenUtil().setWidth(250),
             //滑动到最上面，再滑动是否隐藏导航栏的文字和标题等的具体内容，为true是隐藏，为false是不隐藏
@@ -78,12 +77,12 @@ class MySliverAppBarState
             snap: false,
             flexibleSpace: FlexibleSpaceBar(
               background: CachedNetworkImage(
-                imageUrl: userInfo?.headImg ?? DefaultPersion.defaultHeadImg,
+                imageUrl: userInfo?.headImg ?? AppDefault.DEFAULT_IMG_HEAD,
                 fit: BoxFit.cover,
               ),
               title: Container(
                 constraints: BoxConstraints(maxWidth: ScreenUtil.screenWidthDp),
-                child: Text(userInfo?.name ?? DefaultPersion.name,
+                child: Text(userInfo?.name ?? AppDefault.UNLOGIN_NAME,
                     style: TextStyle(color: Colors.white, shadows: <Shadow>[
                       Shadow(color: Colors.black26, offset: Offset(0, 1)),
                     ])),

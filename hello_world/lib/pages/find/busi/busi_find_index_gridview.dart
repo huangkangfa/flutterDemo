@@ -2,15 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/dao/dao_find.dart';
 import 'package:hello_world/model/model_find_index_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_gridview.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
-import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_toast.dart';
 import 'package:hello_world/widget/swiper/widget_swiper_pagination.dart';
 
@@ -21,7 +21,8 @@ class FindIndexGridView extends StatefulWidget {
   }
 }
 
-class FindIndexGridViewState extends EventStateful<FindIndexGridView,FindIndexGridViewEvent> {
+class FindIndexGridViewState
+    extends EventStateful<FindIndexGridView, FindIndexGridViewEvent> {
   CancelToken tag = CancelToken();
   List<ModelFindIndexEntity> dataIndexs = [];
   List<IndexItem> dataPage = [];
@@ -34,7 +35,7 @@ class FindIndexGridViewState extends EventStateful<FindIndexGridView,FindIndexGr
   }
 
   @override
-  void doThingsForEvent(data){
+  void doThingsForEvent(data) {
     switch (data.cmd) {
       case 'refreshData':
         refreshData();
@@ -74,7 +75,7 @@ class FindIndexGridViewState extends EventStateful<FindIndexGridView,FindIndexGr
     if (dataIndexs.length == 0 || dataPage.length == 0) {
       return PlaceHolderView(
           ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
-              ThemeSize.marginSizeMin * 2,
+              AppSize.marginSizeMin * 2,
           ScreenUtil().setWidth(140));
     }
     return Container(
@@ -109,11 +110,11 @@ class FindIndexGridViewState extends EventStateful<FindIndexGridView,FindIndexGr
         child: PageIndicator(
           layout: PageIndicatorLayout.SCALE,
           size: ScreenUtil().setWidth(8),
-          space: ThemeSize.marginSizeMin,
+          space: AppSize.marginSizeMin,
           count: config.itemCount,
           controller: config.pageController,
-          color: ThemeColors.primary,
-          activeColor: ThemeColors.colorFont_333,
+          color: null,
+          activeColor: AppColors.C_333,
         ),
       );
     });
@@ -122,8 +123,8 @@ class FindIndexGridViewState extends EventStateful<FindIndexGridView,FindIndexGr
   buildItemLayout(BuildContext context, int index) {
     return ComGridView(dataPage[index].childs, buildItemChildLayout, 4,
         paddingTop: ScreenUtil().setWidth(30),
-        mainAxisSpacing: ThemeSize.marginSizeMid,
-        crossAxisSpacing: ThemeSize.marginSizeMax);
+        mainAxisSpacing: AppSize.marginSizeMid,
+        crossAxisSpacing: AppSize.marginSizeMax);
   }
 
   buildItemChildLayout(ModelFindIndexEntity item, index) {

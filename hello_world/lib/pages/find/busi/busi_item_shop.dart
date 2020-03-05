@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/model/model_item_find_shop_entity.dart';
 import 'package:hello_world/util/util_screen.dart';
 
@@ -22,7 +22,7 @@ class ItemOfList extends StatelessWidget {
         }
       },
       child:Padding(
-        padding: EdgeInsets.all(ThemeSize.marginSizeMid),
+        padding: EdgeInsets.all(AppSize.marginSizeMid),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -39,7 +39,7 @@ class ItemOfList extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Padding(
-                padding: EdgeInsets.only(left: ThemeSize.marginSizeMid),
+                padding: EdgeInsets.only(left: AppSize.marginSizeMid),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -50,8 +50,8 @@ class ItemOfList extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              color: ThemeColors.colorFont_333,
-                              fontSize: ThemeSize.fontSizeMid,
+                              color: AppColors.C_333,
+                              fontSize: AppSize.fontSizeMid,
                               fontWeight: FontWeight.bold)),
                     ),
                     Row(
@@ -59,8 +59,8 @@ class ItemOfList extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(top: 2),
                           child: Icon(Icons.location_on,
-                              size: ThemeSize.fontSizeMid,
-                              color: ThemeColors.colorFont_999),
+                              size: AppSize.fontSizeMid,
+                              color: AppColors.C_999),
                         ),
                         Container(
                           width: ScreenUtil().setWidth(180),
@@ -69,8 +69,8 @@ class ItemOfList extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: ThemeColors.colorFont_999,
-                                fontSize: ThemeSize.fontSize14),
+                                color: AppColors.C_999,
+                                fontSize: AppSize.fontSize14),
                           ),
                         )
                       ],
@@ -87,8 +87,8 @@ class ItemOfList extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        color: ThemeColors.colorFont_666,
-                        fontSize: ThemeSize.fontSize14)),
+                        color: AppColors.C_666,
+                        fontSize: AppSize.fontSize14)),
               ),
             )
           ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
+import 'package:hello_world/configs/app_colors.dart';
 import 'package:hello_world/pages/product/busi/busi_product_body.dart';
 
 import 'busi/busi_product_footer.dart';
@@ -20,7 +20,7 @@ class ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColors.colorBg_F2F2F2,
+      backgroundColor: AppColors.C_FA,
       body: Stack(
         children: <Widget>[
           ProductBody(widget.id),

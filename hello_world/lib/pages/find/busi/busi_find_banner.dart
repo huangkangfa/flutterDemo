@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/dao/dao_home.dart';
 import 'package:hello_world/model/model_banner_list_entity.dart';
 import 'package:hello_world/util/http/http.dart';
@@ -54,7 +54,7 @@ class FindBannerState extends EventStateful<FindBanner,HomeBannerEvent> {
     if (dataBanner.length == 0) {
       return PlaceHolderView(
           ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
-              ThemeSize.marginSizeMin * 2,
+              AppSize.marginSizeMin * 2,
           ScreenUtil().setWidth(130));
     }
     return Container(
@@ -62,7 +62,7 @@ class FindBannerState extends EventStateful<FindBanner,HomeBannerEvent> {
       height: ScreenUtil().setWidth(130),
       child: Padding(
         padding: EdgeInsets.only(
-            top: ThemeSize.marginSizeMax, bottom: ThemeSize.marginSizeMid),
+            top: AppSize.marginSizeMax, bottom: AppSize.marginSizeMid),
         child: Swiper(
           autoplay: true,
           autoplayDelay: 8000,
@@ -85,7 +85,7 @@ class FindBannerState extends EventStateful<FindBanner,HomeBannerEvent> {
 
   buildItemLayout(BuildContext context, int index) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(ThemeSize.marginSizeMin),
+      borderRadius: BorderRadius.circular(AppSize.marginSizeMin),
       child: CachedNetworkImage(
         imageUrl: dataBanner[index].img,
         fit: BoxFit.fill,

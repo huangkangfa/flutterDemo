@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:common_utils/common_utils.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
-import 'package:hello_world/configs/_index.dart';
+import 'package:hello_world/configs/index.dart';
 
 import 'http_error.dart';
 import 'interceptors_logs.dart';

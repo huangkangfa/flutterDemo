@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/model/model_com_icon_entity.dart';
 import 'package:hello_world/util/util_screen.dart';
 
@@ -29,7 +29,7 @@ class MyCard1 extends StatelessWidget {
       childs.add(buildItemLayout(i));
     }
     return SliverPadding(
-      padding: EdgeInsets.all(ThemeSize.marginSizeMax),
+      padding: EdgeInsets.all(AppSize.marginSizeMax),
       sliver: SliverToBoxAdapter(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
@@ -53,7 +53,7 @@ class MyCard1 extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: EdgeInsets.only(
-              top: ThemeSize.marginSizeMax, bottom: ThemeSize.marginSizeMax),
+              top: AppSize.marginSizeMax, bottom: AppSize.marginSizeMax),
           child: Column(
             children: <Widget>[
               ClipOval(
@@ -65,11 +65,11 @@ class MyCard1 extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: ThemeSize.marginSizeMid),
+                padding: EdgeInsets.only(top: AppSize.marginSizeMid),
                 child: Text(data[index].name,
                     style: TextStyle(
-                        fontSize: ThemeSize.fontSize14,
-                        color: ThemeColors.colorFont_333)),
+                        fontSize: AppSize.fontSize14,
+                        color: AppColors.C_333)),
               )
             ],
           ),

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_placeholder.dart';
 import 'package:hello_world/widget/video/widget_video_view.dart';
@@ -90,9 +90,9 @@ class ProductDetailSwiperState extends State<ProductDetailSwiper> {
         child: Align(
           alignment: Alignment.bottomRight,
           child: Padding(
-            padding: EdgeInsets.all(ThemeSize.marginSizeMid),
+            padding: EdgeInsets.all(AppSize.marginSizeMid),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(ThemeSize.marginSizeMax),
+              borderRadius: BorderRadius.circular(AppSize.marginSizeMax),
               child: Container(
                 color: Color(0x30000000),
                 constraints:
@@ -104,7 +104,7 @@ class ProductDetailSwiperState extends State<ProductDetailSwiper> {
                     Text(
                       '${config.activeIndex + 1}',
                       style: TextStyle(
-                          fontSize: ThemeSize.fontSize14,
+                          fontSize: AppSize.fontSize14,
                           color: Colors.white,
                           shadows: <Shadow>[
                             Shadow(color: Colors.black26, offset: Offset(0, 1)),
@@ -113,7 +113,7 @@ class ProductDetailSwiperState extends State<ProductDetailSwiper> {
                     Text(
                       '/',
                       style: TextStyle(
-                          fontSize: ThemeSize.fontSize14,
+                          fontSize: AppSize.fontSize14,
                           color: Colors.white,
                           shadows: <Shadow>[
                             Shadow(color: Colors.black26, offset: Offset(0, 1)),
@@ -121,7 +121,7 @@ class ProductDetailSwiperState extends State<ProductDetailSwiper> {
                     ),
                     Text('${config.itemCount}',
                         style: TextStyle(
-                            fontSize: ThemeSize.fontSizeMid,
+                            fontSize: AppSize.fontSizeMid,
                             color: Colors.white,
                             shadows: <Shadow>[
                               Shadow(

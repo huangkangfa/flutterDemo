@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/apis.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/model/model_item_product_entity.dart';
 import 'package:hello_world/pages/home/busi/busi_home_list_item_product.dart';
 import 'package:hello_world/pages/home/page_home.dart';
@@ -55,7 +55,7 @@ class MinePageState extends State<MinePage>
     childs.add(MyCard3());
     childs.add(SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.all(ThemeSize.marginSizeMax),
+        padding: EdgeInsets.all(AppSize.marginSizeMax),
         child: HomeSmallTitle('猜你喜欢'),
       ),
     ));
@@ -67,16 +67,15 @@ class MinePageState extends State<MinePage>
     super.build(context);
 
     return Scaffold(
-      backgroundColor: ThemeColors.colorBg_F2F2F2,
       body: Stack(
         children: <Widget>[
           RefreshSliverList(
               TypeOfSliverGridView(2,
                   mainAxisSpacing: ScreenUtil().setWidth(10),
                   childAspectRatio: 0.7,
-                  crossAxisSpacing: ThemeSize.marginSizeMin,
-                  paddingLeft: ThemeSize.marginSizeMax,
-                  paddingRight: ThemeSize.marginSizeMax),
+                  crossAxisSpacing: AppSize.marginSizeMin,
+                  paddingLeft: AppSize.marginSizeMax,
+                  paddingRight: AppSize.marginSizeMax),
               Apis.products_home,
               (item, index) {
                 ModelItemProductEntity obj =

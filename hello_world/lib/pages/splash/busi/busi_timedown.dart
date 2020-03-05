@@ -1,6 +1,6 @@
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/util/util_screen.dart';
 
 class SplashTimeDown extends StatefulWidget {
@@ -69,7 +69,7 @@ class _SplashTimeDownState extends State<SplashTimeDown> {
               width: ScreenUtil().setWidth(60),
               child: Center(
                   child: Text('跳过${timeDown}s', style: TextStyle(
-                      color: Colors.white, fontSize: ThemeSize.fontSize14)),
+                      color: Colors.white, fontSize: AppSize.fontSize14)),
               ),
             )
         ));

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/model/model_item_product_entity.dart';
 import 'package:hello_world/util/util_screen.dart';
 
@@ -39,10 +39,10 @@ class ListItemOfProduct extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: EdgeInsets.only(
-                        left: ThemeSize.marginSizeMid,
-                        right: ThemeSize.marginSizeMid),
+                        left: AppSize.marginSizeMid,
+                        right: AppSize.marginSizeMid),
                     child: Padding(
-                      padding: EdgeInsets.only(top: ThemeSize.marginSizeMin),
+                      padding: EdgeInsets.only(top: AppSize.marginSizeMin),
                       child: Stack(
                         children: <Widget>[
                           RichText(
@@ -52,13 +52,13 @@ class ListItemOfProduct extends StatelessWidget {
                               TextSpan(
                                   text: '自营 ',
                                   style: TextStyle(
-                                      fontSize: ThemeSize.fontSizeMin,
+                                      fontSize: AppSize.fontSizeMin,
                                       color: Color(0x009CD3CF))),
                               TextSpan(
                                   text: product.name,
                                   style: TextStyle(
-                                      fontSize: ThemeSize.fontSize14,
-                                      color: ThemeColors.colorFont_333)),
+                                      fontSize: AppSize.fontSize14,
+                                      color: AppColors.C_333)),
                             ]),
                           ),
                           ShopFlag()
@@ -75,18 +75,18 @@ class ListItemOfProduct extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(
-                          left: ThemeSize.marginSizeMid,
-                          right: ThemeSize.marginSizeMid),
+                          left: AppSize.marginSizeMid,
+                          right: AppSize.marginSizeMid),
                       child: Text('￥${product.price / 100}',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: Color(0xffff4d7a),
-                              fontSize: ThemeSize.fontSize14)),
+                              fontSize: AppSize.fontSize14)),
                     ),
                     Expanded(flex: 1, child: Center()),
                     Padding(
-                      padding: EdgeInsets.only(right: ThemeSize.marginSizeMid),
+                      padding: EdgeInsets.only(right: AppSize.marginSizeMid),
                       child: product.isVipPrice == 1
                           ? MemberPriceFlag(
                               price: product.minVipPrice?.toDouble())

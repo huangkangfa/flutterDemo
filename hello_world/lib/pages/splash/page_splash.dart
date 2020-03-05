@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/keys.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_keys.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/navigator/navigator.dart';
 import 'package:hello_world/util/util_route_jump.dart';
 import 'package:hello_world/util/util_screen.dart';
 import 'package:hello_world/widget/base_sp.dart';
-import 'package:hello_world/widget/base_statusbar.dart';
 
 import 'busi/busi_timedown.dart';
 
@@ -31,7 +30,7 @@ class SplashPageState extends State<SplashPage> {
     await SpUtil.getInstance();
     if(this.mounted){
       setState(() {
-        hasAd = SpUtil.getBool(Keys.SWITCH_AD, defValue: true);
+        hasAd = SpUtil.getBool(AppKeys.SWITCH_AD, defValue: true);
         if (!hasAd) {
           _goMain();
         }
@@ -45,8 +44,6 @@ class SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    //设置沉浸式
-    StatusBarUtils.setBarStatus(true);
     //屏幕适配 设置宽度750px，高度1334px，根据系统字体进行缩放
     ScreenUtil.init(context, width: 375, height: 667, allowFontScaling: false);
     return Scaffold(
@@ -65,7 +62,7 @@ class SplashPageState extends State<SplashPage> {
             child: Align(
               alignment: Alignment.topRight,
               child: Padding(
-                padding: EdgeInsets.only(right:ThemeSize.marginSizeMax,top: ScreenUtil().setHeight(45)),
+                padding: EdgeInsets.only(right:AppSize.marginSizeMax,top: ScreenUtil().setHeight(45)),
                 child: SplashTimeDown(() {
                   _goMain();
                 }),

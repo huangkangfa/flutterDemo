@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/base_refresh_sliver_list.dart';
@@ -35,7 +35,7 @@ class ButtonOfTopState extends EventStateful<ButtonOfTop, ButtonOfTopEvent> {
       child: Align(
         alignment: Alignment.bottomRight,
         child: Padding(
-          padding: EdgeInsets.all(ThemeSize.marginSizeMax),
+          padding: EdgeInsets.all(AppSize.marginSizeMax),
           child: StackToTop(onTap: () {
             _onTap();
           }),

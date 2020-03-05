@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/dao/dao_home.dart';
 import 'package:hello_world/model/model_item_icon_entity.dart';
 import 'package:hello_world/util/http/http.dart';
@@ -57,7 +57,7 @@ class HomeIconsBarState extends EventStateful<HomeIconsBar, HomeIconsBarEvent> {
     if (dataIcons.length == 0) {
       return PlaceHolderView(
           ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
-              ThemeSize.marginSizeMin * 2,
+              AppSize.marginSizeMin * 2,
           ScreenUtil().setWidth(70));
     }
     List<Widget> children = [];
@@ -76,7 +76,7 @@ class HomeIconsBarState extends EventStateful<HomeIconsBar, HomeIconsBarEvent> {
                   fit: BoxFit.fill,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: ThemeSize.marginSizeMin),
+                  padding: EdgeInsets.only(top: AppSize.marginSizeMin),
                   child: Text(dataIcons[i].name),
                 ),
               ],

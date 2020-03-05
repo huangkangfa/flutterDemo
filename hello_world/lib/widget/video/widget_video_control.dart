@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/util/http/utils.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
@@ -44,7 +43,7 @@ class _VideoControlState
                 child: Container(
                   color: Color(0x00000000),
                   width: ScreenUtil().setWidth(200),
-                  padding: EdgeInsets.all(ThemeSize.marginSizeMid),
+                  padding: EdgeInsets.all(AppSize.marginSizeMid),
                   margin: EdgeInsets.only(top: ScreenUtil().setWidth(25)),
                   child: Visibility(
                     visible: isShow,
@@ -56,15 +55,15 @@ class _VideoControlState
           Container(
             height: ScreenUtil().setWidth(50),
             padding: EdgeInsets.only(
-                left: ThemeSize.marginSizeMid,
-                right: ThemeSize.marginSizeMid,
-                top: ThemeSize.marginSizeMid),
+                left: AppSize.marginSizeMid,
+                right: AppSize.marginSizeMid,
+                top: AppSize.marginSizeMid),
             child: Row(
               children: <Widget>[
                 Text(startTime,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: ThemeSize.fontSize14,
+                        fontSize: AppSize.fontSize14,
                         shadows: <Shadow>[
                           Shadow(color: Colors.black26, offset: Offset(0, 1)),
                         ])),
@@ -83,7 +82,7 @@ class _VideoControlState
                       value: _startTime.toDouble(),
                       max: _endTime.toDouble(),
                       min: 0,
-                      activeColor: ThemeColors.primary,
+                      activeColor: null,
                       onChanged: (val) {
                         setState(() {
                           _startTime = val.toInt();
@@ -102,7 +101,7 @@ class _VideoControlState
                 Text(endTime,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: ThemeSize.fontSize14,
+                        fontSize: AppSize.fontSize14,
                         shadows: <Shadow>[
                           Shadow(color: Colors.black26, offset: Offset(0, 1)),
                         ]))

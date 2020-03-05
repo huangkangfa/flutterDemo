@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/widget/base_event_stateful.dart';
 
 class ProductSelect extends StatefulWidget {
@@ -14,23 +14,23 @@ class _ProductSelectState
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      margin: EdgeInsets.only(bottom: ThemeSize.marginSizeMid),
-      padding: EdgeInsets.all(ThemeSize.marginSizeMax),
+      margin: EdgeInsets.only(bottom: AppSize.marginSizeMid),
+      padding: EdgeInsets.all(AppSize.marginSizeMax),
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(bottom: ThemeSize.marginSizeMid),
+            padding: EdgeInsets.only(bottom: AppSize.marginSizeMid),
             child: Row(
               children: <Widget>[
                 Text('规格',
                     style: TextStyle(
-                        fontSize: ThemeSize.fontSizeMid, color: Colors.grey)),
+                        fontSize: AppSize.fontSizeMid, color: Colors.grey)),
                 Padding(
-                  padding: EdgeInsets.only(left: ThemeSize.marginSizeMid),
+                  padding: EdgeInsets.only(left: AppSize.marginSizeMid),
                   child: Text('未选择',
                       style: TextStyle(
-                          fontSize: ThemeSize.fontSize14,
-                          color: ThemeColors.colorFont_333)),
+                          fontSize: AppSize.fontSize14,
+                          color: AppColors.C_333)),
                 )
               ],
             ),
@@ -39,13 +39,13 @@ class _ProductSelectState
             children: <Widget>[
               Text('运费',
                   style: TextStyle(
-                      fontSize: ThemeSize.fontSizeMid, color: Colors.grey)),
+                      fontSize: AppSize.fontSizeMid, color: Colors.grey)),
               Padding(
-                padding: EdgeInsets.only(left: ThemeSize.marginSizeMid),
+                padding: EdgeInsets.only(left: AppSize.marginSizeMid),
                 child: Text('全国包邮',
                     style: TextStyle(
-                        fontSize: ThemeSize.fontSize14,
-                        color: ThemeColors.colorFont_333)),
+                        fontSize: AppSize.fontSize14,
+                        color: AppColors.C_333)),
               )
             ],
           ),

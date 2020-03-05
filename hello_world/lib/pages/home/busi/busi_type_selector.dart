@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/widget/base_event_stateful.dart';
 
 class TypeSelector extends StatefulWidget {
@@ -50,19 +50,16 @@ class TypeSelectorState extends EventStateful<TypeSelector, TypeSelectorEvent> {
         },
         child: Padding(
           padding: EdgeInsets.only(
-              right: i == data.length - 1 ? 0 : ThemeSize.marginSizeMid),
+              right: i == data.length - 1 ? 0 : AppSize.marginSizeMid),
           child: Row(
             children: <Widget>[
               Icon(data[i].icon,
-                  size: ThemeSize.fontSizeMid,
-                  color:
-                      selectedIndex == i ? ThemeColors.primary : Colors.grey),
+                  size: AppSize.fontSizeMid,
+                  color: selectedIndex == i ? null : Colors.grey),
               Text(
                 data[i].name,
                 style: TextStyle(
-                    color: selectedIndex == i
-                        ? ThemeColors.colorFont_333
-                        : Colors.grey),
+                    color: selectedIndex == i ? AppColors.C_333 : Colors.grey),
               ),
             ],
           ),

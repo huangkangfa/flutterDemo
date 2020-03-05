@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_default.dart';
+import 'package:hello_world/configs/app_size.dart';
 
 class PlaceHolderView extends StatelessWidget {
   final double width;
@@ -15,7 +16,7 @@ class PlaceHolderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(padding??ThemeSize.marginSizeMid),
+      padding: EdgeInsets.all(padding??AppSize.marginSizeMid),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(radius ?? 5),
         child: Container(
@@ -23,7 +24,7 @@ class PlaceHolderView extends StatelessWidget {
           height: height,
           color: bgColor??Colors.grey[100],
           child: Center(
-            child: Image.asset('images/bg_default.png'),
+            child: Image.asset(AppDefault.DEFAULT_IMG_PLACEHOLDER),
           ),
         ),
       ),

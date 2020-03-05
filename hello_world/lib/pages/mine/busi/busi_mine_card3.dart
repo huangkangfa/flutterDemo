@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/model/model_com_icon_entity.dart';
 import 'package:hello_world/pages/home/page_home.dart';
 import 'package:hello_world/util/util_screen.dart';
@@ -46,7 +46,7 @@ class MyCard3 extends StatelessWidget {
       childs2.add(buildItemLayout(i));
     }
     return SliverPadding(
-      padding: EdgeInsets.only(left:ThemeSize.marginSizeMax,right:ThemeSize.marginSizeMax,bottom: ThemeSize.marginSizeMax),
+      padding: EdgeInsets.only(left:AppSize.marginSizeMax,right:AppSize.marginSizeMax,bottom: AppSize.marginSizeMax),
       sliver: SliverToBoxAdapter(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
@@ -57,7 +57,7 @@ class MyCard3 extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child:Padding(
-                    padding: EdgeInsets.only(left: ThemeSize.marginSizeMid),
+                    padding: EdgeInsets.only(left: AppSize.marginSizeMid),
                     child: HomeSmallTitle('其他'),
                   ),
                 ),
@@ -81,7 +81,7 @@ class MyCard3 extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: EdgeInsets.only(
-              top: ThemeSize.marginSizeMax, bottom: ThemeSize.marginSizeMax),
+              top: AppSize.marginSizeMax, bottom: AppSize.marginSizeMax),
           child: Column(
             children: <Widget>[
               Image.asset(
@@ -91,11 +91,11 @@ class MyCard3 extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Padding(
-                padding: EdgeInsets.only(top: ThemeSize.marginSizeMid),
+                padding: EdgeInsets.only(top: AppSize.marginSizeMid),
                 child: Text(data[index].name,
                     style: TextStyle(
-                        fontSize: ThemeSize.fontSize14,
-                        color: ThemeColors.colorFont_333)),
+                        fontSize: AppSize.fontSize14,
+                        color: AppColors.C_333)),
               )
             ],
           ),

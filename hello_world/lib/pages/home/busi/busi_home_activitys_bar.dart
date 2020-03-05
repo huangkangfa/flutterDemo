@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/dao/dao_home.dart';
 import 'package:hello_world/model/model_item_activity_entity.dart';
 import 'package:hello_world/util/http/http.dart';
@@ -53,15 +53,15 @@ class HomeActivitysBarState extends EventStateful<HomeActivitysBar,HomeActivitys
     if (dataActivitys.length == 0) {
       return PlaceHolderView(
           ScreenUtil().setWidth(ScreenUtil.screenWidthDp) -
-              ThemeSize.marginSizeMin * 2,
+              AppSize.marginSizeMin * 2,
           ScreenUtil().setWidth(160));
     }
     return Padding(
       padding: EdgeInsets.only(top: ScreenUtil().setWidth(10)),
       child: ComGridView(dataActivitys, buildItemLayoutOfActivitys, 2,
-          padding: ThemeSize.marginSizeMid,
-          mainAxisSpacing: ThemeSize.marginSizeMin,
-          crossAxisSpacing: ThemeSize.marginSizeMin),
+          padding: AppSize.marginSizeMid,
+          mainAxisSpacing: AppSize.marginSizeMin,
+          crossAxisSpacing: AppSize.marginSizeMin),
     );
   }
 
@@ -88,7 +88,7 @@ class HomeActivitysBarState extends EventStateful<HomeActivitysBar,HomeActivitys
                   borderRadius:
                       BorderRadius.circular(ScreenUtil().setWidth(5))),
               child: Padding(
-                padding: EdgeInsets.all(ThemeSize.marginSize12),
+                padding: EdgeInsets.all(AppSize.marginSize12),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[

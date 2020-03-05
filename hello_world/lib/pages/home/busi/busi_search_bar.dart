@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/widget/base_appbar.dart';
 import 'package:hello_world/widget/base_event_stateful.dart';
 import 'package:hello_world/widget/widget_edit_search.dart';
@@ -31,14 +31,14 @@ class SearchBarState extends EventStateful<SearchBar, SearchBarEvent> {
       left = Row(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: ThemeSize.marginSizeMin),
-            child: Icon(Icons.location_on, size: ThemeSize.fontSize22),
+            padding: EdgeInsets.only(left: AppSize.marginSizeMin),
+            child: Icon(Icons.location_on, size: AppSize.fontSize22),
           ),
           Padding(
             padding: EdgeInsets.only(
-                right: ThemeSize.marginSizeMin,
-                bottom: ThemeSize.marginSizeMin),
-            child: Text('杭州', style: TextStyle(fontSize: ThemeSize.fontSize14)),
+                right: AppSize.marginSizeMin,
+                bottom: AppSize.marginSizeMin),
+            child: Text('杭州', style: TextStyle(fontSize: AppSize.fontSize14)),
           )
         ],
       );
@@ -49,8 +49,8 @@ class SearchBarState extends EventStateful<SearchBar, SearchBarEvent> {
       center: EditSearchWidget(),
       right: Padding(
         padding: EdgeInsets.only(
-            left: ThemeSize.marginSizeMin, right: ThemeSize.marginSizeMin),
-        child: Icon(Icons.shopping_cart, size: ThemeSize.fontSize22),
+            left: AppSize.marginSizeMin, right: AppSize.marginSizeMin),
+        child: Icon(Icons.shopping_cart, size: AppSize.fontSize22),
       ),
     );
   }

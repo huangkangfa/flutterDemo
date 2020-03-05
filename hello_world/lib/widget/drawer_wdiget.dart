@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:hello_world/configs/default_set.dart';
-import 'package:hello_world/configs/keys.dart';
+import 'package:hello_world/configs/app_default.dart';
+import 'package:hello_world/configs/index.dart';
+import 'package:hello_world/configs/app_keys.dart';
 import 'package:hello_world/model/model_user_entity.dart';
 import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/redux/reducer/reducer_user.dart';
@@ -92,9 +93,18 @@ class MyDrawerState extends State<MyDrawer> {
         leading: Icon(Icons.grade),
         title: Text("广告页开关"),
         onTap: () {
-          bool switchOfAd = SpUtil.getBool(Keys.SWITCH_AD, defValue: true);
+          bool switchOfAd = SpUtil.getBool(AppKeys.SWITCH_AD, defValue: true);
           showToast('广告页 ' + (switchOfAd ? '关闭' : '开启'));
-          SpUtil.putBool(Keys.SWITCH_AD, !switchOfAd);
+          SpUtil.putBool(AppKeys.SWITCH_AD, !switchOfAd);
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.account_balance),
+        title: Text("主题切换"),
+        onTap: () {
+          int index = SpUtil.getInt(AppKeys.THEME_INDEX, defValue: 0);
+          SpUtil.putInt(AppKeys.THEME_INDEX, index == 0 ? 1 : 0);
+          Config.resetTheme(context);
         },
       ),
     ];
@@ -135,7 +145,7 @@ class MyDrawerState extends State<MyDrawer> {
                   child: ClipOval(
                     child: CachedNetworkImage(
                       imageUrl:
-                          userInfo?.headImg ?? DefaultPersion.defaultHeadImg,
+                          userInfo?.headImg ?? AppDefault.DEFAULT_IMG_HEAD,
                       height: ScreenUtil().setWidth(80),
                       width: ScreenUtil().setWidth(80),
                       fit: BoxFit.cover,
@@ -149,7 +159,7 @@ class MyDrawerState extends State<MyDrawer> {
                     checkLogin(userInfo == null);
                   },
                   child: Text(
-                    userInfo?.name ?? DefaultPersion.name,
+                    userInfo?.name ?? AppDefault.UNLOGIN_NAME,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,

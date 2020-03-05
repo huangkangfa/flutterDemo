@@ -119,12 +119,13 @@ comAppbar(BuildContext context,
     if (right != null) list.add(right);
     appBar = Row(children: list);
   }
+
   return PreferredSize(
       preferredSize: Size.fromHeight(adapt(48)),
       child: SafeArea(
         top: top ?? true,
         child: Container(
-          color: backgroundColor == null ? Colors.white : backgroundColor,
+          color: backgroundColor == null ? null : backgroundColor,
           height: adapt(48),
           alignment: Alignment.center,
           child: appBar,

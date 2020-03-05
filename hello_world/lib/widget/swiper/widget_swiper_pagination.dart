@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hello_world/configs/colors.dart';
+import 'package:hello_world/configs/index.dart';
 
 class WarmPainter extends BasePainter {
   WarmPainter(PageIndicator widget, double page, int index, Paint paint)
@@ -82,7 +82,7 @@ class NioPainter extends NioBasePainter {
     double secondOffset = index == widget.count - 1
         ? radius
         : radius + ((index + 1) * (size + space));
-    _paint.color = ThemeColors.primary;
+    _paint.color = Config.theme.getPrimaryColor();
     _paint.strokeWidth = lineMin;
     canvas.drawLine(new Offset(secondOffset - lineOffset, radius),
         new Offset(secondOffset + lineOffset, radius), _paint);

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:hello_world/configs/_index.dart';
+import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/util/http/result_data.dart';
 
 class ResponseInterceptors extends InterceptorsWrapper {

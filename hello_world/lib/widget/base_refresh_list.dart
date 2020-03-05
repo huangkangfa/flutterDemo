@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/configs/colors.dart';
-import 'package:hello_world/configs/size.dart';
+import 'package:hello_world/configs/app_colors.dart';
+import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/model/model_refresh_list_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/http/result_data.dart';
@@ -285,8 +285,8 @@ class RefreshListState extends State<RefreshList> {
             padding: EdgeInsets.only(left: 20),
             child: Text(loadingText,
                 style: TextStyle(
-                    color: ThemeColors.colorFont_333,
-                    fontSize: ThemeSize.fontSizeMid)),
+                    color: AppColors.C_333,
+                    fontSize: AppSize.fontSizeMid)),
           )
         ],
       ),
