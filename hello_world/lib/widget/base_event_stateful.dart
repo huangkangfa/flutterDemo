@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hello_world/util/util_event.dart';
 
-abstract class EventStateful<T extends StatefulWidget, K> extends State<T> {
+abstract class EventStateful<T extends StatefulWidget, K> extends State<T> with WidgetsBindingObserver{
   StreamSubscription streamSubscription;
+  AppLifecycleState _lastLifecycleState;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     streamSubscription = registerEvent<K>((data) {
       if (data is K && data != null) {
         doThingsForEvent(data);
@@ -18,9 +20,16 @@ abstract class EventStateful<T extends StatefulWidget, K> extends State<T> {
 
   void doThingsForEvent(K data);
 
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //需要用到原生生命周期可以重写这个方法
+  }
+
   @override
   void dispose() {
     super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     streamSubscription.cancel();
   }
 }

@@ -9,8 +9,7 @@ import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/model/model_refresh_list_entity.dart';
 import 'package:hello_world/util/http/http.dart';
 import 'package:hello_world/util/http/result_data.dart';
-import 'package:hello_world/util/util_event.dart';
-import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 
 //刷新状态枚举
 enum LoadingStatus {
@@ -82,9 +81,9 @@ class RefreshSliverList extends StatefulWidget {
   }
 }
 
-class RefreshSliverListState extends State<RefreshSliverList> {
+class RefreshSliverListState
+    extends EventStateful<RefreshSliverList, RefreshSliverListEvent> {
   CancelToken tag = CancelToken();
-  StreamSubscription _streamSubscription;
 
   //数据源
   List list = [];
@@ -116,15 +115,6 @@ class RefreshSliverListState extends State<RefreshSliverList> {
     params = widget.params;
     //第一页数据请求
     getData(true);
-    _streamSubscription = registerEvent<RefreshSliverListEvent>((data) {
-      if (widget.tag != null &&
-          data is RefreshSliverListEvent &&
-          data.tag == widget.tag) {
-        if (data.cmd == 'toTop' && _controller.hasClients) {
-          _controller.jumpTo(_controller.position.minScrollExtent);
-        }
-      }
-    });
   }
 
   initScrollListener(notification) {
@@ -345,8 +335,16 @@ class RefreshSliverListState extends State<RefreshSliverList> {
   void dispose() {
     super.dispose();
     _controller.dispose();
-    _streamSubscription.cancel();
     HttpManager.getInstance().cancelRequests(tag);
+  }
+
+  @override
+  void doThingsForEvent(RefreshSliverListEvent data) {
+    if (widget.tag != null && data.tag == widget.tag) {
+      if (data.cmd == 'toTop' && _controller.hasClients) {
+        _controller.jumpTo(_controller.position.minScrollExtent);
+      }
+    }
   }
 }
 

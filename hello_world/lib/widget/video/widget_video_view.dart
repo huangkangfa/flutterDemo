@@ -1,11 +1,9 @@
-import 'dart:async';
-
-import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tencentplayer/controller/tencent_player_controller.dart';
 import 'package:flutter_tencentplayer/flutter_tencentplayer.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 
 import 'widget_video_control.dart';
 
@@ -31,8 +29,7 @@ class VideoView extends StatefulWidget {
   }
 }
 
-class VideoViewState extends State<VideoView> {
-  StreamSubscription _streamSubscription;
+class VideoViewState extends EventStateful<VideoView, VideoViewEvent> {
   TencentPlayerController _controller;
   VoidCallback listener;
 
@@ -40,52 +37,6 @@ class VideoViewState extends State<VideoView> {
   void initState() {
     super.initState();
     initVideo(true);
-    _streamSubscription = registerEvent<VideoViewEvent>((data) {
-      if (!this.mounted) {
-        return;
-      }
-      if (data is VideoViewEvent && data != null && _controller != null) {
-        switch (data.cmd) {
-          //播放
-          case 'play':
-            if (_controller.value.position.inSeconds >=
-                _controller.value.duration.inSeconds) {
-              _controller.seekTo(Duration(seconds: 0));
-            }
-            _controller.play();
-            if (widget.playStatus != null) {
-              widget.playStatus(false);
-            }
-            break;
-          //暂停
-          case 'pause':
-            _controller.pause();
-            if (widget.playStatus != null) {
-              widget.playStatus(true);
-            }
-            break;
-          //跳转进度
-          case 'seekTo':
-            _controller.seekTo(Duration(seconds: data.obj.toInt() ?? 0));
-            break;
-          //设置播放速度
-          case 'setRate':
-            _controller.setRate(data.obj.toDouble() ?? 1.0); // 1.0 ~ 2.0
-            break;
-          //切换播放源
-          case 'changeUrl':
-            _controller.removeListener(listener);
-            _controller.pause();
-            _controller = TencentPlayerController.network(data.url ?? '',
-                playerConfig: PlayerConfig(startTime: 0));
-            _controller.initialize().then((_) {
-              if (mounted) setState(() {});
-            });
-            _controller.addListener(listener);
-            break;
-        }
-      }
-    });
   }
 
   void initVideo(bool flag) {
@@ -139,7 +90,6 @@ class VideoViewState extends State<VideoView> {
   void dispose() {
     super.dispose();
     initVideo(false);
-    _streamSubscription.cancel();
   }
 
   @override
@@ -161,6 +111,54 @@ class VideoViewState extends State<VideoView> {
               child: CircularProgressIndicator(),
             ),
     );
+  }
+
+  @override
+  void doThingsForEvent(VideoViewEvent data) {
+    if (!this.mounted) {
+      return;
+    }
+    if (_controller != null) {
+      switch (data.cmd) {
+        //播放
+        case 'play':
+          if (_controller.value.position.inSeconds >=
+              _controller.value.duration.inSeconds) {
+            _controller.seekTo(Duration(seconds: 0));
+          }
+          _controller.play();
+          if (widget.playStatus != null) {
+            widget.playStatus(false);
+          }
+          break;
+        //暂停
+        case 'pause':
+          _controller.pause();
+          if (widget.playStatus != null) {
+            widget.playStatus(true);
+          }
+          break;
+        //跳转进度
+        case 'seekTo':
+          _controller.seekTo(Duration(seconds: data.obj.toInt() ?? 0));
+          break;
+        //设置播放速度
+        case 'setRate':
+          _controller.setRate(data.obj.toDouble() ?? 1.0); // 1.0 ~ 2.0
+          break;
+        //切换播放源
+        case 'changeUrl':
+          _controller.removeListener(listener);
+          _controller.pause();
+          _controller = TencentPlayerController.network(data.url ?? '',
+              playerConfig: PlayerConfig(startTime: 0));
+          _controller.initialize().then((_) {
+            if (mounted) setState(() {});
+          });
+          _controller.addListener(listener);
+          break;
+      }
+    }
   }
 }
 

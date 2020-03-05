@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/colors.dart';
 import 'package:hello_world/configs/size.dart';
 import 'package:hello_world/util/http/utils.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_screen.dart';
+import 'package:hello_world/widget/base_event_stateful.dart';
 
 import 'widget_video_view.dart';
 
@@ -18,8 +17,8 @@ class VideoControl extends StatefulWidget {
   _VideoControlState createState() => _VideoControlState();
 }
 
-class _VideoControlState extends State<VideoControl> {
-  StreamSubscription _streamSubscription;
+class _VideoControlState
+    extends EventStateful<VideoControl, VideoControlEvent> {
   bool isShow = false;
   String startTime = '00:00';
   int _startTime = 0;
@@ -119,27 +118,6 @@ class _VideoControlState extends State<VideoControl> {
   void initState() {
     super.initState();
     isShow = widget.isShow ?? false;
-    _streamSubscription = registerEvent<VideoControlEvent>((data) {
-      if (!this.mounted) {
-        return;
-      }
-      if (data is VideoControlEvent && data != null) {
-        switch (data.cmd) {
-          case 'startTime':
-            setState(() {
-              _startTime = data.obj ?? 0;
-              startTime = getTimeStrBySeconds(data.obj);
-            });
-            break;
-          case 'endTime':
-            setState(() {
-              _endTime = data.obj ?? 0;
-              endTime = getTimeStrBySeconds(data.obj);
-            });
-            break;
-        }
-      }
-    });
   }
 
   getTimeStrBySeconds(int seconds) {
@@ -161,7 +139,27 @@ class _VideoControlState extends State<VideoControl> {
   @override
   void dispose() {
     super.dispose();
-    _streamSubscription.cancel();
+  }
+
+  @override
+  void doThingsForEvent(VideoControlEvent data) {
+    if (!this.mounted) {
+      return;
+    }
+    switch (data.cmd) {
+      case 'startTime':
+        setState(() {
+          _startTime = data.obj ?? 0;
+          startTime = getTimeStrBySeconds(data.obj);
+        });
+        break;
+      case 'endTime':
+        setState(() {
+          _endTime = data.obj ?? 0;
+          endTime = getTimeStrBySeconds(data.obj);
+        });
+        break;
+    }
   }
 }
 
