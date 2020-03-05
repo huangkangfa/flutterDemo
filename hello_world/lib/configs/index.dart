@@ -19,8 +19,11 @@ class Config {
   static BaseEnv env = OnLine();
   static BaseTheme theme = ThemeOfJxl();
 
-  static resetTheme(BuildContext context) {
+  static resetTheme(BuildContext context,ThemeInfo info) {
     int index = SpUtil.getInt(AppKeys.THEME_INDEX, defValue: 0);
+    if(info.index==index){
+      return;
+    }
     switch (index) {
       case 1:
         theme = ThemeOfRed();
