@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       child: StoreConnector<AppState, ThemeInfo>(
         converter: (store) => store.state.themeInfo,
         builder: (context, themeInfo) {
-          Config.resetTheme(context, themeInfo);
+          Config.resetTheme(context);
           return MaterialApp(
             onUnknownRoute: (RouteSettings setting) {
               String name = setting.name;

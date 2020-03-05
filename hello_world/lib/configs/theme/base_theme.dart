@@ -18,4 +18,6 @@ abstract class BaseTheme {
   Color getDividerColor({bool isDark});
 
   String getName();
+
+  int getIndex();
 }

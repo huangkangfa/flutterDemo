@@ -63,4 +63,9 @@ class ThemeOfJxl extends BaseTheme {
   Color getPrimaryColor({isDark: false}) {
     return isDark ? Color(0XFF9CD4CD) : Color(0XFF9CD4CD);
   }
+
+  @override
+  int getIndex() {
+    return 0;
+  }
 }

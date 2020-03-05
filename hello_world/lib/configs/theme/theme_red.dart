@@ -63,4 +63,9 @@ class ThemeOfRed extends BaseTheme {
   Color getPrimaryColor({isDark: false}) {
     return isDark ? Color(0xFFF44336) : Color(0xFFF44336);
   }
+
+  @override
+  int getIndex() {
+    return 1;
+  }
 }
