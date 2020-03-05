@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/configs/app_colors.dart';
 import 'package:hello_world/configs/app_size.dart';
+import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/util/util_event.dart';
 import 'package:hello_world/util/util_route_jump.dart';
 import 'package:hello_world/util/util_screen.dart';
@@ -156,7 +157,7 @@ class HeaderTitleTypeItem extends StatelessWidget {
           children: <Widget>[
             Text(name, style: TextStyle(fontSize: AppSize.fontSizeMid)),
             Container(
-              color: hasLine ? null : Colors.white,
+              color: hasLine ? Config.theme.getPrimaryColor() : Colors.white,
               margin: EdgeInsets.only(top: 3),
               constraints: BoxConstraints(
                 minHeight: ScreenUtil().setWidth(3),
