@@ -14,6 +14,7 @@ class HttpManager {
 
   Dio _dio, dioDownload, dioUpload;
 
+  // 工厂模式 : 单例公开访问点
   factory HttpManager() => _instance;
 
   ///通用全局单例，第一次使用时初始化

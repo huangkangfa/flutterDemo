@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hello_world/util/util_event.dart';
 
-abstract class EventStateful<T extends StatefulWidget, K> extends State<T>
-    with WidgetsBindingObserver {
+abstract class EventStateful<T extends StatefulWidget, K> extends State<T> with WidgetsBindingObserver {
   StreamSubscription streamSubscription;
   AppLifecycleState lastLifecycleState;
 

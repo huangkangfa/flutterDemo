@@ -26,9 +26,7 @@ backAppbar(BuildContext context, String title,
                 fontSize: sp(22),
                 color: textColor == null ? Color(0xFF000000) : textColor),
           ),
-          onTap: () {
-            tapFunc();
-          },
+          onTap: () => tapFunc(),
         ),
         centerTitle: true,
       ));

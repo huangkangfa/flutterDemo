@@ -6,6 +6,7 @@ import 'package:hello_world/configs/app_size.dart';
 import 'package:hello_world/configs/index.dart';
 import 'package:hello_world/configs/app_keys.dart';
 import 'package:hello_world/model/model_user_entity.dart';
+import 'package:hello_world/native/native_test.dart';
 import 'package:hello_world/redux/app_state.dart';
 import 'package:hello_world/redux/reducer/reducer_user.dart';
 import 'package:hello_world/util/util_route_jump.dart';
@@ -24,6 +25,8 @@ class MyDrawer extends StatefulWidget {
 }
 
 class MyDrawerState extends State<MyDrawer> {
+  String content = "展示结果";
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, ModelUserEntity>(
@@ -68,6 +71,15 @@ class MyDrawerState extends State<MyDrawer> {
 
   ///初始化子布局
   initLayout(userInfo) {
+    NativeTest.basicMessageChannel.setMessageHandler(
+          (String message) => Future<String>(() {
+            setState(() {
+              content = message;
+            });
+        return "回复native消息";
+      }),
+    );
+
     var children = <Widget>[
       getHeadItems(userInfo),
       ListTile(
@@ -129,6 +141,35 @@ class MyDrawerState extends State<MyDrawer> {
           Config.resetTheme(context);
         },
       ),
+      ListTile(
+        leading: Icon(Icons.account_balance),
+        title: Text("跳转至原生界面"),
+        onTap: () {
+          NativeTest.goToNativePage();
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.ac_unit),
+        title: Text("MethodChannel,F->N"),
+        onTap: () {
+          NativeTest.testMethodChannel().then((value) {
+            setState(() {
+              content = value;
+            });
+          });
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.details),
+        title: Text(content??"数据为空"),
+      ),
+      Container(
+        width: 200,
+        height: 100,
+        child: AndroidView(
+          viewType: "com.flutter.demo/android_view",
+        ),
+      )
     ];
     if (userInfo != null) {
       children.add(Padding(

@@ -34,8 +34,7 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin<HomePage> {
+class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage> {
   bool showTop = false;
 
   @override

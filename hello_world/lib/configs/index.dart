@@ -31,7 +31,6 @@ class Config {
       default:
         theme = ThemeOfJxl();
     }
-    StoreProvider.of<AppState>(context).dispatch(
-        RefreshThemeAction(ThemeInfo(index: index, name: theme.getName())));
+    StoreProvider.of<AppState>(context).dispatch(RefreshThemeAction(ThemeInfo(index: index, name: theme.getName())));
   }
 }

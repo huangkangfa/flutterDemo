@@ -26,6 +26,7 @@ class ResponseInterceptors extends InterceptorsWrapper {
       } else if (response.statusCode == 401) {
         //重新登录处理
         Config.token = null;
+        
       }
     } catch (e) {
       return getResultDataFromResponse(response,

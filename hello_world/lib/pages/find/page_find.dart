@@ -87,18 +87,18 @@ class FindPageState extends State<FindPage>
   buildItemLayout(item, index) {
     ModelItemFindShopEntity shopEntity = ModelItemFindShopEntity();
     ModelItemProductEntity obj = ModelItemProductEntity().fromJson(item);
-    shopEntity.id = obj.id;
-    shopEntity.logo = obj.images;
-    shopEntity.shop = obj.name;
-    shopEntity.address = obj.name;
-    shopEntity.distance = 100;
-    shopEntity.unit = 'm';
+    shopEntity
+      ..id = obj.id
+      ..logo = obj.images
+      ..shop = obj.name
+      ..address = obj.name
+      ..distance = 100
+      ..unit = 'm';
 //    ModelItemFindShopEntity shopEntity = ModelItemFindShopEntity().fromJson(item);
-    return ItemOfList(shopEntity,index, callback: () => onClick(index),key: ValueKey(shopEntity.id));
+    return ItemOfList(shopEntity, index,
+        callback: () => onClick(index), key: ValueKey(shopEntity.id));
   }
 
   @override
   bool get wantKeepAlive => true;
 }
-
-

@@ -22,6 +22,7 @@ class NavigatorState extends State<MyNavigator> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         drawer: MyDrawer(),
         resizeToAvoidBottomPadding: true,

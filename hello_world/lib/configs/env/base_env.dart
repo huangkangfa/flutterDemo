@@ -7,4 +7,5 @@ abstract class BaseEnv {
   bool getDebug() {
     return false;
   }
+
 }

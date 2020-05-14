@@ -1,4 +1,3 @@
-//刷新状态枚举
 import 'dart:async';
 
 import 'package:dio/dio.dart';
